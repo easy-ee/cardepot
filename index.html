@@ -1,109 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Columbus East Tax Services</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CARDEPOT – Digital Card</title>
 
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f4f6f8;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #eef2f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
 
-        .card {
-            background: #ffffff;
-            max-width: 360px;
-            width: 100%;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            text-align: center;
-        }
+.card {
+    width: 380px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,.2);
+    overflow: hidden;
+    text-align: center;
+}
 
-        h1 {
-            margin-bottom: 10px;
-            font-size: 24px;
-            color: #1f2933;
-        }
+.header {
+    background: linear-gradient(135deg,#0b3c6d,#0f5aa3);
+    padding: 25px 15px;
+    color: white;
+}
 
-        .info {
-            margin: 10px 0;
-            font-size: 16px;
-            color: #4b5563;
-        }
+.car {
+    position: relative;
+    width: 280px;
+    height: 70px;
+    margin: auto;
+}
 
-        .buttons {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+.car-body {
+    background: white;
+    height: 40px;
+    border-radius: 40px;
+    position: relative;
+    top: 15px;
+}
 
-        .buttons a {
-            text-decoration: none;
-            background: #2563eb;
-            color: white;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: background 0.2s ease;
-        }
+.wheel {
+    width: 36px;
+    height: 36px;
+    border: 4px solid #0b3c6d;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -10px;
+    animation: spin 0.8s linear infinite;
+}
 
-        .buttons a.text {
-            background: #16a34a;
-        }
+.wheel.left { left: 40px; }
+.wheel.right { right: 40px; }
 
-        .buttons a.email {
-            background: #9333ea;
-        }
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
 
-        .buttons a:hover {
-            opacity: 0.9;
-        }
+h1 {
+    margin: 15px 0 5px;
+    letter-spacing: 2px;
+}
 
-        footer {
-            margin-top: 15px;
-            font-size: 13px;
-            color: #6b7280;
-        }
-    </style>
+.address {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 20px;
+}
+
+.btn {
+    padding: 14px;
+    border-radius: 14px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.call { background:#2ecc71; }
+.text { background:#3498db; }
+.map { background:#9b59b6; }
+.save { background:#f39c12; }
+
+.extra {
+    padding: 15px;
+}
+
+.extra button {
+    padding: 12px;
+    width: 100%;
+    border-radius: 14px;
+    border: none;
+    background:#34495e;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.qr {
+    padding: 15px;
+}
+
+.qr img {
+    width: 120px;
+}
+
+footer {
+    font-size: 12px;
+    padding: 10px;
+    background: #f4f6f9;
+}
+</style>
 </head>
+
 <body>
 
-    <div class="card">
-        <h1>Columbus East Tax Services</h1>
-
-        <div class="info">
-            Columbus, Ohio 43227
+<div class="card">
+    <div class="header">
+        <div class="car">
+            <div class="car-body"></div>
+            <div class="wheel left"></div>
+            <div class="wheel right"></div>
         </div>
-
-        <div class="info">
-            📞 614-599-1185<br>
-            📞 614-259-7625
+        <h1>CARDEPOT</h1>
+        <div class="address">
+            13725 East Broad St<br>
+            Pataskala, OH 43062
         </div>
-
-        <div class="info">
-            ✉️ Columbuseast.taxservices@outlook.com
-        </div>
-
-        <div class="buttons">
-            <a href="tel:16145991185">Call 614-599-1185</a>
-            <a href="sms:16145991185" class="text">Text 614-599-1185</a>
-            <a href="mailto:Columbuseast.taxservices@outlook.com" class="email">
-                Email Us
-            </a>
-        </div>
-
-        <footer>
-            Tap to call, text, or email
-        </footer>
     </div>
+
+    <div class="buttons">
+        <a class="btn call" href="tel:6142859929">📞 CALL</a>
+        <a class="btn text" href="sms:6142859929">💬 TEXT</a>
+        <a class="btn map" href="https://maps.google.com/?q=13725+East+Broad+St+Pataskala+OH+43062" target="_blank">📍 MAP</a>
+        <a class="btn save" href="cardepot.vcf" download>💾 SAVE</a>
+    </div>
+
+    <div class="extra">
+        <button onclick="navigator.share({title:'CARDEPOT',url:window.location.href})">
+            📤 SHARE CARD
+        </button>
+    </div>
+
+    <div class="qr">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://YOUR-USERNAME.github.io/YOUR-REPO/">
+        <div style="font-size:12px;margin-top:5px;">Scan Me</div>
+    </div>
+
+    <footer>
+        Fast • Reliable • Trusted
+    </footer>
+</div>
 
 </body>
 </html>
