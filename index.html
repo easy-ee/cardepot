@@ -1,133 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>CARDEPOT – Digital Business Card</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CARDEPOT – Digital Card</title>
 
 <style>
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        background: #f2f5f9;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-    }
+body {
+    font-family: Arial, sans-serif;
+    background: #eef2f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
 
-    .card {
-        width: 360px;
-        background: #ffffff;
-        border-radius: 18px;
-        box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-        overflow: hidden;
-        text-align: center;
-    }
+.card {
+    width: 380px;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,.2);
+    overflow: hidden;
+    text-align: center;
+}
 
-    .header {
-        background: linear-gradient(135deg, #0b3c6d, #0f5aa3);
-        padding: 25px 20px;
-        color: white;
-    }
+.header {
+    background: linear-gradient(135deg,#0b3c6d,#0f5aa3);
+    padding: 25px 15px;
+    color: white;
+}
 
-    .car {
-        position: relative;
-        margin: 10px auto 20px;
-        width: 280px;
-        height: 70px;
-    }
+.car {
+    position: relative;
+    width: 280px;
+    height: 70px;
+    margin: auto;
+    animation: drive 4s ease-in-out infinite alternate;
+}
 
-    .car-body {
-        background: #ffffff;
-        border-radius: 40px;
-        height: 40px;
-        position: relative;
-        top: 10px;
-    }
+@keyframes drive {
+    from { transform: translateX(-10px); }
+    to { transform: translateX(10px); }
+}
 
-    .wheel {
-        width: 36px;
-        height: 36px;
-        border: 4px solid #0b3c6d;
-        border-radius: 50%;
-        position: absolute;
-        bottom: -18px;
-        animation: spin 1s linear infinite;
-    }
+.car-body {
+    background: white;
+    height: 40px;
+    border-radius: 40px;
+    position: relative;
+    top: 15px;
+}
 
-    .wheel::after {
-        content: "";
-        width: 6px;
-        height: 6px;
-        background: #0b3c6d;
-        border-radius: 50%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
+.wheel {
+    width: 36px;
+    height: 36px;
+    border: 4px solid #0b3c6d;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -2px;
+    animation: spin 0.8s linear infinite;
+}
 
-    .wheel.left {
-        left: 40px;
-    }
+.wheel::after {
+    content:'';
+    width:6px;
+    height:6px;
+    background:#0b3c6d;
+    border-radius:50%;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
 
-    .wheel.right {
-        right: 40px;
-    }
+.wheel.left { left: 40px; }
+.wheel.right { right: 40px; }
 
-    @keyframes spin {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-    }
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
 
-    h1 {
-        margin: 10px 0 5px;
-        font-size: 28px;
-        letter-spacing: 2px;
-    }
+h1 {
+    margin: 15px 0 5px;
+    letter-spacing: 2px;
+}
 
-    .address {
-        font-size: 14px;
-        line-height: 1.4;
-        opacity: 0.95;
-    }
+.address {
+    font-size: 14px;
+    line-height: 1.4;
+}
 
-    .actions {
-        display: flex;
-        gap: 10px;
-        padding: 20px;
-    }
+.buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 20px;
+}
 
-    .btn {
-        flex: 1;
-        padding: 14px;
-        border-radius: 12px;
-        text-decoration: none;
-        color: white;
-        font-weight: bold;
-        font-size: 14px;
-        transition: transform 0.2s ease;
-    }
+.btn {
+    padding: 14px;
+    border-radius: 14px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+}
 
-    .btn:hover {
-        transform: scale(1.05);
-    }
+.call { background:#2ecc71; }
+.text { background:#3498db; }
+.map { background:#9b59b6; }
+.save { background:#f39c12; }
 
-    .call {
-        background: #2ecc71;
-    }
+.extra {
+    padding: 15px;
+}
 
-    .text {
-        background: #3498db;
-    }
+.extra button {
+    padding: 12px;
+    width: 100%;
+    border-radius: 14px;
+    border: none;
+    background:#34495e;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
 
-    footer {
-        padding: 12px;
-        font-size: 12px;
-        color: #666;
-        background: #f7f9fc;
-    }
+.qr {
+    padding: 15px;
+}
+
+.qr img {
+    width: 120px;
+}
+
+footer {
+    font-size: 12px;
+    padding: 10px;
+    background: #f4f6f9;
+}
 </style>
 </head>
 
@@ -143,19 +156,44 @@
         <h1>CARDEPOT</h1>
         <div class="address">
             13725 East Broad St<br>
-            Pataskala, Ohio 43062
+            Pataskala, OH 43062
         </div>
     </div>
 
-    <div class="actions">
-        <a class="btn call" href="tel:6142859929">📞 TAP TO DIAL</a>
-        <a class="btn text" href="sms:6142859929">💬 TAP TO TEXT</a>
+    <div class="buttons">
+        <a class="btn call" href="tel:+16142859929">📞 CALL</a>
+        <a class="btn text" href="sms:+16142859929">💬 TEXT</a>
+        <a class="btn map" target="_blank"
+           href="https://maps.google.com/?q=13725+East+Broad+St+Pataskala+OH+43062">📍 MAP</a>
+        <a class="btn save" href="cardepot.vcf" download>💾 SAVE</a>
+    </div>
+
+    <div class="extra">
+        <button onclick="shareCard()">📤 SHARE CARD</button>
+    </div>
+
+    <div class="qr">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://YOUR-USERNAME.github.io/YOUR-REPO/">
+        <div style="font-size:12px;margin-top:5px;">Scan Me</div>
     </div>
 
     <footer>
         Fast • Reliable • Trusted
     </footer>
 </div>
+
+<script>
+function shareCard() {
+  if (navigator.share) {
+    navigator.share({
+      title: 'CARDEPOT',
+      url: window.location.href
+    });
+  } else {
+    alert("Sharing works on mobile.\nCopy this link:\n" + window.location.href);
+  }
+}
+</script>
 
 </body>
 </html>
