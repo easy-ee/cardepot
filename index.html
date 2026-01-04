@@ -12,14 +12,14 @@ body {
   margin: 0;
   padding: 20px;
   font-family: Arial, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: radial-gradient(circle at top, #020617, #000000);
+  background: radial-gradient(circle at top, #020617, #000);
 }
 
 /* Card */
 .card {
   max-width: 420px;
   margin: auto;
-  background: #ffffff;
+  background: #fff;
   border-radius: 20px;
   box-shadow: 0 25px 50px rgba(0,0,0,.45);
   overflow: hidden;
@@ -36,7 +36,7 @@ body {
 /* Scene */
 .scene {
   position: relative;
-  height: 230px;
+  height: 240px;
   max-width: 360px;
   margin: auto;
 }
@@ -55,13 +55,13 @@ body {
   50% { transform: translate(-50%,-6px); }
 }
 
-/* Underglow */
+/* RGB Underglow */
 .underglow {
   position: absolute;
-  bottom: 10px;
+  bottom: 12px;
   left: 50%;
-  width: 260px;
-  height: 26px;
+  width: 280px;
+  height: 28px;
   transform: translateX(-50%);
   filter: blur(18px);
   animation: rgb 6s linear infinite;
@@ -84,19 +84,9 @@ body {
   to { transform: rotate(360deg); }
 }
 
-/* Wheel shine */
-.spoke {
-  animation: shine 1.6s ease-in-out infinite;
-}
-
-@keyframes shine {
-  0%,100% { opacity:.4; }
-  50% { opacity:1; }
-}
-
 /* Metallic shimmer */
 .shimmer {
-  animation: shimmer 2.8s linear infinite;
+  animation: shimmer 3s linear infinite;
 }
 
 @keyframes shimmer {
@@ -105,7 +95,7 @@ body {
   100% { opacity:.15; transform: translateX(60px); }
 }
 
-/* Lights */
+/* LEDs */
 .led, .grille {
   animation: glow 1.5s ease-in-out infinite;
 }
@@ -158,49 +148,68 @@ footer {
   <div class="header">
 
     <div class="scene">
-
       <div class="underglow"></div>
 
       <div class="vehicle">
-        <svg viewBox="0 0 860 270" width="360">
-
-          <!-- Shimmer overlay -->
-          <rect class="shimmer" x="140" y="120" width="600" height="90" fill="#ffffff"/>
-
-          <!-- LEDs -->
-          <rect class="led" x="120" y="140" width="8" height="60" rx="4" fill="#eafcff"/>
-          <rect class="grille" x="110" y="145" width="10" height="50" fill="#eafcff"/>
+        <svg viewBox="0 0 860 270" width="360" height="200">
 
           <!-- BODY -->
           <rect x="140" y="120" width="600" height="90" rx="14" fill="#22ff00"/>
-
-          <!-- Roof -->
           <rect x="220" y="85" width="440" height="45" rx="12" fill="#1aff00"/>
-
-          <!-- Windows -->
           <rect x="240" y="100" width="400" height="30" rx="6" fill="#020617"/>
 
-          <!-- Wheels -->
-          <g class="wheel">
-            <circle cx="300" cy="225" r="42" fill="#000"/>
-            <circle cx="300" cy="225" r="24" fill="#fff"/>
-            <line class="spoke" x1="300" y1="201" x2="300" y2="249" stroke="#ccc" stroke-width="4"/>
+          <!-- Metallic shimmer -->
+          <rect class="shimmer" x="140" y="120" width="600" height="90" fill="#ffffff"/>
+
+          <!-- LED Headlights -->
+          <rect class="led" x="120" y="140" width="8" height="60" rx="4" fill="#eafcff"/>
+          <rect class="grille" x="110" y="145" width="10" height="50" fill="#eafcff"/>
+
+          <!-- LEFT 24” RIM -->
+          <g class="wheel" transform="translate(300 225)">
+            <!-- Tire -->
+            <circle r="44" fill="#000"/>
+            <!-- Inner barrel -->
+            <circle r="36" fill="#111"/>
+            <!-- Chrome lip -->
+            <circle r="30" fill="#f8fafc"/>
+            <!-- Spokes -->
+            <g stroke="#e5e7eb" stroke-width="3">
+              <line x1="0" y1="-30" x2="0" y2="30"/>
+              <line x1="-30" y1="0" x2="30" y2="0"/>
+              <line x1="-21" y1="-21" x2="21" y2="21"/>
+              <line x1="-21" y1="21" x2="21" y2="-21"/>
+              <line x1="-10" y1="-28" x2="10" y2="28"/>
+              <line x1="-28" y1="-10" x2="28" y2="10"/>
+            </g>
+            <!-- Hub -->
+            <circle r="6" fill="#9ca3af"/>
           </g>
 
-          <g class="wheel">
-            <circle cx="600" cy="225" r="42" fill="#000"/>
-            <circle cx="600" cy="225" r="24" fill="#fff"/>
-            <line class="spoke" x1="600" y1="201" x2="600" y2="249" stroke="#ccc" stroke-width="4"/>
+          <!-- RIGHT 24” RIM -->
+          <g class="wheel" transform="translate(600 225)">
+            <circle r="44" fill="#000"/>
+            <circle r="36" fill="#111"/>
+            <circle r="30" fill="#f8fafc"/>
+            <g stroke="#e5e7eb" stroke-width="3">
+              <line x1="0" y1="-30" x2="0" y2="30"/>
+              <line x1="-30" y1="0" x2="30" y2="0"/>
+              <line x1="-21" y1="-21" x2="21" y2="21"/>
+              <line x1="-21" y1="21" x2="21" y2="-21"/>
+              <line x1="-10" y1="-28" x2="10" y2="28"/>
+              <line x1="-28" y1="-10" x2="28" y2="10"/>
+            </g>
+            <circle r="6" fill="#9ca3af"/>
           </g>
 
         </svg>
       </div>
-
     </div>
 
     <h1>CARDEPOT</h1>
     <div class="address">
-      13725 East Broad St<br>Pataskala, OH 43062
+      13725 East Broad St<br>
+      Pataskala, OH 43062
     </div>
   </div>
 
