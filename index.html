@@ -45,7 +45,7 @@ body {
 .car {
   position: absolute;
   left: 50%;
-  bottom: 10px;
+  bottom: 0;
   transform: translateX(-50%);
   animation: float 3s ease-in-out infinite;
 }
@@ -55,9 +55,9 @@ body {
   50% { transform: translate(-50%,-6px); }
 }
 
-/* Wheels */
+/* Wheel spin */
 .wheel {
-  animation: spin 0.7s linear infinite;
+  animation: spin 0.8s linear infinite;
   transform-origin: center;
   transform-box: fill-box;
 }
@@ -140,8 +140,8 @@ footer {
 
       <!-- 🚗 SPORTS CAR SVG -->
       <div class="car">
-        <svg width="340" height="120" viewBox="0 0 700 220" role="img" aria-label="Sports car">
-          
+        <svg viewBox="0 0 700 220" width="340" height="120" aria-label="Sports car">
+
           <!-- Body -->
           <path d="
             M60 150
@@ -162,7 +162,7 @@ footer {
             H240
             Q250 100 260 90
             Z"
-            fill="#dfe8f2"/>
+            fill="#e6eef7"/>
 
           <!-- Window -->
           <path d="
@@ -171,22 +171,22 @@ footer {
             Q410 100 430 120
             H250
             Z"
-            fill="#c7d4e2"/>
+            fill="#cfdbea"/>
 
-          <!-- Left wheel -->
-          <g class="wheel" transform="translate(240 170)">
-            <circle r="30" fill="#0b3c6d"/>
-            <circle r="18" fill="#ffffff"/>
-            <line x1="-18" y1="0" x2="18" y2="0" stroke="#0b3c6d" stroke-width="3"/>
-            <line x1="0" y1="-18" x2="0" y2="18" stroke="#0b3c6d" stroke-width="3"/>
+          <!-- LEFT WHEEL -->
+          <g class="wheel">
+            <circle cx="240" cy="170" r="30" fill="#0b3c6d"/>
+            <circle cx="240" cy="170" r="18" fill="#ffffff"/>
+            <line x1="222" y1="170" x2="258" y2="170" stroke="#0b3c6d" stroke-width="3"/>
+            <line x1="240" y1="152" x2="240" y2="188" stroke="#0b3c6d" stroke-width="3"/>
           </g>
 
-          <!-- Right wheel -->
-          <g class="wheel" transform="translate(500 170)">
-            <circle r="30" fill="#0b3c6d"/>
-            <circle r="18" fill="#ffffff"/>
-            <line x1="-18" y1="0" x2="18" y2="0" stroke="#0b3c6d" stroke-width="3"/>
-            <line x1="0" y1="-18" x2="0" y2="18" stroke="#0b3c6d" stroke-width="3"/>
+          <!-- RIGHT WHEEL -->
+          <g class="wheel">
+            <circle cx="500" cy="170" r="30" fill="#0b3c6d"/>
+            <circle cx="500" cy="170" r="18" fill="#ffffff"/>
+            <line x1="482" y1="170" x2="518" y2="170" stroke="#0b3c6d" stroke-width="3"/>
+            <line x1="500" y1="152" x2="500" y2="188" stroke="#0b3c6d" stroke-width="3"/>
           </g>
 
         </svg>
