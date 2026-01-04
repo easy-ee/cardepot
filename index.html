@@ -49,7 +49,18 @@ body {
   100% { color: #ff00ff; }
 }
 
-/* ===== CREDIT / BUY HERE PAY HERE ===== */
+/* ===== RANDOM FLICKER ===== */
+.flicker span {
+  animation: flicker 2.5s infinite;
+}
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: .6; }
+  94% { opacity: .9; }
+  96% { opacity: .4; }
+}
+
+/* ===== TOP MESSAGE ===== */
 .top-led {
   font-size: 30px;
   margin: 14px 0 10px;
@@ -57,6 +68,37 @@ body {
 }
 @keyframes pulse {
   50% { opacity: .7; }
+}
+
+/* ===== FINANCE BURST ===== */
+.burst {
+  position: absolute;
+  top: 90px;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  font-size: 26px;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.burst.show {
+  animation: burstPop 1.4s ease-out forwards;
+}
+
+@keyframes burstPop {
+  0% {
+    transform: translateX(-50%) scale(0);
+    opacity: 0;
+  }
+  30% {
+    transform: translateX(-50%) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 0;
+  }
 }
 
 /* ===== SCENE ===== */
@@ -99,10 +141,6 @@ body {
   filter: blur(6px);
   z-index: 2;
   pointer-events: none;
-  animation: reflectionPulse 2.5s ease-in-out infinite;
-}
-@keyframes reflectionPulse {
-  50% { opacity: .4; }
 }
 
 /* ===== CAR ===== */
@@ -191,22 +229,25 @@ footer {
 <div class="card">
 
   <!-- 🔴 CREDIT / BUY HERE PAY HERE -->
-  <div class="top-led led color-cycle" id="creditText">
-    NO CREDIT
-  </div>
+  <div class="top-led led color-cycle flicker" id="creditText"></div>
 
   <div class="scene">
 
+    <!-- 💥 FINANCE BURST -->
+    <div class="burst led color-cycle" id="financeBurst">
+      WE FINANCE ANYONE
+    </div>
+
     <!-- MARQUEE -->
     <div class="marquee">
-      <div class="marquee-track led color-cycle">
+      <div class="marquee-track led color-cycle flicker">
         USED CAR SALES • FINANCING • USED CAR SALES • FINANCING •
       </div>
     </div>
 
     <!-- MARQUEE REFLECTION -->
     <div class="marquee-reflection">
-      <div class="marquee-track led color-cycle">
+      <div class="marquee-track led color-cycle flicker">
         USED CAR SALES • FINANCING • USED CAR SALES • FINANCING •
       </div>
     </div>
@@ -273,6 +314,7 @@ footer {
 </div>
 
 <script>
+/* CREDIT ROTATION */
 const messages = [
   "NO CREDIT",
   "BAD CREDIT",
@@ -280,12 +322,27 @@ const messages = [
 ];
 
 let index = 0;
-const el = document.getElementById("creditText");
+const credit = document.getElementById("creditText");
+
+function wrapFlicker(text) {
+  return [...text].map(c =>
+    c === " " ? " " : `<span>${c}</span>`
+  ).join("");
+}
+
+credit.innerHTML = wrapFlicker(messages[0]);
 
 setInterval(() => {
   index = (index + 1) % messages.length;
-  el.textContent = messages[index];
+  credit.innerHTML = wrapFlicker(messages[index]);
 }, 1400);
+
+/* FINANCE BURST */
+const burst = document.getElementById("financeBurst");
+setInterval(() => {
+  burst.classList.add("show");
+  setTimeout(() => burst.classList.remove("show"), 1400);
+}, 6000);
 </script>
 
 </body>
