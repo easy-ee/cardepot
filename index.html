@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CARDEPOT – Digital Card</title>
 
 <style>
@@ -12,16 +12,16 @@ body {
   margin: 0;
   padding: 20px;
   font-family: Arial, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: radial-gradient(circle at top, #0f172a, #020617);
+  background: radial-gradient(circle at top, #020617, #000000);
 }
 
 /* Card */
 .card {
   max-width: 420px;
-  margin: 0 auto;
+  margin: auto;
   background: #ffffff;
   border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0,0,0,.35);
+  box-shadow: 0 25px 50px rgba(0,0,0,.45);
   overflow: hidden;
   text-align: center;
 }
@@ -36,12 +36,12 @@ body {
 /* Scene */
 .scene {
   position: relative;
+  height: 230px;
   max-width: 360px;
-  height: 210px;
-  margin: 0 auto 10px;
+  margin: auto;
 }
 
-/* Vehicle float */
+/* Float */
 .vehicle {
   position: absolute;
   left: 50%;
@@ -55,46 +55,64 @@ body {
   50% { transform: translate(-50%,-6px); }
 }
 
+/* Underglow */
+.underglow {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  width: 260px;
+  height: 26px;
+  transform: translateX(-50%);
+  filter: blur(18px);
+  animation: rgb 6s linear infinite;
+}
+
+@keyframes rgb {
+  0% { background:#ff0000; }
+  33% { background:#00ffcc; }
+  66% { background:#8b5cf6; }
+  100% { background:#ff0000; }
+}
+
 /* Wheels */
 .wheel {
   animation: spin 1s linear infinite;
   transform-origin: center;
-  transform-box: fill-box;
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
 
-/* Lighting */
-.led, .grille, .interior {
-  animation: glow 1.6s ease-in-out infinite;
+/* Wheel shine */
+.spoke {
+  animation: shine 1.6s ease-in-out infinite;
 }
 
-@keyframes glow {
+@keyframes shine {
   0%,100% { opacity:.4; }
   50% { opacity:1; }
 }
 
-/* Crest */
-.crest {
-  animation: crestPulse 2s ease-in-out infinite;
+/* Metallic shimmer */
+.shimmer {
+  animation: shimmer 2.8s linear infinite;
 }
 
-@keyframes crestPulse {
-  0%,100% { opacity:.6; }
+@keyframes shimmer {
+  0% { opacity:.15; transform: translateX(-60px); }
+  50% { opacity:.35; }
+  100% { opacity:.15; transform: translateX(60px); }
+}
+
+/* Lights */
+.led, .grille {
+  animation: glow 1.5s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%,100% { opacity:.5; }
   50% { opacity:1; }
-}
-
-/* Exhaust */
-.smoke {
-  animation: smoke 2.5s linear infinite;
-}
-
-@keyframes smoke {
-  0% { transform: translate(0,0) scale(.6); opacity:.6; }
-  100% { transform: translate(-30px,-20px) scale(1.4); opacity:0; }
 }
 
 h1 {
@@ -104,13 +122,11 @@ h1 {
 
 .address {
   font-size: 14px;
-  line-height: 1.4;
 }
 
 /* Buttons */
 .buttons {
   display: grid;
-  grid-template-columns: 1fr;
   gap: 12px;
   padding: 20px;
 }
@@ -133,11 +149,6 @@ footer {
   padding: 12px;
   background: #f4f6f9;
 }
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; }
-}
 </style>
 </head>
 
@@ -147,79 +158,60 @@ footer {
   <div class="header">
 
     <div class="scene">
+
+      <div class="underglow"></div>
+
       <div class="vehicle">
+        <svg viewBox="0 0 860 270" width="360">
 
-        <!-- 🚙 2020 CADILLAC ESCALADE -->
-        <svg viewBox="0 0 860 270" width="360" height="165">
+          <!-- Shimmer overlay -->
+          <rect class="shimmer" x="140" y="120" width="600" height="90" fill="#ffffff"/>
 
-          <!-- Night city background -->
-          <rect x="0" y="0" width="860" height="270" fill="#020617"/>
-          <rect x="0" y="190" width="860" height="80" fill="#020617"/>
-
-          <!-- Exhaust -->
-          <circle class="smoke" cx="760" cy="205" r="10" fill="#ffffff"/>
-
-          <!-- Vertical LED headlights -->
+          <!-- LEDs -->
           <rect class="led" x="120" y="140" width="8" height="60" rx="4" fill="#eafcff"/>
-          <rect class="led" x="132" y="140" width="6" height="60" rx="3" fill="#eafcff"/>
-
-          <!-- Illuminated grille -->
           <rect class="grille" x="110" y="145" width="10" height="50" fill="#eafcff"/>
 
-          <!-- Cadillac crest -->
-          <polygon class="crest" points="115,165 120,180 115,195 110,180" fill="#e11d48"/>
-
-          <!-- Body -->
-          <rect x="140" y="120" width="600" height="90" rx="14" fill="#020617"/>
+          <!-- BODY -->
+          <rect x="140" y="120" width="600" height="90" rx="14" fill="#22ff00"/>
 
           <!-- Roof -->
-          <rect x="220" y="85" width="440" height="45" rx="12" fill="#020617"/>
-
-          <!-- Interior ambient light -->
-          <rect class="interior" x="240" y="100" width="400" height="30" rx="6" fill="#38bdf8"/>
+          <rect x="220" y="85" width="440" height="45" rx="12" fill="#1aff00"/>
 
           <!-- Windows -->
           <rect x="240" y="100" width="400" height="30" rx="6" fill="#020617"/>
 
-          <!-- Trim -->
-          <rect x="140" y="180" width="600" height="10" rx="5" fill="#020617"/>
-
-          <!-- LEFT 24” CHROME WHEEL -->
+          <!-- Wheels -->
           <g class="wheel">
-            <circle cx="300" cy="225" r="40" fill="#d1d5db"/>
-            <circle cx="300" cy="225" r="18" fill="#ffffff"/>
-            <circle cx="300" cy="225" r="22" fill="none" stroke="#ef4444" stroke-width="4"/>
+            <circle cx="300" cy="225" r="42" fill="#000"/>
+            <circle cx="300" cy="225" r="24" fill="#fff"/>
+            <line class="spoke" x1="300" y1="201" x2="300" y2="249" stroke="#ccc" stroke-width="4"/>
           </g>
 
-          <!-- RIGHT 24” CHROME WHEEL -->
           <g class="wheel">
-            <circle cx="600" cy="225" r="40" fill="#d1d5db"/>
-            <circle cx="600" cy="225" r="18" fill="#ffffff"/>
-            <circle cx="600" cy="225" r="22" fill="none" stroke="#ef4444" stroke-width="4"/>
+            <circle cx="600" cy="225" r="42" fill="#000"/>
+            <circle cx="600" cy="225" r="24" fill="#fff"/>
+            <line class="spoke" x1="600" y1="201" x2="600" y2="249" stroke="#ccc" stroke-width="4"/>
           </g>
 
         </svg>
-
       </div>
+
     </div>
 
     <h1>CARDEPOT</h1>
     <div class="address">
-      13725 East Broad St<br>
-      Pataskala, OH 43062
+      13725 East Broad St<br>Pataskala, OH 43062
     </div>
   </div>
 
   <div class="buttons">
     <a class="btn call" href="tel:+16142859929">📞 CALL</a>
     <a class="btn text" href="sms:+16142859929">💬 TEXT</a>
-    <a class="btn map" href="https://maps.google.com/?q=13725+East+Broad+St+Pataskala+OH+43062">📍 MAP</a>
+    <a class="btn map" href="https://maps.google.com">📍 MAP</a>
     <a class="btn save" href="cardepot.vcf" download>💾 SAVE</a>
   </div>
 
-  <footer>
-    Fast • Reliable • Trusted
-  </footer>
+  <footer>Fast • Reliable • Trusted</footer>
 </div>
 
 </body>
