@@ -36,28 +36,45 @@ body {
 /* Scene */
 .scene {
   position: relative;
-  height: 260px; /* slightly taller for big tires */
+  height: 300px;
   max-width: 360px;
   margin: auto;
 }
 
-/* Vehicle (STATIC, LOWERED) */
+/* Vehicle — moved UP 1 inch */
 .vehicle {
   position: absolute;
   left: 50%;
-  bottom: -20px; /* moved down toward title */
+  bottom: calc(-20px - 1in); /* ⬆ moved up exactly 1 inch */
   transform: translateX(-50%);
 }
 
-/* Underglow */
+/* Wheel spin (counter-clockwise, stationary position) */
+.wheel {
+  animation: spinCCW 1s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes spinCCW {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); }
+}
+
+/* Chrome spokes */
+.spoke {
+  stroke: #e5e7eb;
+  stroke-width: 4;
+}
+
+/* RGB Underglow */
 .underglow {
   position: absolute;
-  bottom: 18px;
+  bottom: 20px;
   left: 50%;
-  width: 320px;
-  height: 32px;
+  width: 300px;
+  height: 30px;
   transform: translateX(-50%);
-  filter: blur(22px);
+  filter: blur(20px);
   animation: rgb 6s linear infinite;
 }
 
@@ -68,11 +85,10 @@ body {
   100% { background:#ff0000; }
 }
 
-/* Text */
 h1 {
   margin: 12px 0 6px;
-  font-size: 36px;
   letter-spacing: 3px;
+  font-size: 30px;
 }
 
 .address {
@@ -96,13 +112,18 @@ h1 {
 
 .call { background:#22c55e; }
 .text { background:#3b82f6; }
-.map { background:#8b5cf6; }
+.map  { background:#8b5cf6; }
 .save { background:#f59e0b; }
 
 footer {
   font-size: 12px;
   padding: 12px;
   background: #f4f6f9;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; }
 }
 </style>
 </head>
@@ -118,59 +139,29 @@ footer {
       <div class="vehicle">
         <svg viewBox="0 0 900 320" width="360" height="220">
 
-          <!-- TRUCK BED -->
-          <rect x="460" y="135" width="300" height="70" rx="10" fill="#22ff00"/>
+          <!-- MODERN PICKUP BODY -->
+          <rect x="120" y="140" width="520" height="80" rx="14" fill="#22ff00"/>
+          <rect x="200" y="95" width="260" height="60" rx="12" fill="#1aff00"/>
+          <rect x="470" y="115" width="170" height="70" rx="10" fill="#1aff00"/>
+          <rect x="215" y="110" width="230" height="30" rx="6" fill="#020617"/>
 
-          <!-- CAB -->
-          <path d="
-            M200 135
-            H460
-            V95
-            Q460 75 430 75
-            H260
-            Q230 75 220 95
-            Z" fill="#1aff00"/>
+          <!-- FRONT GRILLE -->
+          <rect x="100" y="150" width="18" height="55" rx="4" fill="#eafcff"/>
 
-          <!-- LOWER BODY -->
-          <rect x="160" y="135" width="620" height="80" rx="14" fill="#22ff00"/>
-
-          <!-- WINDOWS -->
-          <rect x="260" y="90" width="160" height="35" rx="6" fill="#020617"/>
-          <rect x="430" y="90" width="80" height="35" rx="6" fill="#020617"/>
-
-          <!-- HEADLIGHT -->
-          <rect x="140" y="150" width="14" height="40" rx="6" fill="#eafcff"/>
-
-          <!-- LEFT WHEEL (BIGGER) -->
-          <g transform="translate(310 250)">
-            <circle r="60" fill="#000"/>
-            <circle r="36" fill="#fff"/>
-            <line x1="0" y1="-36" x2="0" y2="36" stroke="#e5e7eb" stroke-width="5"/>
-            <line x1="-36" y1="0" x2="36" y2="0" stroke="#e5e7eb" stroke-width="5"/>
-
-            <animateTransform
-              attributeName="transform"
-              type="rotate"
-              from="0 0 0"
-              to="-360 0 0"
-              dur="1s"
-              repeatCount="indefinite" />
+          <!-- LEFT WHEEL -->
+          <g class="wheel" transform="translate(260 240)">
+            <circle r="52" fill="#000"/>
+            <circle r="34" fill="#fff"/>
+            <line class="spoke" x1="0" y1="-34" x2="0" y2="34"/>
+            <line class="spoke" x1="-34" y1="0" x2="34" y2="0"/>
           </g>
 
-          <!-- RIGHT WHEEL (BIGGER) -->
-          <g transform="translate(620 250)">
-            <circle r="60" fill="#000"/>
-            <circle r="36" fill="#fff"/>
-            <line x1="0" y1="-36" x2="0" y2="36" stroke="#e5e7eb" stroke-width="5"/>
-            <line x1="-36" y1="0" x2="36" y2="0" stroke="#e5e7eb" stroke-width="5"/>
-
-            <animateTransform
-              attributeName="transform"
-              type="rotate"
-              from="0 0 0"
-              to="-360 0 0"
-              dur="1s"
-              repeatCount="indefinite" />
+          <!-- RIGHT WHEEL -->
+          <g class="wheel" transform="translate(540 240)">
+            <circle r="52" fill="#000"/>
+            <circle r="34" fill="#fff"/>
+            <line class="spoke" x1="0" y1="-34" x2="0" y2="34"/>
+            <line class="spoke" x1="-34" y1="0" x2="34" y2="0"/>
           </g>
 
         </svg>
