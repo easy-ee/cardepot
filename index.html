@@ -41,7 +41,7 @@ body {
   margin: auto;
 }
 
-/* Vehicle — ABSOLUTELY STATIC */
+/* Vehicle — STATIC */
 .vehicle {
   position: absolute;
   left: 50%;
@@ -68,15 +68,15 @@ body {
   100% { background:#ff0000; }
 }
 
-/* Wheels — ROTATION ONLY */
-.wheel {
-  transform-origin: center;
+/* Wheel rotation ONLY */
+.spin {
   animation: spinCCW 1s linear infinite;
+  transform-origin: center;
+  transform-box: fill-box;
 }
 
 @keyframes spinCCW {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(-360deg); } /* counter-clockwise */
+  to { transform: rotate(-360deg); }
 }
 
 /* Wheel styling */
@@ -188,19 +188,23 @@ footer {
           <rect class="led" x="140" y="150" width="14" height="40" rx="6" fill="#eafcff"/>
 
           <!-- LEFT WHEEL (FIXED POSITION) -->
-          <g class="wheel" transform="translate(310 230)">
-            <circle r="42" fill="#000"/>
-            <circle r="26" fill="#fff"/>
-            <line class="spoke" x1="0" y1="-26" x2="0" y2="26"/>
-            <line class="spoke" x1="-26" y1="0" x2="26" y2="0"/>
+          <g transform="translate(310 230)">
+            <g class="spin">
+              <circle r="42" fill="#000"/>
+              <circle r="26" fill="#fff"/>
+              <line class="spoke" x1="0" y1="-26" x2="0" y2="26"/>
+              <line class="spoke" x1="-26" y1="0" x2="26" y2="0"/>
+            </g>
           </g>
 
           <!-- RIGHT WHEEL (FIXED POSITION) -->
-          <g class="wheel" transform="translate(620 230)">
-            <circle r="42" fill="#000"/>
-            <circle r="26" fill="#fff"/>
-            <line class="spoke" x1="0" y1="-26" x2="0" y2="26"/>
-            <line class="spoke" x1="-26" y1="0" x2="26" y2="0"/>
+          <g transform="translate(620 230)">
+            <g class="spin">
+              <circle r="42" fill="#000"/>
+              <circle r="26" fill="#fff"/>
+              <line class="spoke" x1="0" y1="-26" x2="0" y2="26"/>
+              <line class="spoke" x1="-26" y1="0" x2="26" y2="0"/>
+            </g>
           </g>
 
         </svg>
