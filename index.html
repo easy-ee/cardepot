@@ -2,42 +2,43 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>CARDEPOT – Digital Card</title>
 
 <style>
+* { box-sizing: border-box; }
+
 body {
+  margin: 0;
+  padding: 20px;
   font-family: Arial, sans-serif;
   background: #eef2f7;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
 }
 
 .card {
-  width: 380px;
+  max-width: 420px;
+  margin: 0 auto;
   background: #fff;
   border-radius: 20px;
-  box-shadow: 0 15px 35px rgba(0,0,0,.2);
+  box-shadow: 0 15px 35px rgba(0,0,0,.15);
   overflow: hidden;
   text-align: center;
 }
 
 .header {
   background: linear-gradient(135deg,#0b3c6d,#0f5aa3);
-  padding: 25px 15px;
+  padding: 24px 16px;
   color: #fff;
 }
 
 svg {
-  width: 300px;
+  width: 100%;
+  max-width: 320px;
   display: block;
-  margin: 0 auto;
+  margin: 0 auto 10px;
 }
 
-/* Wheel animation – cross-browser safe */
+/* Wheels */
 .rim {
   animation: spin 0.8s linear infinite;
   transform-origin: 50% 50%;
@@ -60,29 +61,62 @@ h1 {
   line-height: 1.4;
 }
 
+/* Buttons */
 .buttons {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  grid-template-columns: 1fr;
+  gap: 12px;
   padding: 20px;
 }
 
 .btn {
-  padding: 14px;
+  padding: 16px;
   border-radius: 14px;
   text-decoration: none;
   color: #fff;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 15px;
 }
 
-.call { background: #2ecc71; }
-.text { background: #3498db; }
+.call { background:#2ecc71; }
+.text { background:#3498db; }
+.map  { background:#9b59b6; }
+.save { background:#f39c12; }
+
+.extra {
+  padding: 0 20px 20px;
+}
+
+.extra button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  background: #34495e;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.qr {
+  padding: 15px;
+}
+
+.qr img {
+  width: 120px;
+}
 
 footer {
   font-size: 12px;
-  padding: 10px;
+  padding: 12px;
   background: #f4f6f9;
+}
+
+/* Desktop enhancement */
+@media (min-width: 900px) {
+  .card { max-width: 520px; }
+  .buttons { grid-template-columns: 1fr 1fr; }
+  h1 { font-size: 28px; }
 }
 </style>
 </head>
@@ -92,17 +126,11 @@ footer {
 <div class="card">
   <div class="header">
 
-    <!-- Car SVG -->
+    <!-- CAR SVG -->
     <svg viewBox="0 0 600 180" aria-label="Car graphic">
-      <!-- Car Body -->
-      <path d="M60 120 Q100 60 200 60 H360 Q430 60 480 100 L520 110 V140 H60 Z"
-            fill="#ffffff"/>
+      <path d="M60 120 Q100 60 200 60 H360 Q430 60 480 100 L520 110 V140 H60 Z" fill="#ffffff"/>
+      <path d="M200 65 H330 Q360 65 380 90 H210 Z" fill="#dfe9f3"/>
 
-      <!-- Windows -->
-      <path d="M200 65 H330 Q360 65 380 90 H210 Z"
-            fill="#dfe9f3"/>
-
-      <!-- Left Wheel -->
       <g class="rim" transform="translate(160 140)">
         <circle r="26" fill="#0b3c6d"/>
         <circle r="18" fill="#ffffff"/>
@@ -110,7 +138,6 @@ footer {
         <line x1="0" y1="-18" x2="0" y2="18" stroke="#0b3c6d" stroke-width="3"/>
       </g>
 
-      <!-- Right Wheel -->
       <g class="rim" transform="translate(420 140)">
         <circle r="26" fill="#0b3c6d"/>
         <circle r="18" fill="#ffffff"/>
@@ -127,14 +154,39 @@ footer {
   </div>
 
   <div class="buttons">
-    <a class="btn call" href="tel:+16142859929">📞 TAP TO CALL</a>
-    <a class="btn text" href="sms:+16142859929">💬 TAP TO TEXT</a>
+    <a class="btn call" href="tel:+16142859929">📞 CALL</a>
+    <a class="btn text" href="sms:+16142859929">💬 TEXT</a>
+    <a class="btn map" target="_blank"
+       href="https://maps.google.com/?q=13725+East+Broad+St+Pataskala+OH+43062">📍 MAP</a>
+    <a class="btn save" href="cardepot.vcf" download>💾 SAVE CONTACT</a>
+  </div>
+
+  <div class="extra">
+    <button onclick="shareCard()">📤 SHARE CARD</button>
+  </div>
+
+  <div class="qr">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://YOUR-USERNAME.github.io/YOUR-REPO/">
+    <div style="font-size:12px;margin-top:5px;">Scan Me</div>
   </div>
 
   <footer>
     Fast • Reliable • Trusted
   </footer>
 </div>
+
+<script>
+function shareCard() {
+  if (navigator.share) {
+    navigator.share({
+      title: 'CARDEPOT',
+      url: window.location.href
+    });
+  } else {
+    alert("Copy this link:\n" + window.location.href);
+  }
+}
+</script>
 
 </body>
 </html>
