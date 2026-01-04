@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CARDEPOT – Chrome Wheel</title>
+<title>CARDEPOT – Grounded Chrome Wheel</title>
 
 <style>
 * { box-sizing: border-box; }
@@ -57,10 +57,8 @@ body {
 }
 
 @keyframes scroll {
-  from { transform: translateX(0); }
   to { transform: translateX(-100%); }
 }
-
 @keyframes colorCycle {
   0% { color:#00ff00; }
   25% { color:#00ffff; }
@@ -68,7 +66,6 @@ body {
   75% { color:#ffff00; }
   100% { color:#00ff00; }
 }
-
 @keyframes flicker {
   0%,100% { opacity:1; }
   50% { opacity:.85; }
@@ -77,16 +74,27 @@ body {
 /* SCENE */
 .scene {
   position: relative;
-  height: 300px;
+  height: 320px;
+}
+
+/* GROUND */
+.ground {
+  position: absolute;
+  bottom: 40px;
+  left: 10%;
+  width: 80%;
+  height: 4px;
+  background: linear-gradient(to right,#333,#777,#333);
+  border-radius: 4px;
 }
 
 /* UNDERGLOW */
 .underglow {
   position: absolute;
-  bottom: 20px;
+  bottom: 42px;
   left: 50%;
-  width: 80%;
-  height: 30px;
+  width: 70%;
+  height: 28px;
   transform: translateX(-50%);
   filter: blur(22px);
   background: linear-gradient(90deg, red, cyan, lime, magenta);
@@ -103,7 +111,7 @@ svg {
   height: 300px;
 }
 
-/* CHROME WHEEL */
+/* WHEEL */
 .wheel {
   animation: spin 1.2s linear infinite reverse;
   transform-origin: center;
@@ -125,14 +133,6 @@ h1 {
 .address {
   font-size: 22px;
 }
-
-/* FOOTER */
-footer {
-  font-size: 12px;
-  padding: 12px;
-  background: #0a0f14;
-  color: #aaa;
-}
 </style>
 </head>
 
@@ -148,37 +148,41 @@ footer {
     </div>
 
     <div class="scene">
-      <div class="underglow"></div>
 
-      <!-- GIANT CHROME WHEEL -->
+      <div class="underglow"></div>
+      <div class="ground"></div>
+
+      <!-- GROUNDED CHROME WHEEL -->
       <svg viewBox="0 0 400 400" aria-label="Chrome Wheel">
         <defs>
           <radialGradient id="chrome">
             <stop offset="0%" stop-color="#ffffff"/>
-            <stop offset="40%" stop-color="#cccccc"/>
+            <stop offset="45%" stop-color="#cccccc"/>
             <stop offset="70%" stop-color="#777777"/>
             <stop offset="100%" stop-color="#ffffff"/>
           </radialGradient>
         </defs>
 
-        <g class="wheel" transform="translate(200 200)">
+        <!-- Wheel center Y = radius + ground offset -->
+        <g class="wheel" transform="translate(200 240)">
           <!-- Tire -->
-          <circle r="170" fill="#000"/>
+          <circle r="150" fill="#000"/>
           <!-- Chrome Rim -->
-          <circle r="130" fill="url(#chrome)"/>
+          <circle r="110" fill="url(#chrome)"/>
 
           <!-- Spokes -->
           <g stroke="#eee" stroke-width="10">
-            <line x1="-130" y1="0" x2="130" y2="0"/>
-            <line x1="0" y1="-130" x2="0" y2="130"/>
-            <line x1="-92" y1="-92" x2="92" y2="92"/>
-            <line x1="-92" y1="92" x2="92" y2="-92"/>
+            <line x1="-110" y1="0" x2="110" y2="0"/>
+            <line x1="0" y1="-110" x2="0" y2="110"/>
+            <line x1="-78" y1="-78" x2="78" y2="78"/>
+            <line x1="-78" y1="78" x2="78" y2="-78"/>
           </g>
 
           <!-- Hub -->
           <circle r="22" fill="#111"/>
         </g>
       </svg>
+
     </div>
 
     <h1>CARDEPOT</h1>
