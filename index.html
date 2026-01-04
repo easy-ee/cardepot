@@ -47,7 +47,7 @@ body {
   font-size: 30px;
   letter-spacing: 6px;
   padding-left: 100%;
-  animation: scroll 10s linear infinite, colorCycle 3s linear infinite, flicker 1.5s infinite;
+  animation: scroll 10s linear infinite, colorCycle 3s linear infinite;
   color: #00ff00;
   filter: drop-shadow(0 0 12px currentColor);
   background-image: radial-gradient(currentColor 1.3px, transparent 1.4px);
@@ -59,16 +59,13 @@ body {
 @keyframes scroll {
   to { transform: translateX(-100%); }
 }
+
 @keyframes colorCycle {
   0% { color:#00ff00; }
   25% { color:#00ffff; }
   50% { color:#ff00ff; }
   75% { color:#ffff00; }
   100% { color:#00ff00; }
-}
-@keyframes flicker {
-  0%,100% { opacity:1; }
-  50% { opacity:.85; }
 }
 
 /* SCENE */
@@ -94,7 +91,7 @@ body {
   bottom: 42px;
   left: 50%;
   width: 70%;
-  height: 28px;
+  height: 26px;
   transform: translateX(-50%);
   filter: blur(22px);
   background: linear-gradient(90deg, red, cyan, lime, magenta);
@@ -111,11 +108,12 @@ svg {
   height: 300px;
 }
 
-/* WHEEL */
+/* WHEEL — ROTATION ONLY */
 .wheel {
   animation: spin 1.2s linear infinite reverse;
   transform-origin: center;
   transform-box: fill-box;
+  will-change: transform;
 }
 
 @keyframes spin {
@@ -152,7 +150,7 @@ h1 {
       <div class="underglow"></div>
       <div class="ground"></div>
 
-      <!-- GROUNDED CHROME WHEEL -->
+      <!-- PERFECTLY GROUNDED WHEEL -->
       <svg viewBox="0 0 400 400" aria-label="Chrome Wheel">
         <defs>
           <radialGradient id="chrome">
@@ -163,7 +161,7 @@ h1 {
           </radialGradient>
         </defs>
 
-        <!-- Wheel center Y = radius + ground offset -->
+        <!-- CENTER IS FIXED: Y = ground + radius -->
         <g class="wheel" transform="translate(200 240)">
           <!-- Tire -->
           <circle r="150" fill="#000"/>
