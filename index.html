@@ -29,31 +29,31 @@ body {
 /* Header */
 .header {
   background: linear-gradient(180deg,#020617,#0b1220);
-  padding: 24px 16px 30px;
+  padding: 24px 16px 36px;
   color: #fff;
 }
 
 /* Scene */
 .scene {
   position: relative;
-  height: 240px;
+  height: 230px;
   max-width: 360px;
   margin: auto;
 }
 
-/* Vehicle – centered, moved DOWN 0.1in */
+/* Vehicle */
 .vehicle {
   position: absolute;
   left: 50%;
   bottom: 0;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, 6px); /* rests on title */
   animation: suspension 1.6s ease-in-out infinite;
 }
 
 /* Suspension bounce */
 @keyframes suspension {
-  0%,100% { transform: translate(-50%, 0); }
-  50% { transform: translate(-50%, 4px); }
+  0%,100% { transform: translate(-50%, 6px); }
+  50% { transform: translate(-50%, 10px); }
 }
 
 /* Underglow */
@@ -92,15 +92,31 @@ body {
   stroke-width: 3;
 }
 
-/* Text */
-h1 {
-  margin: 12px 0 6px;
-  letter-spacing: 3px;
-  font-size: 30px;
+/* BRAND TEXT */
+.brand {
+  margin-top: -6px; /* pulls text closer to car */
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 44px; /* INCREASED */
+  letter-spacing: 6px;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #eaffff;
+  text-shadow:
+    0 0 6px #22ff00,
+    0 0 14px #22ff00,
+    0 0 28px rgba(34,255,0,.8);
+}
+
+.brand .car {
+  margin-right: 14px; /* SPACE BETWEEN CAR + DEPOT */
 }
 
 .address {
   font-size: 16px;
+  margin-top: 6px;
 }
 
 /* Buttons */
@@ -143,12 +159,10 @@ footer {
 
     <div class="scene">
       <div class="vehicle">
-
         <div class="underglow"></div>
 
         <svg viewBox="0 0 900 320" width="360" height="220">
           <defs>
-            <!-- Light glow -->
             <filter id="glow">
               <feGaussianBlur stdDeviation="8" result="blur"/>
               <feMerge>
@@ -187,16 +201,23 @@ footer {
             <line class="spoke" x1="0" y1="-28" x2="0" y2="28"/>
             <line class="spoke" x1="-28" y1="0" x2="28" y2="0"/>
           </g>
-
         </svg>
       </div>
     </div>
 
-    <h1>CARDEPOT</h1>
+    <!-- BRAND -->
+    <div class="brand">
+      <h1>
+        <span class="car">CAR</span>
+        <span class="depot">DEPOT</span>
+      </h1>
+    </div>
+
     <div class="address">
       13725 East Broad St<br>
       Pataskala, OH 43062
     </div>
+
   </div>
 
   <div class="buttons">
