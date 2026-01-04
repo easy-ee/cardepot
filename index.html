@@ -6,9 +6,7 @@
 <title>CARDEPOT – Digital Card</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -21,7 +19,7 @@ body {
 .card {
   max-width: 420px;
   margin: 0 auto;
-  background: #ffffff;
+  background: #fff;
   border-radius: 20px;
   box-shadow: 0 15px 35px rgba(0,0,0,.15);
   overflow: hidden;
@@ -31,19 +29,71 @@ body {
 /* Header */
 .header {
   background: linear-gradient(135deg,#0b3c6d,#0f5aa3);
-  padding: 24px 16px;
-  color: #ffffff;
+  padding: 24px 16px 30px;
+  color: #fff;
+  position: relative;
+}
+
+/* Scene */
+.scene {
+  position: relative;
+  max-width: 340px;
+  margin: 0 auto 10px;
+}
+
+/* Road */
+.road {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background: #2c3e50;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+/* Road lines */
+.road::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -200%;
+  width: 400%;
+  height: 4px;
+  background: repeating-linear-gradient(
+    to right,
+    #ecf0f1 0 40px,
+    transparent 40px 80px
+  );
+  transform: translateY(-50%);
+  animation: roadMove 1.2s linear infinite;
+}
+
+@keyframes roadMove {
+  from { transform: translateX(0) translateY(-50%); }
+  to   { transform: translateX(-80px) translateY(-50%); }
+}
+
+/* Car motion */
+.car {
+  animation: bob 1.8s ease-in-out infinite;
+}
+
+@keyframes bob {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(2px); }
 }
 
 /* SVG */
 svg {
   width: 100%;
-  max-width: 340px;
   display: block;
-  margin: 0 auto 10px;
+  position: relative;
+  z-index: 2;
 }
 
-/* Wheel animation */
+/* Wheels */
 .rim {
   animation: spin 0.8s linear infinite;
   transform-origin: 50% 50%;
@@ -78,7 +128,7 @@ h1 {
   padding: 16px;
   border-radius: 14px;
   text-decoration: none;
-  color: #ffffff;
+  color: #fff;
   font-weight: bold;
   font-size: 15px;
 }
@@ -99,7 +149,7 @@ h1 {
   border-radius: 14px;
   border: none;
   background: #34495e;
-  color: #ffffff;
+  color: #fff;
   font-weight: bold;
   cursor: pointer;
 }
@@ -111,7 +161,7 @@ footer {
   background: #f4f6f9;
 }
 
-/* Desktop enhancement */
+/* Desktop */
 @media (min-width: 900px) {
   .card { max-width: 520px; }
   .buttons { grid-template-columns: 1fr 1fr; }
@@ -125,59 +175,70 @@ footer {
 <div class="card">
   <div class="header">
 
-    <!-- 🚗 SEDAN CAR SVG WITH MOVING WHEELS -->
-    <svg viewBox="0 0 700 220" aria-label="Sedan car">
-      <!-- Body -->
-      <path d="
-        M80 150
-        Q120 90 200 90
-        H350
-        Q430 90 500 120
-        L560 135
-        V165
-        H80
-        Z"
-        fill="#ffffff"/>
+    <div class="scene">
+      <div class="car">
+        <!-- 🚗 SEDAN SVG -->
+        <svg viewBox="0 0 700 220" aria-label="Sedan car">
+          <!-- Body -->
+          <path d="
+            M80 150
+            Q120 90 200 90
+            H350
+            Q430 90 500 120
+            L560 135
+            V165
+            H80
+            Z"
+            fill="#ffffff"/>
 
-      <!-- Roof -->
-      <path d="
-        M210 90
-        H360
-        Q390 90 410 120
-        H180
-        Q195 100 210 90
-        Z"
-        fill="#e6eef7"/>
+          <!-- Roof -->
+          <path d="
+            M210 90
+            H360
+            Q390 90 410 120
+            H180
+            Q195 100 210 90
+            Z"
+            fill="#e6eef7"/>
 
-      <!-- Windows -->
-      <path d="
-        M220 100
-        H350
-        Q370 100 390 120
-        H200
-        Z"
-        fill="#d1dce8"/>
+          <!-- Windows -->
+          <path d="
+            M220 100
+            H350
+            Q370 100 390 120
+            H200
+            Z"
+            fill="#d1dce8"/>
 
-      <!-- Left Wheel -->
-      <g class="rim" transform="translate(220 165)">
-        <circle r="28" fill="#0b3c6d"/>
-        <circle r="19" fill="#ffffff"/>
-        <line x1="-19" y1="0" x2="19" y2="0" stroke="#0b3c6d" stroke-width="3"/>
-        <line x1="0" y1="-19" x2="0" y2="19" stroke="#0b3c6d" stroke-width="3"/>
-      </g>
+          <!-- Left Wheel -->
+          <g class="rim" transform="translate(220 165)">
+            <circle r="28" fill="#0b3c6d"/>
+            <circle r="19" fill="#ffffff"/>
+            <line x1="-19" y1="0" x2="19" y2="0" stroke="#0b3c6d" stroke-width="3"/>
+            <line x1="0" y1="-19" x2="0" y2="19" stroke="#0b3c6d" stroke-width="3"/>
+          </g>
 
-      <!-- Right Wheel -->
-      <g class="rim" transform="translate(460 165)">
-        <circle r="28" fill="#0b3c6d"/>
-        <circle r="19" fill="#ffffff"/>
-        <line x1="-19" y1="0" x2="19" y2="0" stroke="#0b3c6d" stroke-width="3"/>
-        <line x1="0" y1="-19" x2="0" y2="19" stroke="#0b3c6d" stroke-width="3"/>
-      </g>
-    </svg>
+          <!-- Right Wheel -->
+          <g class="rim" transform="translate(460 165)">
+            <circle r="28" fill="#0b3c6d"/>
+            <circle r="19" fill="#ffffff"/>
+            <line x1="-19" y1="0" x2="19" y2="0" stroke="#0b3c6d" stroke-width="3"/>
+            <line x1="0" y1="-19" x2="0" y2="19" stroke="#0b3c6d" stroke-width="3"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="road"></div>
+    </div>
 
     <h1>CARDEPOT</h1>
     <div class="address">
       13725 East Broad St<br>
       Pataskala, OH 43062
     </div>
-  </di
+  </div>
+
+  <div class="buttons">
+    <a class="btn call" href="tel:+16142859929">📞 CALL</a>
+    <a class="btn text" href="sms:+16142859929">💬 TEXT</a>
+    <a class="btn map" target="_blan_
