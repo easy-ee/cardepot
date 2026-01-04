@@ -41,7 +41,7 @@ body {
   margin: auto;
 }
 
-/* Vehicle — STATIC */
+/* Vehicle (STATIC) */
 .vehicle {
   position: absolute;
   left: 50%;
@@ -66,44 +66,6 @@ body {
   33% { background:#00ffcc; }
   66% { background:#8b5cf6; }
   100% { background:#ff0000; }
-}
-
-/* Wheel rotation ONLY */
-.spin {
-  animation: spinCCW 1s linear infinite;
-  transform-origin: center;
-  transform-box: fill-box;
-}
-
-@keyframes spinCCW {
-  to { transform: rotate(-360deg); }
-}
-
-/* Wheel styling */
-.spoke {
-  stroke: #e5e7eb;
-  stroke-width: 4;
-}
-
-/* Chrome shimmer */
-.shimmer {
-  animation: shimmer 3s linear infinite;
-}
-
-@keyframes shimmer {
-  0% { opacity:.12; transform: translateX(-80px); }
-  50% { opacity:.3; }
-  100% { opacity:.12; transform: translateX(80px); }
-}
-
-/* LEDs */
-.led {
-  animation: glow 1.5s ease-in-out infinite;
-}
-
-@keyframes glow {
-  0%,100% { opacity:.5; }
-  50% { opacity:1; }
 }
 
 /* Text */
@@ -142,11 +104,6 @@ footer {
   padding: 12px;
   background: #f4f6f9;
 }
-
-/* Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; }
-}
 </style>
 </head>
 
@@ -181,30 +138,41 @@ footer {
           <rect x="260" y="90" width="160" height="35" rx="6" fill="#020617"/>
           <rect x="430" y="90" width="80" height="35" rx="6" fill="#020617"/>
 
-          <!-- SHIMMER -->
-          <rect class="shimmer" x="160" y="135" width="620" height="80" fill="#ffffff"/>
-
           <!-- HEADLIGHT -->
-          <rect class="led" x="140" y="150" width="14" height="40" rx="6" fill="#eafcff"/>
+          <rect x="140" y="150" width="14" height="40" rx="6" fill="#eafcff"/>
 
-          <!-- LEFT WHEEL (FIXED POSITION) -->
+          <!-- LEFT WHEEL -->
           <g transform="translate(310 230)">
-            <g class="spin">
-              <circle r="42" fill="#000"/>
-              <circle r="26" fill="#fff"/>
-              <line class="spoke" x1="0" y1="-26" x2="0" y2="26"/>
-              <line class="spoke" x1="-26" y1="0" x2="26" y2="0"/>
-            </g>
+            <circle r="42" fill="#000"/>
+            <circle r="26" fill="#fff"/>
+            <line x1="0" y1="-26" x2="0" y2="26" stroke="#e5e7eb" stroke-width="4"/>
+            <line x1="-26" y1="0" x2="26" y2="0" stroke="#e5e7eb" stroke-width="4"/>
+
+            <!-- SVG-NATIVE ROTATION -->
+            <animateTransform
+              attributeName="transform"
+              type="rotate"
+              from="0 0 0"
+              to="-360 0 0"
+              dur="1s"
+              repeatCount="indefinite" />
           </g>
 
-          <!-- RIGHT WHEEL (FIXED POSITION) -->
+          <!-- RIGHT WHEEL -->
           <g transform="translate(620 230)">
-            <g class="spin">
-              <circle r="42" fill="#000"/>
-              <circle r="26" fill="#fff"/>
-              <line class="spoke" x1="0" y1="-26" x2="0" y2="26"/>
-              <line class="spoke" x1="-26" y1="0" x2="26" y2="0"/>
-            </g>
+            <circle r="42" fill="#000"/>
+            <circle r="26" fill="#fff"/>
+            <line x1="0" y1="-26" x2="0" y2="26" stroke="#e5e7eb" stroke-width="4"/>
+            <line x1="-26" y1="0" x2="26" y2="0" stroke="#e5e7eb" stroke-width="4"/>
+
+            <!-- SVG-NATIVE ROTATION -->
+            <animateTransform
+              attributeName="transform"
+              type="rotate"
+              from="0 0 0"
+              to="-360 0 0"
+              dur="1s"
+              repeatCount="indefinite" />
           </g>
 
         </svg>
