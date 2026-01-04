@@ -12,7 +12,7 @@ body {
   margin: 0;
   padding: 20px;
   font-family: Arial, sans-serif;
-  background: radial-gradient(circle at top, #020617, #000);
+  background: radial-gradient(circle at top, #020617,#000);
 }
 
 /* CARD */
@@ -62,11 +62,11 @@ body {
   margin-right: 18px;
 }
 
-/* CAR POSITION (RESTS ON TEXT) */
+/* CAR POSITION (LOWERED 0.1 INCH) */
 .car-wrapper {
   position: absolute;
   left: 50%;
-  bottom: 58px; /* sits on top of CAR DEPOT */
+  bottom: calc(58px - 0.1in); /* lowered 0.1 inch */
   transform: translateX(-50%);
 }
 
