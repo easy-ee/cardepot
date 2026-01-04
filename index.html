@@ -26,16 +26,22 @@ body {
   box-shadow: 0 30px 60px rgba(0,0,0,.6);
 }
 
-/* MARQUEE AT TOP */
+/* MARQUEE */
 .marquee {
   width: 100%;
   overflow: hidden;
   background: #111;
-  color: #22ff00;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 17px; /* increased by 3 from 14 */
   text-transform: uppercase;
   letter-spacing: 2px;
+  padding: 6px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+  color: #22ff00;
+  text-shadow:
+    0 0 6px #22ff00,
+    0 0 14px #22ff00,
+    0 0 28px rgba(34,255,0,.85);
 }
 
 .marquee .track {
