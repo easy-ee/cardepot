@@ -74,15 +74,14 @@ body {
   100% { background:#ff0000; }
 }
 
-/* Rim spin — ANTI-CLOCKWISE */
+/* Rim spin ONLY */
 .rim-spin {
-  animation: spinCCW 1s linear infinite;
+  animation: spin 1s linear infinite;
   transform-origin: center;
 }
 
-@keyframes spinCCW {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(-360deg); }
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 /* Shimmer */
@@ -168,20 +167,20 @@ footer {
 
           <!-- LEFT WHEEL -->
           <g transform="translate(300 228)">
-            <!-- Tire (reduced size, stationary) -->
-            <circle r="44" fill="#000"/>
-            <circle r="38" fill="#111"/>
+            <!-- Tire (stationary, larger) -->
+            <circle r="50" fill="#000"/>
+            <circle r="44" fill="#111"/>
 
-            <!-- Rim (spinning CCW) -->
+            <!-- Rim (spinning) -->
             <g class="rim-spin">
-              <circle r="30" fill="#f8fafc"/>
+              <circle r="34" fill="#f8fafc"/>
               <g stroke="#e5e7eb" stroke-width="3">
-                <line x1="0" y1="-30" x2="0" y2="30"/>
-                <line x1="-30" y1="0" x2="30" y2="0"/>
-                <line x1="-21" y1="-21" x2="21" y2="21"/>
-                <line x1="-21" y1="21" x2="21" y2="-21"/>
-                <line x1="-12" y1="-28" x2="12" y2="28"/>
-                <line x1="-28" y1="-12" x2="28" y2="12"/>
+                <line x1="0" y1="-34" x2="0" y2="34"/>
+                <line x1="-34" y1="0" x2="34" y2="0"/>
+                <line x1="-24" y1="-24" x2="24" y2="24"/>
+                <line x1="-24" y1="24" x2="24" y2="-24"/>
+                <line x1="-12" y1="-32" x2="12" y2="32"/>
+                <line x1="-32" y1="-12" x2="32" y2="12"/>
               </g>
               <circle r="6" fill="#9ca3af"/>
             </g>
@@ -189,18 +188,18 @@ footer {
 
           <!-- RIGHT WHEEL -->
           <g transform="translate(600 228)">
-            <circle r="44" fill="#000"/>
-            <circle r="38" fill="#111"/>
+            <circle r="50" fill="#000"/>
+            <circle r="44" fill="#111"/>
 
             <g class="rim-spin">
-              <circle r="30" fill="#f8fafc"/>
+              <circle r="34" fill="#f8fafc"/>
               <g stroke="#e5e7eb" stroke-width="3">
-                <line x1="0" y1="-30" x2="0" y2="30"/>
-                <line x1="-30" y1="0" x2="30" y2="0"/>
-                <line x1="-21" y1="-21" x2="21" y2="21"/>
-                <line x1="-21" y1="21" x2="21" y2="-21"/>
-                <line x1="-12" y1="-28" x2="12" y2="28"/>
-                <line x1="-28" y1="-12" x2="28" y2="12"/>
+                <line x1="0" y1="-34" x2="0" y2="34"/>
+                <line x1="-34" y1="0" x2="34" y2="0"/>
+                <line x1="-24" y1="-24" x2="24" y2="24"/>
+                <line x1="-24" y1="24" x2="24" y2="-24"/>
+                <line x1="-12" y1="-32" x2="12" y2="32"/>
+                <line x1="-32" y1="-12" x2="32" y2="12"/>
               </g>
               <circle r="6" fill="#9ca3af"/>
             </g>
