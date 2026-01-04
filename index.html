@@ -24,7 +24,7 @@ body {
 }
 
 .header {
-  padding: 26px 16px 10px;
+  padding: 26px 16px 14px;
   color: #fff;
 }
 
@@ -69,16 +69,47 @@ body {
   opacity: .95;
 }
 
+/* 💎 CHROME SHIMMER TITLE */
 h1 {
-  margin: 10px 0 4px;
-  letter-spacing: 2px;
+  margin: 16px 0 6px;
+  font-size: 36px;
+  font-weight: 900;
+  letter-spacing: 4px;
+
+  background: linear-gradient(
+    120deg,
+    #ffffff 0%,
+    #cfd4dc 20%,
+    #ffffff 40%,
+    #9ca3af 60%,
+    #ffffff 80%,
+    #e5e7eb 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow:
+    0 0 6px rgba(255,255,255,.45),
+    0 0 18px rgba(180,190,200,.35),
+    0 0 36px rgba(120,130,150,.25);
+
+  animation: chromeShimmer 3.5s linear infinite;
 }
 
+@keyframes chromeShimmer {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+/* Address */
 .address {
-  font-size: 14px;
+  font-size: 17px;
+  line-height: 1.5;
   color: #cbd5f5;
 }
 
+/* Buttons */
 .buttons {
   display: grid;
   gap: 12px;
@@ -99,7 +130,7 @@ h1 {
 .save { background:#f59e0b; }
 
 footer {
-  font-size: 12px;
+  font-size: 13px;
   padding: 14px;
   color: #94a3b8;
 }
@@ -113,22 +144,18 @@ footer {
 
     <div class="scene">
       <svg viewBox="0 0 700 300" width="100%" class="car-float">
-
         <defs>
-          <!-- Metallic green paint -->
           <linearGradient id="paint" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stop-color="#22ff55"/>
             <stop offset="50%" stop-color="#00cc44"/>
             <stop offset="100%" stop-color="#66ff99"/>
           </linearGradient>
 
-          <!-- Tire depth -->
           <radialGradient id="tireShadow">
             <stop offset="60%" stop-color="#222"/>
             <stop offset="100%" stop-color="#000"/>
           </radialGradient>
 
-          <!-- Chrome rim -->
           <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stop-color="#f8fafc"/>
             <stop offset="25%" stop-color="#9ca3af"/>
@@ -137,7 +164,6 @@ footer {
             <stop offset="100%" stop-color="#f8fafc"/>
           </linearGradient>
 
-          <!-- RGB lighting -->
           <linearGradient id="rgbGlow" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stop-color="#00f"/>
             <stop offset="50%" stop-color="#0f0"/>
@@ -145,46 +171,30 @@ footer {
           </linearGradient>
         </defs>
 
-        <!-- UNDERGLOW -->
+        <!-- Underglow -->
         <ellipse cx="350" cy="265" rx="260" ry="22"
                  fill="url(#rgbGlow)" class="underglow"/>
 
-        <!-- ESCALADE BODY -->
-        <path d="
-          M90 180
-          Q120 115 190 115
-          H520
-          Q590 115 620 170
-          V195
-          H90
-          Z"
-          fill="url(#paint)"/>
+        <!-- Escalade body -->
+        <path d="M90 180 Q120 115 190 115 H520 Q590 115 620 170 V195 H90 Z"
+              fill="url(#paint)"/>
 
-        <!-- WINDOWS -->
         <path d="M210 125 H500 Q520 125 530 150 H200 Z"
               fill="#020617"/>
 
-        <!-- GRILLE -->
-        <rect x="535" y="160" width="45" height="30" rx="4"
-              fill="#e5e7eb"/>
-        <rect x="540" y="165" width="35" height="20" rx="3"
-              fill="#ffffff" opacity=".6"/>
-
-        <!-- HEADLIGHTS -->
+        <!-- Headlights -->
         <rect x="585" y="158" width="22" height="10" rx="4"
               fill="#e0f2fe"/>
         <rect x="585" y="172" width="22" height="8" rx="4"
               fill="#e0f2fe"/>
 
-        <!-- LEFT 55” WHEEL -->
+        <!-- LEFT WHEEL -->
         <g transform="translate(250 255)">
           <circle r="44" fill="#050505"/>
           <circle r="40" fill="#111"/>
           <circle r="36" fill="url(#tireShadow)"/>
-
-          <circle r="32" class="rim-glow"
-                  fill="none" stroke="url(#rgbGlow)" stroke-width="4"/>
-
+          <circle r="32" class="rim-glow" fill="none"
+                  stroke="url(#rgbGlow)" stroke-width="4"/>
           <g class="rim-spin">
             <circle r="30" fill="url(#chrome)"/>
             <g stroke="#e5e7eb" stroke-width="2.4">
@@ -192,22 +202,18 @@ footer {
               <line x1="-30" y1="0" x2="30" y2="0"/>
               <line x1="-22" y1="-22" x2="22" y2="22"/>
               <line x1="-22" y1="22" x2="22" y2="-22"/>
-              <line x1="-30" y1="-10" x2="30" y2="10"/>
-              <line x1="-30" y1="10" x2="30" y2="-10"/>
             </g>
             <circle r="6" fill="#9ca3af"/>
           </g>
         </g>
 
-        <!-- RIGHT 55” WHEEL -->
+        <!-- RIGHT WHEEL -->
         <g transform="translate(530 255)">
           <circle r="44" fill="#050505"/>
           <circle r="40" fill="#111"/>
           <circle r="36" fill="url(#tireShadow)"/>
-
-          <circle r="32" class="rim-glow"
-                  fill="none" stroke="url(#rgbGlow)" stroke-width="4"/>
-
+          <circle r="32" class="rim-glow" fill="none"
+                  stroke="url(#rgbGlow)" stroke-width="4"/>
           <g class="rim-spin">
             <circle r="30" fill="url(#chrome)"/>
             <g stroke="#e5e7eb" stroke-width="2.4">
@@ -215,13 +221,10 @@ footer {
               <line x1="-30" y1="0" x2="30" y2="0"/>
               <line x1="-22" y1="-22" x2="22" y2="22"/>
               <line x1="-22" y1="22" x2="22" y2="-22"/>
-              <line x1="-30" y1="-10" x2="30" y2="10"/>
-              <line x1="-30" y1="10" x2="30" y2="-10"/>
             </g>
             <circle r="6" fill="#9ca3af"/>
           </g>
         </g>
-
       </svg>
     </div>
 
