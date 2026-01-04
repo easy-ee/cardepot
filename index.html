@@ -36,28 +36,28 @@ body {
 /* Scene */
 .scene {
   position: relative;
-  height: 240px;
+  height: 260px; /* slightly taller for big tires */
   max-width: 360px;
   margin: auto;
 }
 
-/* Vehicle (STATIC) */
+/* Vehicle (STATIC, LOWERED) */
 .vehicle {
   position: absolute;
   left: 50%;
-  bottom: 0;
+  bottom: -20px; /* moved down toward title */
   transform: translateX(-50%);
 }
 
 /* Underglow */
 .underglow {
   position: absolute;
-  bottom: 14px;
+  bottom: 18px;
   left: 50%;
-  width: 300px;
-  height: 28px;
+  width: 320px;
+  height: 32px;
   transform: translateX(-50%);
-  filter: blur(20px);
+  filter: blur(22px);
   animation: rgb 6s linear infinite;
 }
 
@@ -116,7 +116,7 @@ footer {
       <div class="underglow"></div>
 
       <div class="vehicle">
-        <svg viewBox="0 0 900 300" width="360" height="200">
+        <svg viewBox="0 0 900 320" width="360" height="220">
 
           <!-- TRUCK BED -->
           <rect x="460" y="135" width="300" height="70" rx="10" fill="#22ff00"/>
@@ -141,14 +141,13 @@ footer {
           <!-- HEADLIGHT -->
           <rect x="140" y="150" width="14" height="40" rx="6" fill="#eafcff"/>
 
-          <!-- LEFT WHEEL -->
-          <g transform="translate(310 230)">
-            <circle r="42" fill="#000"/>
-            <circle r="26" fill="#fff"/>
-            <line x1="0" y1="-26" x2="0" y2="26" stroke="#e5e7eb" stroke-width="4"/>
-            <line x1="-26" y1="0" x2="26" y2="0" stroke="#e5e7eb" stroke-width="4"/>
+          <!-- LEFT WHEEL (BIGGER) -->
+          <g transform="translate(310 250)">
+            <circle r="60" fill="#000"/>
+            <circle r="36" fill="#fff"/>
+            <line x1="0" y1="-36" x2="0" y2="36" stroke="#e5e7eb" stroke-width="5"/>
+            <line x1="-36" y1="0" x2="36" y2="0" stroke="#e5e7eb" stroke-width="5"/>
 
-            <!-- SVG-NATIVE ROTATION -->
             <animateTransform
               attributeName="transform"
               type="rotate"
@@ -158,14 +157,13 @@ footer {
               repeatCount="indefinite" />
           </g>
 
-          <!-- RIGHT WHEEL -->
-          <g transform="translate(620 230)">
-            <circle r="42" fill="#000"/>
-            <circle r="26" fill="#fff"/>
-            <line x1="0" y1="-26" x2="0" y2="26" stroke="#e5e7eb" stroke-width="4"/>
-            <line x1="-26" y1="0" x2="26" y2="0" stroke="#e5e7eb" stroke-width="4"/>
+          <!-- RIGHT WHEEL (BIGGER) -->
+          <g transform="translate(620 250)">
+            <circle r="60" fill="#000"/>
+            <circle r="36" fill="#fff"/>
+            <line x1="0" y1="-36" x2="0" y2="36" stroke="#e5e7eb" stroke-width="5"/>
+            <line x1="-36" y1="0" x2="36" y2="0" stroke="#e5e7eb" stroke-width="5"/>
 
-            <!-- SVG-NATIVE ROTATION -->
             <animateTransform
               attributeName="transform"
               type="rotate"
