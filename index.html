@@ -41,7 +41,7 @@ body {
   margin: auto;
 }
 
-/* Vehicle (LOCKED) */
+/* Vehicle — ABSOLUTELY STATIC */
 .vehicle {
   position: absolute;
   left: 50%;
@@ -68,14 +68,15 @@ body {
   100% { background:#ff0000; }
 }
 
-/* Wheels */
+/* Wheels — ROTATION ONLY */
 .wheel {
-  animation: spin 1s linear infinite;
   transform-origin: center;
+  animation: spinCCW 1s linear infinite;
 }
 
-@keyframes spin {
-  to { transform: rotate(-360deg); }
+@keyframes spinCCW {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(-360deg); } /* counter-clockwise */
 }
 
 /* Wheel styling */
@@ -173,7 +174,7 @@ footer {
             Q230 75 220 95
             Z" fill="#1aff00"/>
 
-          <!-- BODY LOWER -->
+          <!-- LOWER BODY -->
           <rect x="160" y="135" width="620" height="80" rx="14" fill="#22ff00"/>
 
           <!-- WINDOWS -->
@@ -186,7 +187,7 @@ footer {
           <!-- HEADLIGHT -->
           <rect class="led" x="140" y="150" width="14" height="40" rx="6" fill="#eafcff"/>
 
-          <!-- LEFT WHEEL -->
+          <!-- LEFT WHEEL (FIXED POSITION) -->
           <g class="wheel" transform="translate(310 230)">
             <circle r="42" fill="#000"/>
             <circle r="26" fill="#fff"/>
@@ -194,7 +195,7 @@ footer {
             <line class="spoke" x1="-26" y1="0" x2="26" y2="0"/>
           </g>
 
-          <!-- RIGHT WHEEL -->
+          <!-- RIGHT WHEEL (FIXED POSITION) -->
           <g class="wheel" transform="translate(620 230)">
             <circle r="42" fill="#000"/>
             <circle r="26" fill="#fff"/>
