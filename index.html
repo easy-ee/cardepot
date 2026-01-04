@@ -11,7 +11,7 @@
 body {
   margin: 0;
   padding: 20px;
-  font-family: Arial, sans-serif;
+  font-family: Arial, -apple-system, BlinkMacSystemFont, sans-serif;
   background: #eef2f7;
 }
 
@@ -53,13 +53,13 @@ body {
   border-radius: 6px;
 }
 
-/* Road lines */
+/* Road lines (GPU-friendly) */
 .road::before {
   content: '';
   position: absolute;
   top: 50%;
-  left: -200%;
-  width: 400%;
+  left: 0;
+  width: 200%;
   height: 4px;
   background: repeating-linear-gradient(
     to right,
@@ -67,22 +67,33 @@ body {
     transparent 40px 80px
   );
   transform: translateY(-50%);
-  animation: roadMove 1.2s linear infinite;
+  animation: roadMove 1.4s linear infinite;
+  will-change: transform;
 }
 
 @keyframes roadMove {
-  from { transform: translateX(0) translateY(-50%); }
-  to   { transform: translateX(-80px) translateY(-50%); }
+  from { transform: translate3d(0,-50%,0); }
+  to   { transform: translate3d(-80px,-50%,0); }
 }
 
-/* Car motion */
-.car {
-  animation: bob 1.8s ease-in-out infinite;
+/* Car motion – subtle float */
+.car-float {
+  animation: float 3s ease-in-out infinite;
+  will-change: transform;
 }
 
-@keyframes bob {
+.car-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 14px 18px rgba(0,0,0,.35));
+}
+
+@keyframes float {
   0%,100% { transform: translateY(0); }
-  50%     { transform: translateY(2px); }
+  50% { transform: translateY(-6px); }
+}
+  50%     { transform: translateY(1.5px); }
 }
 
 /* SVG */
@@ -93,10 +104,10 @@ svg {
   z-index: 2;
 }
 
-/* Wheels */
+/* Wheels – Safari-safe rotation */
 .rim {
-  animation: spin 0.8s linear infinite;
-  transform-origin: 50% 50%;
+  animation: spin 1s linear infinite;
+  transform-origin: center;
   transform-box: fill-box;
   will-change: transform;
 }
@@ -131,6 +142,7 @@ h1 {
   color: #fff;
   font-weight: bold;
   font-size: 15px;
+  min-height: 48px; /* accessibility tap target */
 }
 
 .call { background:#2ecc71; }
@@ -152,6 +164,7 @@ h1 {
   color: #fff;
   font-weight: bold;
   cursor: pointer;
+  min-height: 48px;
 }
 
 /* Footer */
@@ -159,6 +172,13 @@ footer {
   font-size: 12px;
   padding: 12px;
   background: #f4f6f9;
+}
+
+/* Reduce motion support */
+@media (prefers-reduced-motion: reduce) {
+  .rim, .car, .road::before {
+    animation: none;
+  }
 }
 
 /* Desktop */
@@ -172,62 +192,13 @@ footer {
 
 <body>
 
-<div class="card">
+<div class="card" role="region" aria-label="CARDEPOT contact card">
   <div class="header">
 
-    <div class="scene">
-      <div class="car">
-        <!-- 🚗 SEDAN SVG -->
-        <svg viewBox="0 0 700 220" aria-label="Sedan car">
-          <!-- Body -->
-          <path d="
-            M80 150
-            Q120 90 200 90
-            H350
-            Q430 90 500 120
-            L560 135
-            V165
-            H80
-            Z"
-            fill="#ffffff"/>
-
-          <!-- Roof -->
-          <path d="
-            M210 90
-            H360
-            Q390 90 410 120
-            H180
-            Q195 100 210 90
-            Z"
-            fill="#e6eef7"/>
-
-          <!-- Windows -->
-          <path d="
-            M220 100
-            H350
-            Q370 100 390 120
-            H200
-            Z"
-            fill="#d1dce8"/>
-
-          <!-- Left Wheel -->
-          <g class="rim" transform="translate(220 165)">
-            <circle r="28" fill="#0b3c6d"/>
-            <circle r="19" fill="#ffffff"/>
-            <line x1="-19" y1="0" x2="19" y2="0" stroke="#0b3c6d" stroke-width="3"/>
-            <line x1="0" y1="-19" x2="0" y2="19" stroke="#0b3c6d" stroke-width="3"/>
-          </g>
-
-          <!-- Right Wheel -->
-          <g class="rim" transform="translate(460 165)">
-            <circle r="28" fill="#0b3c6d"/>
-            <circle r="19" fill="#ffffff"/>
-            <line x1="-19" y1="0" x2="19" y2="0" stroke="#0b3c6d" stroke-width="3"/>
-            <line x1="0" y1="-19" x2="0" y2="19" stroke="#0b3c6d" stroke-width="3"/>
-          </g>
-        </svg>
+    <div class="scene" aria-hidden="true">
+      <div class="car car-float">
+        <img src="A_digital_card_design_for_CARDEPOT_features_a_slee.png" alt="CARDEPOT vehicle" class="car-img" />
       </div>
-
       <div class="road"></div>
     </div>
 
@@ -241,4 +212,33 @@ footer {
   <div class="buttons">
     <a class="btn call" href="tel:+16142859929">📞 CALL</a>
     <a class="btn text" href="sms:+16142859929">💬 TEXT</a>
-    <a class="btn map" target="_blan_
+    <a class="btn map" target="_blank" rel="noopener"
+       href="https://maps.google.com/?q=13725+East+Broad+St+Pataskala+OH+43062">📍 MAP</a>
+    <a class="btn save" href="cardepot.vcf" download>💾 SAVE</a>
+  </div>
+
+  <div class="extra">
+    <button onclick="shareCard()">📤 SHARE CARD</button>
+  </div>
+
+  <footer>
+    Fast • Reliable • Trusted
+  </footer>
+</div>
+
+<script>
+function shareCard() {
+  if (navigator.share) {
+    navigator.share({
+      title: 'CARDEPOT',
+      url: window.location.href
+    });
+  } else {
+    navigator.clipboard.writeText(window.location.href);
+    alert('Link copied to clipboard');
+  }
+}
+</script>
+
+</body>
+</html>
