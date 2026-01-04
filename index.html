@@ -32,7 +32,7 @@ body {
   overflow: hidden;
   background: #111;
   font-weight: bold;
-  font-size: 153px; /* 3x previous 51px */
+  font-size: 153px; /* 3x previous size */
   text-transform: uppercase;
   letter-spacing: 4px;
   padding: 20px 0;
@@ -42,7 +42,9 @@ body {
 .marquee .track {
   display: inline-block;
   white-space: nowrap;
-  animation: scroll 25s linear infinite, neonPulse 2s ease-in-out infinite;
+  animation: scroll 25s linear infinite,
+             neonPulse 2s ease-in-out infinite,
+             colorCycle 9s linear infinite; /* new color cycle */
   padding-left: 100%;
   color: #22ff00;
   text-shadow:
@@ -51,21 +53,30 @@ body {
     0 0 56px rgba(34,255,0,.85);
 }
 
+/* SCROLL ANIMATION */
 @keyframes scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-100%); }
 }
 
-/* Neon pulse */
+/* NEON PULSE */
 @keyframes neonPulse {
   0%, 100% {
-    text-shadow: 0 0 12px #22ff00, 0 0 28px #22ff00, 0 0 56px rgba(34,255,0,.85);
+    text-shadow: 0 0 12px currentColor, 0 0 28px currentColor, 0 0 56px currentColor;
     opacity: 1;
   }
   50% {
-    text-shadow: 0 0 24px #22ff00, 0 0 48px #22ff00, 0 0 80px rgba(34,255,0,.9);
+    text-shadow: 0 0 24px currentColor, 0 0 48px currentColor, 0 0 80px currentColor;
     opacity: 0.95;
   }
+}
+
+/* COLOR CYCLE (alternates every 3s) */
+@keyframes colorCycle {
+  0%   { color: #22ff00; text-shadow: 0 0 12px #22ff00,0 0 28px #22ff00,0 0 56px rgba(34,255,0,.85); }
+  33%  { color: #ff0000; text-shadow: 0 0 12px #ff0000,0 0 28px #ff0000,0 0 56px rgba(255,0,0,.85); }
+  66%  { color: #00ffff; text-shadow: 0 0 12px #00ffff,0 0 28px #00ffff,0 0 56px rgba(0,255,255,.85); }
+  100% { color: #22ff00; text-shadow: 0 0 12px #22ff00,0 0 28px #22ff00,0 0 56px rgba(34,255,0,.85); }
 }
 
 /* HEADER */
