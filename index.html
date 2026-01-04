@@ -12,23 +12,23 @@ body {
   margin: 0;
   padding: 20px;
   font-family: Arial, -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #eef2f7;
+  background: radial-gradient(circle at top, #0f172a, #020617);
 }
 
 /* Card */
 .card {
   max-width: 420px;
   margin: 0 auto;
-  background: #fff;
+  background: #ffffff;
   border-radius: 20px;
-  box-shadow: 0 15px 35px rgba(0,0,0,.15);
+  box-shadow: 0 20px 40px rgba(0,0,0,.35);
   overflow: hidden;
   text-align: center;
 }
 
 /* Header */
 .header {
-  background: linear-gradient(135deg,#0b3c6d,#0f5aa3);
+  background: linear-gradient(180deg,#020617,#0b1220);
   padding: 24px 16px 30px;
   color: #fff;
 }
@@ -37,7 +37,7 @@ body {
 .scene {
   position: relative;
   max-width: 360px;
-  height: 200px;
+  height: 210px;
   margin: 0 auto 10px;
 }
 
@@ -52,7 +52,7 @@ body {
 
 @keyframes float {
   0%,100% { transform: translate(-50%,0); }
-  50% { transform: translate(-50%,-5px); }
+  50% { transform: translate(-50%,-6px); }
 }
 
 /* Wheels */
@@ -64,30 +64,30 @@ body {
 
 @keyframes spin {
   from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
+  to { transform: rotate(360deg); }
 }
 
-/* Headlights */
-.led {
+/* Lighting */
+.led, .grille, .interior {
   animation: glow 1.6s ease-in-out infinite;
 }
 
 @keyframes glow {
-  0%,100% { opacity: .4; }
-  50% { opacity: 1; }
+  0%,100% { opacity:.4; }
+  50% { opacity:1; }
 }
 
-/* Illuminated grille */
-.grille-glow {
-  animation: grillePulse 2s ease-in-out infinite;
+/* Crest */
+.crest {
+  animation: crestPulse 2s ease-in-out infinite;
 }
 
-@keyframes grillePulse {
-  0%,100% { opacity: .3; }
-  50% { opacity: .8; }
+@keyframes crestPulse {
+  0%,100% { opacity:.6; }
+  50% { opacity:1; }
 }
 
-/* Exhaust vapor */
+/* Exhaust */
 .smoke {
   animation: smoke 2.5s linear infinite;
 }
@@ -121,15 +121,13 @@ h1 {
   text-decoration: none;
   color: #fff;
   font-weight: bold;
-  min-height: 48px;
 }
 
-.call { background:#2ecc71; }
-.text { background:#3498db; }
-.map  { background:#9b59b6; }
-.save { background:#f39c12; }
+.call { background:#22c55e; }
+.text { background:#3b82f6; }
+.map { background:#8b5cf6; }
+.save { background:#f59e0b; }
 
-/* Footer */
 footer {
   font-size: 12px;
   padding: 12px;
@@ -138,7 +136,7 @@ footer {
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .vehicle, .wheel, .led, .smoke, .grille-glow { animation: none; }
+  * { animation: none !important; }
 }
 </style>
 </head>
@@ -151,45 +149,53 @@ footer {
     <div class="scene">
       <div class="vehicle">
 
-        <!-- 🚙 2020 ESCALADE – BLACK SPORT -->
-        <svg viewBox="0 0 840 260" width="360" height="155">
+        <!-- 🚙 2020 CADILLAC ESCALADE -->
+        <svg viewBox="0 0 860 270" width="360" height="165">
 
-          <!-- Exhaust vapor -->
-          <circle class="smoke" cx="740" cy="190" r="10" fill="#ffffff"/>
+          <!-- Night city background -->
+          <rect x="0" y="0" width="860" height="270" fill="#020617"/>
+          <rect x="0" y="190" width="860" height="80" fill="#020617"/>
+
+          <!-- Exhaust -->
+          <circle class="smoke" cx="760" cy="205" r="10" fill="#ffffff"/>
 
           <!-- Vertical LED headlights -->
-          <rect class="led" x="110" y="135" width="8" height="55" rx="4" fill="#eafcff"/>
-          <rect class="led" x="122" y="135" width="6" height="55" rx="3" fill="#eafcff"/>
+          <rect class="led" x="120" y="140" width="8" height="60" rx="4" fill="#eafcff"/>
+          <rect class="led" x="132" y="140" width="6" height="60" rx="3" fill="#eafcff"/>
 
           <!-- Illuminated grille -->
-          <rect class="grille-glow" x="100" y="140" width="10" height="45" fill="#eafcff"/>
+          <rect class="grille" x="110" y="145" width="10" height="50" fill="#eafcff"/>
 
-          <!-- Body (black sport) -->
-          <rect x="130" y="115" width="580" height="85" rx="12" fill="#0f172a"/>
+          <!-- Cadillac crest -->
+          <polygon class="crest" points="115,165 120,180 115,195 110,180" fill="#e11d48"/>
+
+          <!-- Body -->
+          <rect x="140" y="120" width="600" height="90" rx="14" fill="#020617"/>
 
           <!-- Roof -->
-          <rect x="200" y="85" width="440" height="45" rx="12" fill="#0b1220"/>
+          <rect x="220" y="85" width="440" height="45" rx="12" fill="#020617"/>
+
+          <!-- Interior ambient light -->
+          <rect class="interior" x="240" y="100" width="400" height="30" rx="6" fill="#38bdf8"/>
 
           <!-- Windows -->
-          <rect x="220" y="95" width="380" height="32" rx="6" fill="#1e293b"/>
+          <rect x="240" y="100" width="400" height="30" rx="6" fill="#020617"/>
 
-          <!-- Black trim -->
-          <rect x="130" y="175" width="580" height="10" rx="5" fill="#020617"/>
+          <!-- Trim -->
+          <rect x="140" y="180" width="600" height="10" rx="5" fill="#020617"/>
 
           <!-- LEFT 24” CHROME WHEEL -->
           <g class="wheel">
-            <circle cx="280" cy="220" r="38" fill="#cfd8dc"/>
-            <circle cx="280" cy="220" r="18" fill="#ffffff"/>
-            <line x1="255" y1="220" x2="305" y2="220" stroke="#9aa5ac" stroke-width="3"/>
-            <line x1="280" y1="195" x2="280" y2="245" stroke="#9aa5ac" stroke-width="3"/>
+            <circle cx="300" cy="225" r="40" fill="#d1d5db"/>
+            <circle cx="300" cy="225" r="18" fill="#ffffff"/>
+            <circle cx="300" cy="225" r="22" fill="none" stroke="#ef4444" stroke-width="4"/>
           </g>
 
           <!-- RIGHT 24” CHROME WHEEL -->
           <g class="wheel">
-            <circle cx="580" cy="220" r="38" fill="#cfd8dc"/>
-            <circle cx="580" cy="220" r="18" fill="#ffffff"/>
-            <line x1="555" y1="220" x2="605" y2="220" stroke="#9aa5ac" stroke-width="3"/>
-            <line x1="580" y1="195" x2="580" y2="245" stroke="#9aa5ac" stroke-width="3"/>
+            <circle cx="600" cy="225" r="40" fill="#d1d5db"/>
+            <circle cx="600" cy="225" r="18" fill="#ffffff"/>
+            <circle cx="600" cy="225" r="22" fill="none" stroke="#ef4444" stroke-width="4"/>
           </g>
 
         </svg>
@@ -207,8 +213,7 @@ footer {
   <div class="buttons">
     <a class="btn call" href="tel:+16142859929">📞 CALL</a>
     <a class="btn text" href="sms:+16142859929">💬 TEXT</a>
-    <a class="btn map" target="_blank"
-       href="https://maps.google.com/?q=13725+East+Broad+St+Pataskala+OH+43062">📍 MAP</a>
+    <a class="btn map" href="https://maps.google.com/?q=13725+East+Broad+St+Pataskala+OH+43062">📍 MAP</a>
     <a class="btn save" href="cardepot.vcf" download>💾 SAVE</a>
   </div>
 
