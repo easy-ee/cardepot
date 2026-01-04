@@ -33,7 +33,7 @@ body {
   margin: auto;
 }
 
-/* Float */
+/* Float animation */
 .car-float {
   animation: float 3s ease-in-out infinite;
 }
@@ -42,15 +42,15 @@ body {
   50% { transform: translateY(-6px); }
 }
 
-/* Rim spin */
+/* Rim spin (anti-clockwise) */
 .rim-spin {
-  animation: spinCCW 1s linear infinite;
+  animation: spinCCW 0.9s linear infinite;
   transform-origin: center;
   transform-box: fill-box;
 }
 @keyframes spinCCW {
   from { transform: rotate(0deg); }
-  to { transform: rotate(-360deg); }
+  to   { transform: rotate(-360deg); }
 }
 
 /* RGB pulse */
@@ -65,17 +65,18 @@ body {
 
 /* Underglow */
 .underglow {
-  filter: blur(18px);
-  opacity: .9;
+  filter: blur(22px);
+  opacity: .95;
 }
 
-.controls {
-  padding: 14px 20px 0;
-  color: #cbd5f5;
-  font-size: 14px;
+h1 {
+  margin: 10px 0 4px;
+  letter-spacing: 2px;
 }
-.controls input {
-  width: 100%;
+
+.address {
+  font-size: 14px;
+  color: #cbd5f5;
 }
 
 .buttons {
@@ -111,20 +112,23 @@ footer {
   <div class="header">
 
     <div class="scene">
-      <svg viewBox="0 0 700 260" width="100%" class="car-float">
+      <svg viewBox="0 0 700 300" width="100%" class="car-float">
 
         <defs>
+          <!-- Metallic green paint -->
           <linearGradient id="paint" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stop-color="#22ff55"/>
             <stop offset="50%" stop-color="#00cc44"/>
             <stop offset="100%" stop-color="#66ff99"/>
           </linearGradient>
 
+          <!-- Tire depth -->
           <radialGradient id="tireShadow">
             <stop offset="60%" stop-color="#222"/>
             <stop offset="100%" stop-color="#000"/>
           </radialGradient>
 
+          <!-- Chrome rim -->
           <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stop-color="#f8fafc"/>
             <stop offset="25%" stop-color="#9ca3af"/>
@@ -133,6 +137,7 @@ footer {
             <stop offset="100%" stop-color="#f8fafc"/>
           </linearGradient>
 
+          <!-- RGB lighting -->
           <linearGradient id="rgbGlow" x1="0" y1="0" x2="1" y2="0">
             <stop offset="0%" stop-color="#00f"/>
             <stop offset="50%" stop-color="#0f0"/>
@@ -141,61 +146,79 @@ footer {
         </defs>
 
         <!-- UNDERGLOW -->
-        <ellipse cx="350" cy="235" rx="230" ry="18"
+        <ellipse cx="350" cy="265" rx="260" ry="22"
                  fill="url(#rgbGlow)" class="underglow"/>
 
-        <!-- BODY -->
+        <!-- ESCALADE BODY -->
         <path d="
-          M90 170
-          Q120 110 190 110
+          M90 180
+          Q120 115 190 115
           H520
-          Q590 110 620 160
-          V185
+          Q590 115 620 170
+          V195
           H90
           Z"
           fill="url(#paint)"/>
 
         <!-- WINDOWS -->
-        <path d="M210 120 H500 Q520 120 530 145 H200 Z" fill="#020617"/>
+        <path d="M210 125 H500 Q520 125 530 150 H200 Z"
+              fill="#020617"/>
 
-        <!-- WHEELS -->
-        <g id="leftWheel" transform="translate(260 210)">
-          <g class="wheel-scale">
-            <circle r="28" fill="#050505"/>
-            <circle r="25" fill="#111"/>
-            <circle r="22" fill="url(#tireShadow)"/>
-            <circle r="20" class="rim-glow" fill="none"
-                    stroke="url(#rgbGlow)" stroke-width="3"/>
-            <g class="rim-spin">
-              <circle r="18" fill="url(#chrome)"/>
-              <g stroke="#e5e7eb" stroke-width="1.8">
-                <line x1="0" y1="-18" x2="0" y2="18"/>
-                <line x1="-18" y1="0" x2="18" y2="0"/>
-                <line x1="-13" y1="-13" x2="13" y2="13"/>
-                <line x1="-13" y1="13" x2="13" y2="-13"/>
-              </g>
-              <circle r="4" fill="#9ca3af"/>
+        <!-- GRILLE -->
+        <rect x="535" y="160" width="45" height="30" rx="4"
+              fill="#e5e7eb"/>
+        <rect x="540" y="165" width="35" height="20" rx="3"
+              fill="#ffffff" opacity=".6"/>
+
+        <!-- HEADLIGHTS -->
+        <rect x="585" y="158" width="22" height="10" rx="4"
+              fill="#e0f2fe"/>
+        <rect x="585" y="172" width="22" height="8" rx="4"
+              fill="#e0f2fe"/>
+
+        <!-- LEFT 55” WHEEL -->
+        <g transform="translate(250 255)">
+          <circle r="44" fill="#050505"/>
+          <circle r="40" fill="#111"/>
+          <circle r="36" fill="url(#tireShadow)"/>
+
+          <circle r="32" class="rim-glow"
+                  fill="none" stroke="url(#rgbGlow)" stroke-width="4"/>
+
+          <g class="rim-spin">
+            <circle r="30" fill="url(#chrome)"/>
+            <g stroke="#e5e7eb" stroke-width="2.4">
+              <line x1="0" y1="-30" x2="0" y2="30"/>
+              <line x1="-30" y1="0" x2="30" y2="0"/>
+              <line x1="-22" y1="-22" x2="22" y2="22"/>
+              <line x1="-22" y1="22" x2="22" y2="-22"/>
+              <line x1="-30" y1="-10" x2="30" y2="10"/>
+              <line x1="-30" y1="10" x2="30" y2="-10"/>
             </g>
+            <circle r="6" fill="#9ca3af"/>
           </g>
         </g>
 
-        <g id="rightWheel" transform="translate(520 210)">
-          <g class="wheel-scale">
-            <circle r="28" fill="#050505"/>
-            <circle r="25" fill="#111"/>
-            <circle r="22" fill="url(#tireShadow)"/>
-            <circle r="20" class="rim-glow" fill="none"
-                    stroke="url(#rgbGlow)" stroke-width="3"/>
-            <g class="rim-spin">
-              <circle r="18" fill="url(#chrome)"/>
-              <g stroke="#e5e7eb" stroke-width="1.8">
-                <line x1="0" y1="-18" x2="0" y2="18"/>
-                <line x1="-18" y1="0" x2="18" y2="0"/>
-                <line x1="-13" y1="-13" x2="13" y2="13"/>
-                <line x1="-13" y1="13" x2="13" y2="-13"/>
-              </g>
-              <circle r="4" fill="#9ca3af"/>
+        <!-- RIGHT 55” WHEEL -->
+        <g transform="translate(530 255)">
+          <circle r="44" fill="#050505"/>
+          <circle r="40" fill="#111"/>
+          <circle r="36" fill="url(#tireShadow)"/>
+
+          <circle r="32" class="rim-glow"
+                  fill="none" stroke="url(#rgbGlow)" stroke-width="4"/>
+
+          <g class="rim-spin">
+            <circle r="30" fill="url(#chrome)"/>
+            <g stroke="#e5e7eb" stroke-width="2.4">
+              <line x1="0" y1="-30" x2="0" y2="30"/>
+              <line x1="-30" y1="0" x2="30" y2="0"/>
+              <line x1="-22" y1="-22" x2="22" y2="22"/>
+              <line x1="-22" y1="22" x2="22" y2="-22"/>
+              <line x1="-30" y1="-10" x2="30" y2="10"/>
+              <line x1="-30" y1="10" x2="30" y2="-10"/>
             </g>
+            <circle r="6" fill="#9ca3af"/>
           </g>
         </g>
 
@@ -203,13 +226,10 @@ footer {
     </div>
 
     <h1>CARDEPOT</h1>
-    <div class="address">13725 East Broad St<br>Pataskala, OH 43062</div>
-  </div>
-
-  <!-- WHEEL SIZE SLIDER -->
-  <div class="controls">
-    <label>🛞 Wheel Size: <strong><span id="wheelLabel">26</span>”</strong></label>
-    <input type="range" min="24" max="35" value="26" id="wheelSlider">
+    <div class="address">
+      13725 East Broad St<br>
+      Pataskala, OH 43062
+    </div>
   </div>
 
   <div class="buttons">
@@ -220,32 +240,10 @@ footer {
     <a class="btn save" href="cardepot.vcf" download>💾 SAVE</a>
   </div>
 
-  <footer>Luxury • Performance • Presence</footer>
+  <footer>
+    Luxury • Performance • Presence
+  </footer>
 </div>
-
-<script>
-const slider = document.getElementById('wheelSlider');
-const label = document.getElementById('wheelLabel');
-const wheels = document.querySelectorAll('.wheel-scale');
-
-function updateWheels() {
-  const size = slider.value;
-  label.textContent = size;
-
-  // 26" = scale 1
-  const scale = size / 26;
-
-  wheels.forEach(wheel => {
-    wheel.setAttribute(
-      'transform',
-      `scale(${scale})`
-    );
-  });
-}
-
-slider.addEventListener('input', updateWheels);
-updateWheels();
-</script>
 
 </body>
 </html>
