@@ -41,8 +41,8 @@ body {
   margin: 0 auto 10px;
 }
 
-/* Truck float */
-.truck {
+/* Vehicle float */
+.vehicle {
   position: absolute;
   left: 50%;
   bottom: 0;
@@ -52,12 +52,12 @@ body {
 
 @keyframes float {
   0%,100% { transform: translate(-50%,0); }
-  50% { transform: translate(-50%,-6px); }
+  50% { transform: translate(-50%,-5px); }
 }
 
 /* Wheels */
 .wheel {
-  animation: spin 0.9s linear infinite;
+  animation: spin 1s linear infinite;
   transform-origin: center;
   transform-box: fill-box;
 }
@@ -67,44 +67,34 @@ body {
   to   { transform: rotate(360deg); }
 }
 
-/* Headlight glow */
-.glow {
-  animation: glow 1.8s ease-in-out infinite;
+/* Headlights */
+.led {
+  animation: glow 1.6s ease-in-out infinite;
 }
 
 @keyframes glow {
   0%,100% { opacity: .4; }
-  50% { opacity: .9; }
-}
-
-/* LED light bar */
-.led {
-  animation: ledPulse 1.5s ease-in-out infinite;
-}
-
-@keyframes ledPulse {
-  0%,100% { opacity: .5; }
   50% { opacity: 1; }
 }
 
-/* Exhaust smoke */
+/* Illuminated grille */
+.grille-glow {
+  animation: grillePulse 2s ease-in-out infinite;
+}
+
+@keyframes grillePulse {
+  0%,100% { opacity: .3; }
+  50% { opacity: .8; }
+}
+
+/* Exhaust vapor */
 .smoke {
-  animation: smoke 2.4s linear infinite;
+  animation: smoke 2.5s linear infinite;
 }
 
 @keyframes smoke {
-  0%   { transform: translate(0,0) scale(.6); opacity: .6; }
-  100% { transform: translate(-25px,-20px) scale(1.3); opacity: 0; }
-}
-
-/* Mud splatter */
-.mud {
-  animation: mudBounce 1.2s ease-in-out infinite;
-}
-
-@keyframes mudBounce {
-  0%,100% { opacity: .7; }
-  50% { opacity: .9; }
+  0% { transform: translate(0,0) scale(.6); opacity:.6; }
+  100% { transform: translate(-30px,-20px) scale(1.4); opacity:0; }
 }
 
 h1 {
@@ -148,7 +138,7 @@ footer {
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .truck, .wheel, .glow, .smoke, .led, .mud { animation: none; }
+  .vehicle, .wheel, .led, .smoke, .grille-glow { animation: none; }
 }
 </style>
 </head>
@@ -159,63 +149,52 @@ footer {
   <div class="header">
 
     <div class="scene">
+      <div class="vehicle">
 
-      <div class="truck">
-        <svg viewBox="0 0 780 280" width="360" height="160">
+        <!-- 🚙 2020 ESCALADE – BLACK SPORT -->
+        <svg viewBox="0 0 840 260" width="360" height="155">
 
-          <!-- Exhaust smoke -->
-          <circle class="smoke" cx="660" cy="175" r="12" fill="#ffffff"/>
+          <!-- Exhaust vapor -->
+          <circle class="smoke" cx="740" cy="190" r="10" fill="#ffffff"/>
 
-          <!-- LED light bar -->
-          <rect class="led" x="260" y="90" width="160" height="8" rx="4" fill="#9be7ff"/>
+          <!-- Vertical LED headlights -->
+          <rect class="led" x="110" y="135" width="8" height="55" rx="4" fill="#eafcff"/>
+          <rect class="led" x="122" y="135" width="6" height="55" rx="3" fill="#eafcff"/>
 
-          <!-- Headlight glow -->
-          <ellipse class="glow" cx="95" cy="160" rx="28" ry="14" fill="#fff7c2"/>
+          <!-- Illuminated grille -->
+          <rect class="grille-glow" x="100" y="140" width="10" height="45" fill="#eafcff"/>
 
-          <!-- Bed -->
-          <rect x="390" y="125" width="300" height="70" rx="4" fill="#ffffff"/>
+          <!-- Body (black sport) -->
+          <rect x="130" y="115" width="580" height="85" rx="12" fill="#0f172a"/>
 
-          <!-- Cab -->
-          <rect x="190" y="105" width="200" height="90" rx="4" fill="#ffffff"/>
+          <!-- Roof -->
+          <rect x="200" y="85" width="440" height="45" rx="12" fill="#0b1220"/>
 
-          <!-- Hood -->
-          <rect x="90" y="135" width="100" height="60" rx="4" fill="#ffffff"/>
+          <!-- Windows -->
+          <rect x="220" y="95" width="380" height="32" rx="6" fill="#1e293b"/>
 
-          <!-- Window -->
-          <rect x="215" y="120" width="120" height="45" rx="4" fill="#cfdbea"/>
+          <!-- Black trim -->
+          <rect x="130" y="175" width="580" height="10" rx="5" fill="#020617"/>
 
-          <!-- Fender -->
-          <rect x="70" y="190" width="640" height="18" rx="9" fill="#e6eef7"/>
-
-          <!-- Lift blocks -->
-          <rect x="160" y="215" width="40" height="12" fill="#0b3c6d"/>
-          <rect x="520" y="215" width="40" height="12" fill="#0b3c6d"/>
-
-          <!-- LEFT OFF-ROAD TIRE -->
+          <!-- LEFT 24” CHROME WHEEL -->
           <g class="wheel">
-            <circle cx="180" cy="245" r="40" fill="#0b3c6d"/>
-            <circle cx="180" cy="245" r="20" fill="#ffffff"/>
-            <line x1="150" y1="245" x2="210" y2="245" stroke="#0b3c6d" stroke-width="4"/>
-            <line x1="180" y1="215" x2="180" y2="275" stroke="#0b3c6d" stroke-width="4"/>
-            <!-- Mud -->
-            <circle class="mud" cx="150" cy="260" r="6" fill="#6b4f2a"/>
-            <circle class="mud" cx="205" cy="255" r="5" fill="#6b4f2a"/>
+            <circle cx="280" cy="220" r="38" fill="#cfd8dc"/>
+            <circle cx="280" cy="220" r="18" fill="#ffffff"/>
+            <line x1="255" y1="220" x2="305" y2="220" stroke="#9aa5ac" stroke-width="3"/>
+            <line x1="280" y1="195" x2="280" y2="245" stroke="#9aa5ac" stroke-width="3"/>
           </g>
 
-          <!-- RIGHT OFF-ROAD TIRE -->
+          <!-- RIGHT 24” CHROME WHEEL -->
           <g class="wheel">
-            <circle cx="545" cy="245" r="40" fill="#0b3c6d"/>
-            <circle cx="545" cy="245" r="20" fill="#ffffff"/>
-            <line x1="515" y1="245" x2="575" y2="245" stroke="#0b3c6d" stroke-width="4"/>
-            <line x1="545" y1="215" x2="545" y2="275" stroke="#0b3c6d" stroke-width="4"/>
-            <!-- Mud -->
-            <circle class="mud" cx="515" cy="260" r="6" fill="#6b4f2a"/>
-            <circle class="mud" cx="575" cy="255" r="5" fill="#6b4f2a"/>
+            <circle cx="580" cy="220" r="38" fill="#cfd8dc"/>
+            <circle cx="580" cy="220" r="18" fill="#ffffff"/>
+            <line x1="555" y1="220" x2="605" y2="220" stroke="#9aa5ac" stroke-width="3"/>
+            <line x1="580" y1="195" x2="580" y2="245" stroke="#9aa5ac" stroke-width="3"/>
           </g>
 
         </svg>
-      </div>
 
+      </div>
     </div>
 
     <h1>CARDEPOT</h1>
