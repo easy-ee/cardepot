@@ -29,30 +29,53 @@ body {
 /* HEADER */
 .header {
   background: linear-gradient(180deg,#020617,#0b1220);
-  padding: 20px 16px 28px;
+  padding: 20px 16px 26px;
   color: #fff;
 }
 
 /* SCENE */
 .scene {
   position: relative;
-  height: 220px;
+  height: 260px;
 }
 
-/* CAR WRAPPER (POSITION ONLY) */
+/* TITLE */
+.brand {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 46px;
+  letter-spacing: 8px;
+  font-weight: 900;
+  color: #eaffff;
+  text-shadow:
+    0 0 6px #22ff00,
+    0 0 14px #22ff00,
+    0 0 30px rgba(34,255,0,.85);
+}
+
+.brand span:first-child {
+  margin-right: 18px;
+}
+
+/* CAR POSITION (RESTS ON TEXT) */
 .car-wrapper {
   position: absolute;
   left: 50%;
-  bottom: 22px;
+  bottom: 58px; /* sits on top of CAR DEPOT */
   transform: translateX(-50%);
 }
 
-/* CAR BOUNCE (ANIMATION ONLY) */
+/* SUSPENSION */
 .car-bounce {
-  animation: bounce 1.6s ease-in-out infinite;
+  animation: suspension 1.6s ease-in-out infinite;
 }
 
-@keyframes bounce {
+@keyframes suspension {
   0%,100% { transform: translateY(0); }
   50% { transform: translateY(6px); }
 }
@@ -65,32 +88,6 @@ body {
 
 @keyframes spin {
   to { transform: rotate(-360deg); }
-}
-
-/* BRAND */
-.brand {
-  margin-top: 160px;
-}
-
-.brand h1 {
-  margin: 0;
-  font-size: 46px;
-  letter-spacing: 8px;
-  font-weight: 900;
-  color: #eaffff;
-  text-shadow:
-    0 0 6px #22ff00,
-    0 0 14px #22ff00,
-    0 0 28px rgba(34,255,0,.8);
-}
-
-.brand span:first-child {
-  margin-right: 16px;
-}
-
-.address {
-  margin-top: 6px;
-  font-size: 16px;
 }
 
 /* BUTTONS */
@@ -127,6 +124,8 @@ footer {
   <div class="header">
 
     <div class="scene">
+
+      <!-- CAR -->
       <div class="car-wrapper">
         <div class="car-bounce">
 
@@ -162,10 +161,12 @@ footer {
 
         </div>
       </div>
-    </div>
 
-    <div class="brand">
-      <h1><span>CAR</span><span>DEPOT</span></h1>
+      <!-- TITLE -->
+      <div class="brand">
+        <h1><span>CAR</span><span>DEPOT</span></h1>
+      </div>
+
     </div>
 
     <div class="address">
