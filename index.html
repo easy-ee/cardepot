@@ -23,45 +23,44 @@ body {
   text-align: center;
 }
 
-/* 🔴 LED MARQUEE */
+/* ===== SCENE ===== */
+.scene {
+  position: relative;
+  max-width: 360px;
+  margin: auto;
+}
+
+/* 🔴 LED MARQUEE OVER CAR */
 .marquee {
-  background: #020617;
+  position: absolute;
+  top: 18px;
+  left: 0;
+  right: 0;
+  z-index: 5;
   overflow: hidden;
-  white-space: nowrap;
-  border-bottom: 1px solid rgba(255,255,255,.08);
+  pointer-events: none;
 }
 
 .marquee span {
   display: inline-block;
   padding-left: 100%;
-  font-size: 14px;
+  font-size: 22px;              /* 🔥 INCREASED SIZE */
   font-weight: 900;
   letter-spacing: 4px;
   text-transform: uppercase;
   color: #ff2d2d;
 
   text-shadow:
-    0 0 6px rgba(255,45,45,.8),
-    0 0 18px rgba(255,45,45,.6),
-    0 0 36px rgba(255,45,45,.4);
+    0 0 6px rgba(255,45,45,.9),
+    0 0 18px rgba(255,45,45,.7),
+    0 0 36px rgba(255,45,45,.5);
 
-  animation: marqueeScroll 12s linear infinite;
+  animation: marqueeScroll 10s linear infinite;
 }
 
 @keyframes marqueeScroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-100%); }
-}
-
-/* Header */
-.header {
-  padding: 18px 16px 14px;
-  color: #fff;
-}
-
-.scene {
-  max-width: 360px;
-  margin: auto;
 }
 
 /* Float animation */
@@ -99,7 +98,7 @@ body {
 
 /* 💎 CHROME SHIMMER TITLE */
 h1 {
-  margin: 16px 0 6px;
+  margin: 14px 0 6px;
   font-size: 36px;
   font-weight: 900;
   letter-spacing: 4px;
@@ -165,13 +164,14 @@ footer {
 
 <div class="card">
 
-  <!-- 🔴 LED SCROLLING MARQUEE -->
-  <div class="marquee">
-    <span>USED CAR SALES • USED CAR SALES • USED CAR SALES • USED CAR SALES • </span>
-  </div>
-
   <div class="header">
     <div class="scene">
+
+      <!-- 🔴 MARQUEE OVER CAR -->
+      <div class="marquee">
+        <span>USED CAR SALES • USED CAR SALES • USED CAR SALES • </span>
+      </div>
+
       <svg viewBox="0 0 700 300" width="100%" class="car-float">
         <defs>
           <linearGradient id="paint" x1="0" y1="0" x2="1" y2="1">
@@ -203,6 +203,7 @@ footer {
         <ellipse cx="350" cy="265" rx="260" ry="22"
                  fill="url(#rgbGlow)" class="underglow"/>
 
+        <!-- Escalade body -->
         <path d="M90 180 Q120 115 190 115 H520 Q590 115 620 170 V195 H90 Z"
               fill="url(#paint)"/>
 
