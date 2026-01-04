@@ -41,7 +41,7 @@ body {
   margin: auto;
 }
 
-/* VEHICLE — FIXED, NO ANIMATION */
+/* Vehicle (LOCKED) */
 .vehicle {
   position: absolute;
   left: 50%;
@@ -49,15 +49,15 @@ body {
   transform: translateX(-50%);
 }
 
-/* RGB Underglow */
+/* Underglow */
 .underglow {
   position: absolute;
-  bottom: 12px;
+  bottom: 14px;
   left: 50%;
-  width: 280px;
+  width: 300px;
   height: 28px;
   transform: translateX(-50%);
-  filter: blur(18px);
+  filter: blur(20px);
   animation: rgb 6s linear infinite;
 }
 
@@ -68,7 +68,7 @@ body {
   100% { background:#ff0000; }
 }
 
-/* Wheels — SPIN ONLY */
+/* Wheels */
 .wheel {
   animation: spin 1s linear infinite;
   transform-origin: center;
@@ -78,25 +78,25 @@ body {
   to { transform: rotate(-360deg); }
 }
 
-/* Chrome spokes */
+/* Wheel styling */
 .spoke {
   stroke: #e5e7eb;
   stroke-width: 4;
 }
 
-/* Metallic shimmer */
+/* Chrome shimmer */
 .shimmer {
   animation: shimmer 3s linear infinite;
 }
 
 @keyframes shimmer {
-  0% { opacity:.12; transform: translateX(-60px); }
+  0% { opacity:.12; transform: translateX(-80px); }
   50% { opacity:.3; }
-  100% { opacity:.12; transform: translateX(60px); }
+  100% { opacity:.12; transform: translateX(80px); }
 }
 
 /* LEDs */
-.led, .grille {
+.led {
   animation: glow 1.5s ease-in-out infinite;
 }
 
@@ -158,22 +158,36 @@ footer {
       <div class="underglow"></div>
 
       <div class="vehicle">
-        <svg viewBox="0 0 860 270" width="360" height="200">
+        <svg viewBox="0 0 900 300" width="360" height="200">
 
-          <!-- BODY -->
-          <rect x="140" y="120" width="600" height="90" rx="14" fill="#22ff00"/>
-          <rect x="220" y="85" width="440" height="45" rx="12" fill="#1aff00"/>
-          <rect x="240" y="100" width="400" height="30" rx="6" fill="#020617"/>
+          <!-- TRUCK BED -->
+          <rect x="460" y="135" width="300" height="70" rx="10" fill="#22ff00"/>
 
-          <!-- Metallic shimmer -->
-          <rect class="shimmer" x="140" y="120" width="600" height="90" fill="#ffffff"/>
+          <!-- CAB -->
+          <path d="
+            M200 135
+            H460
+            V95
+            Q460 75 430 75
+            H260
+            Q230 75 220 95
+            Z" fill="#1aff00"/>
 
-          <!-- LED Headlights -->
-          <rect class="led" x="120" y="140" width="8" height="60" rx="4" fill="#eafcff"/>
-          <rect class="grille" x="110" y="145" width="10" height="50" fill="#eafcff"/>
+          <!-- BODY LOWER -->
+          <rect x="160" y="135" width="620" height="80" rx="14" fill="#22ff00"/>
+
+          <!-- WINDOWS -->
+          <rect x="260" y="90" width="160" height="35" rx="6" fill="#020617"/>
+          <rect x="430" y="90" width="80" height="35" rx="6" fill="#020617"/>
+
+          <!-- SHIMMER -->
+          <rect class="shimmer" x="160" y="135" width="620" height="80" fill="#ffffff"/>
+
+          <!-- HEADLIGHT -->
+          <rect class="led" x="140" y="150" width="14" height="40" rx="6" fill="#eafcff"/>
 
           <!-- LEFT WHEEL -->
-          <g class="wheel" transform="translate(300 225)">
+          <g class="wheel" transform="translate(310 230)">
             <circle r="42" fill="#000"/>
             <circle r="26" fill="#fff"/>
             <line class="spoke" x1="0" y1="-26" x2="0" y2="26"/>
@@ -181,7 +195,7 @@ footer {
           </g>
 
           <!-- RIGHT WHEEL -->
-          <g class="wheel" transform="translate(600 225)">
+          <g class="wheel" transform="translate(620 230)">
             <circle r="42" fill="#000"/>
             <circle r="26" fill="#fff"/>
             <line class="spoke" x1="0" y1="-26" x2="0" y2="26"/>
