@@ -41,7 +41,7 @@ body {
   margin: auto;
 }
 
-/* Float */
+/* Vehicle float */
 .vehicle {
   position: absolute;
   left: 50%;
@@ -58,12 +58,12 @@ body {
 /* RGB Underglow */
 .underglow {
   position: absolute;
-  bottom: 12px;
+  bottom: 14px;
   left: 50%;
-  width: 280px;
-  height: 28px;
+  width: 300px;
+  height: 32px;
   transform: translateX(-50%);
-  filter: blur(18px);
+  filter: blur(20px);
   animation: rgb 6s linear infinite;
 }
 
@@ -74,8 +74,8 @@ body {
   100% { background:#ff0000; }
 }
 
-/* Wheels */
-.wheel {
+/* Rim spin ONLY */
+.rim-spin {
   animation: spin 1s linear infinite;
   transform-origin: center;
 }
@@ -84,7 +84,7 @@ body {
   to { transform: rotate(360deg); }
 }
 
-/* Metallic shimmer */
+/* Shimmer */
 .shimmer {
   animation: shimmer 3s linear infinite;
 }
@@ -165,41 +165,44 @@ footer {
           <rect class="led" x="120" y="140" width="8" height="60" rx="4" fill="#eafcff"/>
           <rect class="grille" x="110" y="145" width="10" height="50" fill="#eafcff"/>
 
-          <!-- LEFT 24” RIM -->
-          <g class="wheel" transform="translate(300 225)">
-            <!-- Tire -->
-            <circle r="44" fill="#000"/>
-            <!-- Inner barrel -->
-            <circle r="36" fill="#111"/>
-            <!-- Chrome lip -->
-            <circle r="30" fill="#f8fafc"/>
-            <!-- Spokes -->
-            <g stroke="#e5e7eb" stroke-width="3">
-              <line x1="0" y1="-30" x2="0" y2="30"/>
-              <line x1="-30" y1="0" x2="30" y2="0"/>
-              <line x1="-21" y1="-21" x2="21" y2="21"/>
-              <line x1="-21" y1="21" x2="21" y2="-21"/>
-              <line x1="-10" y1="-28" x2="10" y2="28"/>
-              <line x1="-28" y1="-10" x2="28" y2="10"/>
+          <!-- LEFT WHEEL -->
+          <g transform="translate(300 228)">
+            <!-- Tire (stationary, larger) -->
+            <circle r="50" fill="#000"/>
+            <circle r="44" fill="#111"/>
+
+            <!-- Rim (spinning) -->
+            <g class="rim-spin">
+              <circle r="34" fill="#f8fafc"/>
+              <g stroke="#e5e7eb" stroke-width="3">
+                <line x1="0" y1="-34" x2="0" y2="34"/>
+                <line x1="-34" y1="0" x2="34" y2="0"/>
+                <line x1="-24" y1="-24" x2="24" y2="24"/>
+                <line x1="-24" y1="24" x2="24" y2="-24"/>
+                <line x1="-12" y1="-32" x2="12" y2="32"/>
+                <line x1="-32" y1="-12" x2="32" y2="12"/>
+              </g>
+              <circle r="6" fill="#9ca3af"/>
             </g>
-            <!-- Hub -->
-            <circle r="6" fill="#9ca3af"/>
           </g>
 
-          <!-- RIGHT 24” RIM -->
-          <g class="wheel" transform="translate(600 225)">
-            <circle r="44" fill="#000"/>
-            <circle r="36" fill="#111"/>
-            <circle r="30" fill="#f8fafc"/>
-            <g stroke="#e5e7eb" stroke-width="3">
-              <line x1="0" y1="-30" x2="0" y2="30"/>
-              <line x1="-30" y1="0" x2="30" y2="0"/>
-              <line x1="-21" y1="-21" x2="21" y2="21"/>
-              <line x1="-21" y1="21" x2="21" y2="-21"/>
-              <line x1="-10" y1="-28" x2="10" y2="28"/>
-              <line x1="-28" y1="-10" x2="28" y2="10"/>
+          <!-- RIGHT WHEEL -->
+          <g transform="translate(600 228)">
+            <circle r="50" fill="#000"/>
+            <circle r="44" fill="#111"/>
+
+            <g class="rim-spin">
+              <circle r="34" fill="#f8fafc"/>
+              <g stroke="#e5e7eb" stroke-width="3">
+                <line x1="0" y1="-34" x2="0" y2="34"/>
+                <line x1="-34" y1="0" x2="34" y2="0"/>
+                <line x1="-24" y1="-24" x2="24" y2="24"/>
+                <line x1="-24" y1="24" x2="24" y2="-24"/>
+                <line x1="-12" y1="-32" x2="12" y2="32"/>
+                <line x1="-32" y1="-12" x2="32" y2="12"/>
+              </g>
+              <circle r="6" fill="#9ca3af"/>
             </g>
-            <circle r="6" fill="#9ca3af"/>
           </g>
 
         </svg>
