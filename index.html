@@ -29,8 +29,8 @@ body {
   font-weight: 900;
   letter-spacing: 6px;
   text-transform: uppercase;
-  filter: drop-shadow(0 0 6px currentColor);
-  background-image: radial-gradient(currentColor 1.2px, transparent 1.3px);
+  filter: drop-shadow(0 0 8px currentColor);
+  background-image: radial-gradient(currentColor 1.3px, transparent 1.4px);
   background-size: 6px 6px;
   -webkit-background-clip: text;
   background-clip: text;
@@ -49,21 +49,14 @@ body {
   100% { color: #ff00ff; }
 }
 
-/* ===== CREDIT MESSAGE ===== */
+/* ===== CREDIT / BUY HERE PAY HERE ===== */
 .top-led {
-  font-size: 28px;
-  margin: 12px 0 6px;
-}
-
-/* ===== BUY HERE PAY HERE ===== */
-.buyhere {
-  font-size: 22px;
-  margin-bottom: 8px;
+  font-size: 30px;
+  margin: 14px 0 10px;
   animation: pulse 1.4s ease-in-out infinite;
 }
-
 @keyframes pulse {
-  50% { opacity: .65; }
+  50% { opacity: .7; }
 }
 
 /* ===== SCENE ===== */
@@ -146,7 +139,7 @@ body {
 /* ===== TITLE ===== */
 h1 {
   margin: 16px 0 6px;
-  font-size: 40px;
+  font-size: 42px;
   font-weight: 900;
   letter-spacing: 4px;
   background: linear-gradient(120deg,#fff,#cfd4dc,#fff,#9ca3af,#fff);
@@ -160,7 +153,7 @@ h1 {
 }
 
 .address {
-  font-size: 19px;
+  font-size: 20px;
   line-height: 1.5;
   color: #cbd5f5;
 }
@@ -197,12 +190,9 @@ footer {
 
 <div class="card">
 
-  <!-- CREDIT MESSAGE -->
-  <div class="top-led led color-cycle" id="creditText">NO CREDIT</div>
-
-  <!-- BUY HERE PAY HERE -->
-  <div class="buyhere led color-cycle">
-    BUY HERE • PAY HERE
+  <!-- 🔴 CREDIT / BUY HERE PAY HERE -->
+  <div class="top-led led color-cycle" id="creditText">
+    NO CREDIT
   </div>
 
   <div class="scene">
@@ -283,11 +273,19 @@ footer {
 </div>
 
 <script>
-const credit = document.getElementById("creditText");
+const messages = [
+  "NO CREDIT",
+  "BAD CREDIT",
+  "BUY HERE / PAY HERE"
+];
+
+let index = 0;
+const el = document.getElementById("creditText");
+
 setInterval(() => {
-  credit.textContent =
-    credit.textContent === "NO CREDIT" ? "BAD CREDIT" : "NO CREDIT";
-}, 1200);
+  index = (index + 1) % messages.length;
+  el.textContent = messages[index];
+}, 1400);
 </script>
 
 </body>
