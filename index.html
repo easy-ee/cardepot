@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CARDEPOT – Digital Card</title>
 
 <style>
@@ -23,6 +23,49 @@ body {
   text-align: center;
 }
 
+/* ===== LED DOT MATRIX ===== */
+.led {
+  font-family: monospace;
+  font-weight: 900;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  filter: drop-shadow(0 0 6px currentColor);
+  background-image: radial-gradient(currentColor 1.2px, transparent 1.3px);
+  background-size: 6px 6px;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ===== COLOR CYCLE ===== */
+.color-cycle {
+  animation: colorCycle 3s linear infinite;
+}
+@keyframes colorCycle {
+  0%   { color: #ff0000; }
+  25%  { color: #ffff00; }
+  50%  { color: #00ff00; }
+  75%  { color: #00ffff; }
+  100% { color: #ff00ff; }
+}
+
+/* ===== CREDIT MESSAGE ===== */
+.top-led {
+  font-size: 28px;
+  margin: 12px 0 6px;
+}
+
+/* ===== BUY HERE PAY HERE ===== */
+.buyhere {
+  font-size: 22px;
+  margin-bottom: 8px;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% { opacity: .65; }
+}
+
 /* ===== SCENE ===== */
 .scene {
   position: relative;
@@ -30,10 +73,10 @@ body {
   margin: auto;
 }
 
-/* 🔴 LED MARQUEE OVER CAR */
+/* ===== MARQUEE ===== */
 .marquee {
   position: absolute;
-  top: 18px;
+  top: 36px;
   left: 0;
   right: 0;
   z-index: 5;
@@ -41,21 +84,10 @@ body {
   pointer-events: none;
 }
 
-.marquee span {
+.marquee-track {
   display: inline-block;
   padding-left: 100%;
-  font-size: 22px;              /* 🔥 INCREASED SIZE */
-  font-weight: 900;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: #ff2d2d;
-
-  text-shadow:
-    0 0 6px rgba(255,45,45,.9),
-    0 0 18px rgba(255,45,45,.7),
-    0 0 36px rgba(255,45,45,.5);
-
-  animation: marqueeScroll 10s linear infinite;
+  animation: marqueeScroll 9s linear infinite;
 }
 
 @keyframes marqueeScroll {
@@ -63,16 +95,32 @@ body {
   to   { transform: translateX(-100%); }
 }
 
-/* Float animation */
+/* ===== MARQUEE REFLECTION ===== */
+.marquee-reflection {
+  position: absolute;
+  top: 118px;
+  left: 0;
+  right: 0;
+  transform: scaleY(-1) skewX(-8deg);
+  opacity: .25;
+  filter: blur(6px);
+  z-index: 2;
+  pointer-events: none;
+  animation: reflectionPulse 2.5s ease-in-out infinite;
+}
+@keyframes reflectionPulse {
+  50% { opacity: .4; }
+}
+
+/* ===== CAR ===== */
 .car-float {
   animation: float 3s ease-in-out infinite;
 }
 @keyframes float {
-  0%,100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
 }
 
-/* Rim spin */
+/* Wheels */
 .rim-spin {
   animation: spinCCW .9s linear infinite;
   transform-origin: center;
@@ -82,7 +130,6 @@ body {
   to { transform: rotate(-360deg); }
 }
 
-/* RGB glow */
 .rim-glow {
   animation: rgbPulse 2s ease-in-out infinite;
 }
@@ -92,42 +139,28 @@ body {
 }
 
 .underglow {
-  filter: blur(22px);
+  filter: blur(24px);
   opacity: .95;
 }
 
-/* 💎 CHROME SHIMMER TITLE */
+/* ===== TITLE ===== */
 h1 {
-  margin: 14px 0 6px;
-  font-size: 36px;
+  margin: 16px 0 6px;
+  font-size: 40px;
   font-weight: 900;
   letter-spacing: 4px;
-
-  background: linear-gradient(
-    120deg,
-    #ffffff,
-    #cfd4dc,
-    #ffffff,
-    #9ca3af,
-    #ffffff
-  );
+  background: linear-gradient(120deg,#fff,#cfd4dc,#fff,#9ca3af,#fff);
   background-size: 300% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-
-  text-shadow:
-    0 0 6px rgba(255,255,255,.45),
-    0 0 18px rgba(180,190,200,.35);
-
   animation: chromeShimmer 3.5s linear infinite;
 }
-
 @keyframes chromeShimmer {
   to { background-position: 300% 50%; }
 }
 
 .address {
-  font-size: 17px;
+  font-size: 19px;
   line-height: 1.5;
   color: #cbd5f5;
 }
@@ -164,82 +197,77 @@ footer {
 
 <div class="card">
 
-  <div class="header">
-    <div class="scene">
+  <!-- CREDIT MESSAGE -->
+  <div class="top-led led color-cycle" id="creditText">NO CREDIT</div>
 
-      <!-- 🔴 MARQUEE OVER CAR -->
-      <div class="marquee">
-        <span>USED CAR SALES • USED CAR SALES • USED CAR SALES • </span>
+  <!-- BUY HERE PAY HERE -->
+  <div class="buyhere led color-cycle">
+    BUY HERE • PAY HERE
+  </div>
+
+  <div class="scene">
+
+    <!-- MARQUEE -->
+    <div class="marquee">
+      <div class="marquee-track led color-cycle">
+        USED CAR SALES • FINANCING • USED CAR SALES • FINANCING •
       </div>
-
-      <svg viewBox="0 0 700 300" width="100%" class="car-float">
-        <defs>
-          <linearGradient id="paint" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#22ff55"/>
-            <stop offset="50%" stop-color="#00cc44"/>
-            <stop offset="100%" stop-color="#66ff99"/>
-          </linearGradient>
-
-          <radialGradient id="tireShadow">
-            <stop offset="60%" stop-color="#222"/>
-            <stop offset="100%" stop-color="#000"/>
-          </radialGradient>
-
-          <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#f8fafc"/>
-            <stop offset="25%" stop-color="#9ca3af"/>
-            <stop offset="50%" stop-color="#ffffff"/>
-            <stop offset="75%" stop-color="#6b7280"/>
-            <stop offset="100%" stop-color="#f8fafc"/>
-          </linearGradient>
-
-          <linearGradient id="rgbGlow" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stop-color="#00f"/>
-            <stop offset="50%" stop-color="#0f0"/>
-            <stop offset="100%" stop-color="#f0f"/>
-          </linearGradient>
-        </defs>
-
-        <ellipse cx="350" cy="265" rx="260" ry="22"
-                 fill="url(#rgbGlow)" class="underglow"/>
-
-        <!-- Escalade body -->
-        <path d="M90 180 Q120 115 190 115 H520 Q590 115 620 170 V195 H90 Z"
-              fill="url(#paint)"/>
-
-        <path d="M210 125 H500 Q520 125 530 150 H200 Z"
-              fill="#020617"/>
-
-        <!-- Wheels -->
-        <g transform="translate(250 255)">
-          <circle r="44" fill="#050505"/>
-          <circle r="40" fill="#111"/>
-          <circle r="36" fill="url(#tireShadow)"/>
-          <circle r="32" class="rim-glow" fill="none"
-                  stroke="url(#rgbGlow)" stroke-width="4"/>
-          <g class="rim-spin">
-            <circle r="30" fill="url(#chrome)"/>
-          </g>
-        </g>
-
-        <g transform="translate(530 255)">
-          <circle r="44" fill="#050505"/>
-          <circle r="40" fill="#111"/>
-          <circle r="36" fill="url(#tireShadow)"/>
-          <circle r="32" class="rim-glow" fill="none"
-                  stroke="url(#rgbGlow)" stroke-width="4"/>
-          <g class="rim-spin">
-            <circle r="30" fill="url(#chrome)"/>
-          </g>
-        </g>
-      </svg>
     </div>
 
-    <h1>CARDEPOT</h1>
-    <div class="address">
-      13725 East Broad St<br>
-      Pataskala, OH 43062
+    <!-- MARQUEE REFLECTION -->
+    <div class="marquee-reflection">
+      <div class="marquee-track led color-cycle">
+        USED CAR SALES • FINANCING • USED CAR SALES • FINANCING •
+      </div>
     </div>
+
+    <!-- ESCALADE -->
+    <svg viewBox="0 0 700 300" width="100%" class="car-float">
+      <defs>
+        <linearGradient id="paint" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#22ff55"/>
+          <stop offset="50%" stop-color="#00cc44"/>
+          <stop offset="100%" stop-color="#66ff99"/>
+        </linearGradient>
+
+        <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#f8fafc"/>
+          <stop offset="50%" stop-color="#9ca3af"/>
+          <stop offset="100%" stop-color="#ffffff"/>
+        </linearGradient>
+
+        <linearGradient id="rgbGlow" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#00f"/>
+          <stop offset="50%" stop-color="#0f0"/>
+          <stop offset="100%" stop-color="#f0f"/>
+        </linearGradient>
+      </defs>
+
+      <ellipse cx="350" cy="265" rx="260" ry="22"
+               fill="url(#rgbGlow)" class="underglow"/>
+
+      <path d="M90 180 Q120 115 190 115 H520 Q590 115 620 170 V195 H90 Z"
+            fill="url(#paint)"/>
+
+      <!-- Wheels -->
+      <g transform="translate(250 255)">
+        <circle r="44" fill="#000"/>
+        <circle r="36" fill="url(#chrome)" class="rim-spin"/>
+        <circle r="32" fill="none" stroke="url(#rgbGlow)" stroke-width="4" class="rim-glow"/>
+      </g>
+
+      <g transform="translate(530 255)">
+        <circle r="44" fill="#000"/>
+        <circle r="36" fill="url(#chrome)" class="rim-spin"/>
+        <circle r="32" fill="none" stroke="url(#rgbGlow)" stroke-width="4" class="rim-glow"/>
+      </g>
+    </svg>
+  </div>
+
+  <h1>CARDEPOT</h1>
+  <div class="address">
+    13725 East Broad St<br>
+    Pataskala, OH 43062
   </div>
 
   <div class="buttons">
@@ -250,10 +278,17 @@ footer {
     <a class="btn save" href="cardepot.vcf" download>💾 SAVE</a>
   </div>
 
-  <footer>
-    Luxury • Performance • Presence
-  </footer>
+  <footer>Luxury • Performance • Presence</footer>
+
 </div>
+
+<script>
+const credit = document.getElementById("creditText");
+setInterval(() => {
+  credit.textContent =
+    credit.textContent === "NO CREDIT" ? "BAD CREDIT" : "NO CREDIT";
+}, 1200);
+</script>
 
 </body>
 </html>
