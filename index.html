@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CAR DEPOT – Digital Card</title>
+<title>CAR DEPOT – Truck Demo</title>
 
 <style>
 * { box-sizing: border-box; }
@@ -26,35 +26,6 @@ body {
   box-shadow: 0 30px 60px rgba(0,0,0,.6);
 }
 
-/* MARQUEE */
-.marquee {
-  background: #0a0a0a;
-  overflow: hidden;
-  padding: 10px 0;
-  font-size: 18px;
-  font-weight: bold;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.marquee span {
-  display: inline-block;
-  white-space: nowrap;
-  padding-left: 100%;
-  animation: scroll 14s linear infinite, colorCycle 8s linear infinite;
-}
-
-@keyframes scroll {
-  to { transform: translateX(-100%); }
-}
-
-@keyframes colorCycle {
-  0%   { color:#22ff00; text-shadow:0 0 10px #22ff00; }
-  33%  { color:#00ffff; text-shadow:0 0 10px #00ffff; }
-  66%  { color:#ff00ff; text-shadow:0 0 10px #ff00ff; }
-  100% { color:#22ff00; text-shadow:0 0 10px #22ff00; }
-}
-
 /* HEADER */
 .header {
   background: linear-gradient(180deg,#020617,#0b1220);
@@ -65,56 +36,80 @@ body {
 /* SCENE */
 .scene {
   position: relative;
-  height: 280px;
+  height: 300px;
 }
 
-/* BRAND */
-.brand {
+/* UNDERGLOW */
+.underglow {
   position: absolute;
-  bottom: 0;
-  width: 100%;
+  bottom: 92px;
+  left: 50%;
+  width: 300px;
+  height: 30px;
+  transform: translateX(-50%);
+  filter: blur(20px);
+  animation: rgb 6s linear infinite;
 }
 
-.brand h1 {
-  margin: 0;
-  font-size: 46px;
-  letter-spacing: 8px;
-  font-weight: 900;
-  color: #eaffff;
-  text-shadow:
-    0 0 6px #22ff00,
-    0 0 18px #22ff00,
-    0 0 36px rgba(34,255,0,.9);
+@keyframes rgb {
+  0% { background:#ff0000; }
+  33% { background:#00ffff; }
+  66% { background:#8b5cf6; }
+  100% { background:#ff0000; }
+}
+
+/* HEADLIGHT BEAMS */
+.beam {
+  position: absolute;
+  left: 40px;
+  bottom: 150px;
+  width: 160px;
+  height: 60px;
+  background: linear-gradient(90deg, rgba(180,255,255,.6), transparent);
+  clip-path: polygon(0 20%,100% 0,100% 100%,0 80%);
+  filter: blur(8px);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,100% { opacity:.4; }
+  50% { opacity:.8; }
 }
 
 /* VEHICLE */
-.car-wrapper {
+.car {
   position: absolute;
   left: 50%;
-  bottom: 64px;
+  bottom: 110px;
   transform: translateX(-50%);
 }
 
-/* SHADOW */
-.shadow {
-  position: absolute;
-  bottom: 58px;
-  left: 50%;
-  width: 280px;
-  height: 20px;
-  background: rgba(0,0,0,.6);
-  filter: blur(18px);
-  transform: translateX(-50%);
-}
-
-/* WHEEL ROTATION ONLY */
+/* WHEELS */
 .wheel {
   transform-origin: center;
-  animation: spin 0.7s linear infinite;
+  animation: spin .7s linear infinite;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to { transform: rotate(-360deg); }
+}
+
+/* SLIDER */
+.slider {
+  padding: 12px;
+  background: #020617;
+  color: #fff;
+  font-size: 14px;
+}
+
+input[type=range] {
+  width: 100%;
+}
+
+/* BRAND */
+h1 {
+  margin: 10px 0 0;
+  letter-spacing: 6px;
 }
 
 /* BUTTONS */
@@ -149,19 +144,16 @@ footer {
 
 <div class="card">
 
-  <div class="marquee">
-    <span>BUY HERE / PAY HERE – NO CREDIT / BAD CREDIT – WE FINANCE ANYONE</span>
-  </div>
-
   <div class="header">
     <div class="scene">
 
-      <div class="shadow"></div>
+      <div class="underglow"></div>
+      <div class="beam"></div>
 
-      <div class="car-wrapper">
-        <svg width="360" height="170" viewBox="0 0 700 260">
+      <div class="car">
+        <svg width="360" height="180" viewBox="0 0 700 260">
 
-          <!-- ESCALADE / LIFTED TRUCK BODY -->
+          <!-- TRUCK BODY -->
           <path d="
             M60 140
             Q90 90 150 90
@@ -178,17 +170,14 @@ footer {
           <!-- WINDOWS -->
           <rect x="220" y="70" width="220" height="25" rx="6" fill="#020617"/>
 
-          <!-- WHEEL WELLS (CUT INTO BODY) -->
+          <!-- WHEEL CUTOUTS -->
           <path d="M210 150 a45 45 0 0 0 90 0" fill="#020617"/>
           <path d="M430 150 a45 45 0 0 0 90 0" fill="#020617"/>
 
           <!-- LEFT WHEEL -->
-          <g class="wheel" transform="translate(255 150)">
-            <!-- Tire -->
+          <g id="wheelL" class="wheel" transform="translate(255 150)">
             <circle r="38" fill="#000"/>
-            <!-- Tread -->
             <circle r="34" fill="none" stroke="#333" stroke-width="4" stroke-dasharray="6 6"/>
-            <!-- Chrome Rim -->
             <circle r="22" fill="#d1d5db"/>
             <circle r="18" fill="none" stroke="#fff" stroke-width="3"/>
             <line x1="-18" y1="0" x2="18" y2="0" stroke="#fff" stroke-width="2"/>
@@ -196,7 +185,7 @@ footer {
           </g>
 
           <!-- RIGHT WHEEL -->
-          <g class="wheel" transform="translate(475 150)">
+          <g id="wheelR" class="wheel" transform="translate(475 150)">
             <circle r="38" fill="#000"/>
             <circle r="34" fill="none" stroke="#333" stroke-width="4" stroke-dasharray="6 6"/>
             <circle r="22" fill="#d1d5db"/>
@@ -208,27 +197,41 @@ footer {
         </svg>
       </div>
 
-      <div class="brand">
-        <h1>CAR DEPOT</h1>
-      </div>
-
     </div>
 
-    <div class="address">
-      13725 East Broad St<br>
-      Pataskala, OH 43062
-    </div>
+    <h1>CAR DEPOT</h1>
+    <div>13725 East Broad St • Pataskala, OH</div>
+  </div>
+
+  <!-- WHEEL SIZE SLIDER -->
+  <div class="slider">
+    Wheel Size: <span id="sizeLabel">24”</span>
+    <input id="wheelSize" type="range" min="24" max="32" value="24">
   </div>
 
   <div class="buttons">
     <a class="btn call" href="tel:+16142859929">📞 CALL</a>
     <a class="btn text" href="sms:+16142859929">💬 TEXT</a>
-    <a class="btn map" href="https://maps.google.com/?q=13725+East+Broad+St+Pataskala+OH+43062">📍 MAP</a>
-    <a class="btn save" href="cardepot.vcf" download>💾 SAVE</a>
+    <a class="btn map" href="https://maps.google.com">📍 MAP</a>
+    <a class="btn save" href="#">💾 SAVE</a>
   </div>
 
   <footer>Fast • Reliable • Trusted</footer>
 </div>
+
+<script>
+const slider = document.getElementById('wheelSize');
+const label = document.getElementById('sizeLabel');
+const wheels = [document.getElementById('wheelL'), document.getElementById('wheelR')];
+
+slider.addEventListener('input', () => {
+  label.textContent = slider.value + '”';
+  const scale = slider.value / 24;
+  wheels.forEach(w => {
+    w.style.transform = `translate(${w.getAttribute('transform').match(/translate\\(([^)]+)\\)/)[1]}) scale(${scale})`;
+  });
+});
+</script>
 
 </body>
 </html>
