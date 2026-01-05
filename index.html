@@ -93,18 +93,18 @@ body {
   margin-right: 18px;
 }
 
-/* CAR WRAPPER (GLOBAL MOTION) */
+/* CAR WRAPPER (GLOBAL BODY MOTION ONLY) */
 .car-wrapper {
   position: absolute;
   left: 50%;
   bottom: calc(58px - 0.1in);
   transform: translateX(-50%);
-  animation: vehicleBounce 1.8s ease-in-out infinite;
+  animation: bodyBounce 1.8s ease-in-out infinite;
 }
 
-@keyframes vehicleBounce {
+@keyframes bodyBounce {
   0%,100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(6px); }
+  50% { transform: translateX(-50%) translateY(4px); }
 }
 
 /* SHADOW */
@@ -135,7 +135,7 @@ body {
   50% { transform: translateY(2px); }
 }
 
-/* AXLES */
+/* AXLES (VISUAL FLEX ONLY) */
 .axle.front {
   animation: frontAxle 1.8s ease-in-out infinite;
 }
@@ -152,14 +152,37 @@ body {
   50% { transform: translateY(3px); }
 }
 
-/* WHEELS */
+/* WHEELS — LOCKED TO GROUND */
 .wheel {
-  animation: spin 0.6s linear infinite;
   transform-origin: center;
+  animation: spin 0.6s linear infinite;
 }
 
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+/* CANCEL AXLE MOTION ON WHEELS */
+.axle.front .wheel {
+  animation:
+    spin 0.6s linear infinite,
+    wheelLockFront 1.8s ease-in-out infinite;
+}
+
+.axle.rear .wheel {
+  animation:
+    spin 0.6s linear infinite,
+    wheelLockRear 1.8s ease-in-out infinite;
+}
+
+@keyframes wheelLockFront {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(180deg); }
+}
+
+@keyframes wheelLockRear {
+  0%,100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-3px) rotate(180deg); }
 }
 
 /* BUTTONS */
