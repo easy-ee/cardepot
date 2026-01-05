@@ -31,7 +31,7 @@ body {
   background: #0a0a0a;
   overflow: hidden;
   padding: 10px 0;
-  font-size: 17px;
+  font-size: 18px;
   font-weight: bold;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -41,33 +41,31 @@ body {
   display: inline-block;
   white-space: nowrap;
   padding-left: 100%;
-  animation: scroll 16s linear infinite, colorCycle 9s linear infinite;
+  animation: scroll 14s linear infinite, colorCycle 8s linear infinite;
 }
 
 @keyframes scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-100%); }
+  to { transform: translateX(-100%); }
 }
 
 @keyframes colorCycle {
-  0%   { color:#22ff00; text-shadow:0 0 8px #22ff00; }
-  33%  { color:#00ffff; text-shadow:0 0 8px #00ffff; }
-  66%  { color:#ff00ff; text-shadow:0 0 8px #ff00ff; }
-  100% { color:#22ff00; text-shadow:0 0 8px #22ff00; }
+  0%   { color:#22ff00; text-shadow:0 0 10px #22ff00; }
+  33%  { color:#00ffff; text-shadow:0 0 10px #00ffff; }
+  66%  { color:#ff00ff; text-shadow:0 0 10px #ff00ff; }
+  100% { color:#22ff00; text-shadow:0 0 10px #22ff00; }
 }
 
 /* HEADER */
 .header {
   background: linear-gradient(180deg,#020617,#0b1220);
   color: #fff;
-  padding: 20px 16px 28px;
-  position: relative;
+  padding: 20px 16px 30px;
 }
 
 /* SCENE */
 .scene {
   position: relative;
-  height: 260px;
+  height: 280px;
 }
 
 /* BRAND */
@@ -89,100 +87,34 @@ body {
     0 0 36px rgba(34,255,0,.9);
 }
 
-.brand span:first-child {
-  margin-right: 18px;
-}
-
-/* CAR WRAPPER (GLOBAL BODY MOTION ONLY) */
+/* VEHICLE */
 .car-wrapper {
   position: absolute;
   left: 50%;
-  bottom: calc(58px - 0.1in);
+  bottom: 64px;
   transform: translateX(-50%);
-  animation: bodyBounce 1.8s ease-in-out infinite;
-}
-
-@keyframes bodyBounce {
-  0%,100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(4px); }
 }
 
 /* SHADOW */
 .shadow {
   position: absolute;
-  bottom: 52px;
+  bottom: 58px;
   left: 50%;
-  width: 260px;
-  height: 18px;
+  width: 280px;
+  height: 20px;
   background: rgba(0,0,0,.6);
   filter: blur(18px);
   transform: translateX(-50%);
-  animation: shadowPulse 1.8s ease-in-out infinite;
 }
 
-@keyframes shadowPulse {
-  0%,100% { transform: translateX(-50%) scale(1); opacity:.6; }
-  50% { transform: translateX(-50%) scale(.85); opacity:.4; }
-}
-
-/* BODY */
-.car-body {
-  animation: bodyFloat 1.8s ease-in-out infinite;
-}
-
-@keyframes bodyFloat {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(2px); }
-}
-
-/* AXLES (VISUAL FLEX ONLY) */
-.axle.front {
-  animation: frontAxle 1.8s ease-in-out infinite;
-}
-.axle.rear {
-  animation: rearAxle 1.8s ease-in-out infinite;
-}
-
-@keyframes frontAxle {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(6px); }
-}
-@keyframes rearAxle {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(3px); }
-}
-
-/* WHEELS — LOCKED TO GROUND */
+/* WHEEL ROTATION ONLY */
 .wheel {
   transform-origin: center;
-  animation: spin 0.6s linear infinite;
+  animation: spin 0.7s linear infinite;
 }
 
 @keyframes spin {
   to { transform: rotate(360deg); }
-}
-
-/* CANCEL AXLE MOTION ON WHEELS */
-.axle.front .wheel {
-  animation:
-    spin 0.6s linear infinite,
-    wheelLockFront 1.8s ease-in-out infinite;
-}
-
-.axle.rear .wheel {
-  animation:
-    spin 0.6s linear infinite,
-    wheelLockRear 1.8s ease-in-out infinite;
-}
-
-@keyframes wheelLockFront {
-  0%,100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-6px) rotate(180deg); }
-}
-
-@keyframes wheelLockRear {
-  0%,100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-3px) rotate(180deg); }
 }
 
 /* BUTTONS */
@@ -218,7 +150,7 @@ footer {
 <div class="card">
 
   <div class="marquee">
-    <span>BUY HERE / PAY HERE – GOOD CREDIT / BAD CREDIT – FINANCING AVAILABLE</span>
+    <span>BUY HERE / PAY HERE – NO CREDIT / BAD CREDIT – WE FINANCE ANYONE</span>
   </div>
 
   <div class="header">
@@ -227,53 +159,57 @@ footer {
       <div class="shadow"></div>
 
       <div class="car-wrapper">
-        <svg width="360" height="140" viewBox="0 0 600 200">
+        <svg width="360" height="170" viewBox="0 0 700 260">
 
-          <!-- BODY -->
-          <g class="car-body">
-            <path d="M40 110
-                     Q70 70 120 70
-                     H360
-                     Q420 70 480 90
-                     Q520 100 560 110
-                     V120
-                     H40 Z"
-                  fill="#7CFF00"/>
-            <path d="M160 70
-                     Q200 40 260 40
-                     Q320 40 360 70"
-                  fill="#7CFF00"/>
+          <!-- ESCALADE / LIFTED TRUCK BODY -->
+          <path d="
+            M60 140
+            Q90 90 150 90
+            H430
+            Q520 90 600 120
+            L640 130
+            V150
+            H60 Z"
+            fill="#7CFF00"/>
+
+          <!-- ROOF -->
+          <rect x="200" y="60" width="260" height="40" rx="10" fill="#7CFF00"/>
+
+          <!-- WINDOWS -->
+          <rect x="220" y="70" width="220" height="25" rx="6" fill="#020617"/>
+
+          <!-- WHEEL WELLS (CUT INTO BODY) -->
+          <path d="M210 150 a45 45 0 0 0 90 0" fill="#020617"/>
+          <path d="M430 150 a45 45 0 0 0 90 0" fill="#020617"/>
+
+          <!-- LEFT WHEEL -->
+          <g class="wheel" transform="translate(255 150)">
+            <!-- Tire -->
+            <circle r="38" fill="#000"/>
+            <!-- Tread -->
+            <circle r="34" fill="none" stroke="#333" stroke-width="4" stroke-dasharray="6 6"/>
+            <!-- Chrome Rim -->
+            <circle r="22" fill="#d1d5db"/>
+            <circle r="18" fill="none" stroke="#fff" stroke-width="3"/>
+            <line x1="-18" y1="0" x2="18" y2="0" stroke="#fff" stroke-width="2"/>
+            <line x1="0" y1="-18" x2="0" y2="18" stroke="#fff" stroke-width="2"/>
           </g>
 
-          <!-- FRONT AXLE -->
-          <g class="axle front">
-            <g class="wheel" transform="translate(230 135)">
-              <circle r="18" fill="#000"/>
-              <circle r="7" fill="#777"/>
-            </g>
-            <g class="wheel" transform="translate(300 135)">
-              <circle r="18" fill="#000"/>
-              <circle r="7" fill="#777"/>
-            </g>
-          </g>
-
-          <!-- REAR AXLE -->
-          <g class="axle rear">
-            <g class="wheel" transform="translate(400 135)">
-              <circle r="18" fill="#000"/>
-              <circle r="7" fill="#777"/>
-            </g>
-            <g class="wheel" transform="translate(470 135)">
-              <circle r="18" fill="#000"/>
-              <circle r="7" fill="#777"/>
-            </g>
+          <!-- RIGHT WHEEL -->
+          <g class="wheel" transform="translate(475 150)">
+            <circle r="38" fill="#000"/>
+            <circle r="34" fill="none" stroke="#333" stroke-width="4" stroke-dasharray="6 6"/>
+            <circle r="22" fill="#d1d5db"/>
+            <circle r="18" fill="none" stroke="#fff" stroke-width="3"/>
+            <line x1="-18" y1="0" x2="18" y2="0" stroke="#fff" stroke-width="2"/>
+            <line x1="0" y1="-18" x2="0" y2="18" stroke="#fff" stroke-width="2"/>
           </g>
 
         </svg>
       </div>
 
       <div class="brand">
-        <h1><span>CAR</span><span>DEPOT</span></h1>
+        <h1>CAR DEPOT</h1>
       </div>
 
     </div>
