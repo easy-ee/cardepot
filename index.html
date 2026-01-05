@@ -46,7 +46,7 @@ body {
   display: inline-block;
   white-space: nowrap;
   padding-left: 100%;
-  font-size: 26px; /* BIG */
+  font-size: 26px;
   font-weight: 900;
   letter-spacing: 4px;
   animation: scroll 14s linear infinite, glow 6s linear infinite;
@@ -89,7 +89,7 @@ body {
   100% { background:#ff0000; }
 }
 
-/* HEADLIGHT BEAMS */
+/* HEADLIGHT BEAM */
 .beam {
   position: absolute;
   left: 40px;
@@ -107,15 +107,15 @@ body {
   50% { opacity:.8; }
 }
 
-/* VEHICLE POSITION */
+/* VEHICLE POSITION — LOWERED 1 INCH */
 .car {
   position: absolute;
   left: 50%;
-  bottom: 48px;
+  bottom: 24px; /* MOVED DOWN */
   transform: translateX(-50%);
 }
 
-/* WHEELS — STOPPED */
+/* WHEELS STOPPED */
 .wheel {
   animation: none;
 }
@@ -181,7 +181,6 @@ footer {
 
   <div class="header">
 
-    <!-- BIG MARQUEE ABOVE CAR -->
     <div class="marquee">
       <span>
         BUY HERE • PAY HERE • NO CREDIT • BAD CREDIT • WE FINANCE ANYONE •
@@ -217,19 +216,16 @@ footer {
           <path d="M210 150 a45 45 0 0 0 90 0" fill="#020617"/>
           <path d="M430 150 a45 45 0 0 0 90 0" fill="#020617"/>
 
-          <!-- BRAKE LIGHT -->
+          <!-- LIGHTS -->
           <rect class="brake" x="630" y="125" width="10" height="20" rx="4" fill="#ff0000"/>
-
-          <!-- TURN SIGNAL -->
           <rect class="signal" x="50" y="125" width="10" height="20" rx="4" fill="#ffb000"/>
 
-          <!-- LEFT WHEEL -->
+          <!-- WHEELS -->
           <g class="wheel" transform="translate(255 150)">
             <circle r="38" fill="#000"/>
             <circle r="22" fill="#d1d5db"/>
           </g>
 
-          <!-- RIGHT WHEEL -->
           <g class="wheel" transform="translate(475 150)">
             <circle r="38" fill="#000"/>
             <circle r="22" fill="#d1d5db"/>
