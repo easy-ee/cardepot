@@ -46,14 +46,14 @@ body {
 
 @keyframes scroll {
   from { transform: translateX(0); }
-  to   { transform: translateX(-100%); }
+  to { transform: translateX(-100%); }
 }
 
 @keyframes colorCycle {
-  0%   { color:#22ff00; text-shadow:0 0 8px #22ff00; }
-  33%  { color:#00ffff; text-shadow:0 0 8px #00ffff; }
-  66%  { color:#ff00ff; text-shadow:0 0 8px #ff00ff; }
-  100% { color:#22ff00; text-shadow:0 0 8px #22ff00; }
+  0% { color:#22ff00; text-shadow:0 0 10px #22ff00; }
+  33% { color:#00ffff; text-shadow:0 0 10px #00ffff; }
+  66% { color:#ff00ff; text-shadow:0 0 10px #ff00ff; }
+  100% { color:#22ff00; text-shadow:0 0 10px #22ff00; }
 }
 
 /* HEADER */
@@ -67,7 +67,7 @@ body {
 /* SCENE */
 .scene {
   position: relative;
-  height: 250px;
+  height: 260px;
 }
 
 /* BRAND */
@@ -93,7 +93,7 @@ body {
   margin-right: 18px;
 }
 
-/* CAR POSITION */
+/* CAR WRAPPER */
 .car-wrapper {
   position: absolute;
   left: 50%;
@@ -101,15 +101,53 @@ body {
   transform: translateX(-50%);
 }
 
-/* SUSPENSION */
+/* CAR MOTION */
 .car {
-  animation: bounce 1.8s ease-in-out infinite;
+  animation:
+    slideIn 1.2s ease-out forwards,
+    bounce 1.8s ease-in-out infinite,
+    rumble 0.12s linear infinite;
   filter: drop-shadow(0 0 14px #22ff00);
+}
+
+@keyframes slideIn {
+  from { transform: translate(-600px, 0); opacity:0; }
+  to { transform: translate(0,0); opacity:1; }
 }
 
 @keyframes bounce {
   0%,100% { transform: translateY(0); }
   50% { transform: translateY(6px); }
+}
+
+@keyframes rumble {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(1px); }
+  100% { transform: translateX(0); }
+}
+
+/* WHEELS */
+.wheel {
+  animation: spin 0.6s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* LIGHTS */
+.headlight {
+  animation: blink 2.5s ease-in-out infinite;
+}
+
+.taillight {
+  animation: blink 3s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%,100% { opacity: .4; }
+  50% { opacity: 1; }
 }
 
 /* BUTTONS */
@@ -146,28 +184,41 @@ footer {
 
   <!-- MARQUEE -->
   <div class="marquee">
-    <span>BUY HERE / PAY HERE  –  GOOD CREDIT / BAD CREDIT  –  FINANCING AVAILABLE</span>
+    <span>BUY HERE / PAY HERE – GOOD CREDIT / BAD CREDIT – FINANCING AVAILABLE</span>
   </div>
 
   <div class="header">
     <div class="scene">
 
-      <!-- VEHICLE (INLINE SVG) -->
+      <!-- VEHICLE -->
       <div class="car-wrapper">
-        <svg class="car" width="360" height="120" viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg">
-          <path d="M40 110
-                   Q70 70 120 70
-                   H360
-                   Q420 70 480 90
-                   Q520 100 560 110
-                   V120
-                   H40
-                   Z"
+        <svg class="car" width="360" height="140" viewBox="0 0 600 200">
+
+          <!-- BODY -->
+          <path d="M40 130 Q80 80 140 80 H360 Q430 80 500 100 Q540 110 560 130 V140 H40 Z"
                 fill="#7CFF00"/>
-          <path d="M160 70
-                   Q200 40 260 40
-                   Q320 40 360 70"
+
+          <path d="M180 80 Q230 40 300 40 Q360 40 400 80"
                 fill="#7CFF00"/>
+
+          <!-- HEADLIGHT -->
+          <circle class="headlight" cx="555" cy="120" r="6" fill="#ffffff"/>
+
+          <!-- TAILLIGHT -->
+          <circle class="taillight" cx="45" cy="120" r="6" fill="#ff0000"/>
+
+          <!-- LEFT WHEEL -->
+          <g class="wheel" transform="translate(180 140)">
+            <circle r="18" fill="#000"/>
+            <circle r="8" fill="#aaa"/>
+          </g>
+
+          <!-- RIGHT WHEEL -->
+          <g class="wheel" transform="translate(420 140)">
+            <circle r="18" fill="#000"/>
+            <circle r="8" fill="#aaa"/>
+          </g>
+
         </svg>
       </div>
 
