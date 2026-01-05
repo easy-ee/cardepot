@@ -12,7 +12,7 @@ body {
   margin: 0;
   padding: 20px;
   font-family: Arial, sans-serif;
-  background: radial-gradient(circle at top, #020617,#000);
+  background: radial-gradient(circle at top, #020617, #000);
 }
 
 /* CARD */
@@ -28,63 +28,53 @@ body {
 
 /* MARQUEE */
 .marquee {
-  width: 100%;
-  overflow: hidden;
   background: #111;
+  overflow: hidden;
+  padding: 8px 0;
+  font-size: 17px;
   font-weight: bold;
-  font-size: 51px; /* previous size */
-  text-transform: uppercase;
   letter-spacing: 2px;
-  padding: 20px 0;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
-  position: relative;
+  text-transform: uppercase;
 }
 
-.marquee .track {
+.marquee span {
   display: inline-block;
   white-space: nowrap;
   padding-left: 100%;
-  animation: scroll 20s linear infinite, rainbow 9s linear infinite;
+  animation: scroll 16s linear infinite, colorCycle 9s linear infinite;
 }
 
-/* SCROLL ANIMATION */
 @keyframes scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
 }
 
-/* RAINBOW NEON CYCLE */
-@keyframes rainbow {
-  0%   { color: #22ff00; text-shadow: 0 0 12px #22ff00,0 0 28px #22ff00,0 0 56px #22ff00; }
-  14%  { color: #00ffff; text-shadow: 0 0 12px #00ffff,0 0 28px #00ffff,0 0 56px #00ffff; }
-  28%  { color: #ff00ff; text-shadow: 0 0 12px #ff00ff,0 0 28px #ff00ff,0 0 56px #ff00ff; }
-  42%  { color: #ffff00; text-shadow: 0 0 12px #ffff00,0 0 28px #ffff00,0 0 56px #ffff00; }
-  57%  { color: #ff6600; text-shadow: 0 0 12px #ff6600,0 0 28px #ff6600,0 0 56px #ff6600; }
-  71%  { color: #ff0000; text-shadow: 0 0 12px #ff0000,0 0 28px #ff0000,0 0 56px #ff0000; }
-  85%  { color: #00ffcc; text-shadow: 0 0 12px #00ffcc,0 0 28px #00ffcc,0 0 56px #00ffcc; }
-  100% { color: #22ff00; text-shadow: 0 0 12px #22ff00,0 0 28px #22ff00,0 0 56px #22ff00; }
+@keyframes colorCycle {
+  0%   { color:#22ff00; text-shadow:0 0 8px #22ff00; }
+  33%  { color:#00ffff; text-shadow:0 0 8px #00ffff; }
+  66%  { color:#ff00ff; text-shadow:0 0 8px #ff00ff; }
+  100% { color:#22ff00; text-shadow:0 0 8px #22ff00; }
 }
 
 /* HEADER */
 .header {
   background: linear-gradient(180deg,#020617,#0b1220);
-  padding: 20px 16px 26px;
   color: #fff;
+  padding: 20px 16px 28px;
   position: relative;
 }
 
 /* SCENE */
 .scene {
   position: relative;
-  height: 260px;
+  height: 250px;
 }
 
-/* TITLE */
+/* BRAND */
 .brand {
   position: absolute;
   bottom: 0;
   width: 100%;
-  text-align: center;
 }
 
 .brand h1 {
@@ -95,40 +85,31 @@ body {
   color: #eaffff;
   text-shadow:
     0 0 6px #22ff00,
-    0 0 14px #22ff00,
-    0 0 30px rgba(34,255,0,.85);
+    0 0 16px #22ff00,
+    0 0 32px rgba(34,255,0,.9);
 }
 
 .brand span:first-child {
   margin-right: 18px;
 }
 
-/* CAR POSITION (LOWERED 0.1 INCH) */
+/* CAR POSITION */
 .car-wrapper {
   position: absolute;
   left: 50%;
-  bottom: calc(58px - 0.1in);
+  bottom: calc(56px - 0.1in);
   transform: translateX(-50%);
 }
 
 /* SUSPENSION */
-.car-bounce {
-  animation: suspension 1.6s ease-in-out infinite;
+.car {
+  animation: bounce 1.8s ease-in-out infinite;
+  filter: drop-shadow(0 0 14px #22ff00);
 }
 
-@keyframes suspension {
+@keyframes bounce {
   0%,100% { transform: translateY(0); }
   50% { transform: translateY(6px); }
-}
-
-/* WHEELS */
-.wheel {
-  animation: spin 0.7s linear infinite;
-  transform-origin: center;
-}
-
-@keyframes spin {
-  to { transform: rotate(-360deg); }
 }
 
 /* BUTTONS */
@@ -165,50 +146,29 @@ footer {
 
   <!-- MARQUEE -->
   <div class="marquee">
-    <div class="track">
-      BUY HERE / PAY HERE  -  GOOD CREDIT / BAD CREDIT  -  FINANCING AVAILABLE
-    </div>
+    <span>BUY HERE / PAY HERE  –  GOOD CREDIT / BAD CREDIT  –  FINANCING AVAILABLE</span>
   </div>
 
   <div class="header">
-
     <div class="scene">
 
-      <!-- CAR -->
+      <!-- VEHICLE (INLINE SVG) -->
       <div class="car-wrapper">
-        <div class="car-bounce">
-
-          <svg width="360" height="200" viewBox="0 0 900 320">
-
-            <!-- BODY -->
-            <rect x="130" y="130" width="560" height="80" rx="14" fill="#22ff00"/>
-            <rect x="230" y="85" width="260" height="60" rx="12" fill="#1aff00"/>
-            <rect x="520" y="105" width="170" height="70" rx="10" fill="#1aff00"/>
-
-            <!-- WINDOWS -->
-            <rect x="245" y="100" width="230" height="30" rx="6" fill="#020617"/>
-
-            <!-- HEADLIGHT -->
-            <rect x="110" y="150" width="12" height="24" rx="4" fill="#ffffff"/>
-
-            <!-- TAILLIGHT -->
-            <rect x="690" y="150" width="12" height="24" rx="4" fill="#ff0000"/>
-
-            <!-- LEFT WHEEL -->
-            <g class="wheel" transform="translate(300 200)">
-              <circle r="42" fill="#000"/>
-              <circle r="26" fill="#fff"/>
-            </g>
-
-            <!-- RIGHT WHEEL -->
-            <g class="wheel" transform="translate(560 200)">
-              <circle r="42" fill="#000"/>
-              <circle r="26" fill="#fff"/>
-            </g>
-
-          </svg>
-
-        </div>
+        <svg class="car" width="360" height="120" viewBox="0 0 600 160" xmlns="http://www.w3.org/2000/svg">
+          <path d="M40 110
+                   Q70 70 120 70
+                   H360
+                   Q420 70 480 90
+                   Q520 100 560 110
+                   V120
+                   H40
+                   Z"
+                fill="#7CFF00"/>
+          <path d="M160 70
+                   Q200 40 260 40
+                   Q320 40 360 70"
+                fill="#7CFF00"/>
+        </svg>
       </div>
 
       <!-- TITLE -->
@@ -222,7 +182,6 @@ footer {
       13725 East Broad St<br>
       Pataskala, OH 43062
     </div>
-
   </div>
 
   <div class="buttons">
