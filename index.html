@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CAR DEPOT – Animated Truck Card</title>
+<title>CAR DEPOT – Digital Card</title>
 
 <style>
 * { box-sizing: border-box; }
@@ -30,7 +30,7 @@ body {
 .header {
   background: linear-gradient(180deg,#020617,#0b1220);
   color: #fff;
-  padding: 20px 16px 18px;
+  padding: 20px 16px 30px;
 }
 
 /* SCENE */
@@ -44,10 +44,10 @@ body {
   position: absolute;
   bottom: 78px;
   left: 50%;
-  width: 320px;
-  height: 32px;
+  width: 300px;
+  height: 30px;
   transform: translateX(-50%);
-  filter: blur(22px);
+  filter: blur(20px);
   animation: rgb 6s linear infinite;
 }
 
@@ -58,76 +58,67 @@ body {
   100% { background:#ff0000; }
 }
 
-/* HEADLIGHT BEAM */
+/* HEADLIGHT BEAMS */
 .beam {
   position: absolute;
-  left: 48px;
-  bottom: 150px;
-  width: 170px;
+  left: 40px;
+  bottom: 140px;
+  width: 160px;
   height: 60px;
-  background: linear-gradient(90deg, rgba(200,255,255,.7), transparent);
+  background: linear-gradient(90deg, rgba(200,255,255,.6), transparent);
   clip-path: polygon(0 20%,100% 0,100% 100%,0 80%);
   filter: blur(8px);
-  animation: beamPulse 1.6s ease-in-out infinite;
+  animation: pulse 1.4s ease-in-out infinite;
 }
 
-@keyframes beamPulse {
+@keyframes pulse {
   0%,100% { opacity:.4; }
-  50% { opacity:.85; }
+  50% { opacity:.8; }
 }
 
-/* VEHICLE — VERY LOW */
+/* VEHICLE — LOWERED */
 .car {
   position: absolute;
   left: 50%;
-  bottom: 52px; /* wheels almost touching title */
+  bottom: 48px; /* VERY CLOSE TO TITLE */
   transform: translateX(-50%);
 }
 
 /* WHEELS */
 .wheel {
   transform-origin: center;
-  animation: spin .7s linear infinite;
+  animation: spin 2.5s linear infinite; /* slowed */
 }
 
 @keyframes spin {
   to { transform: rotate(-360deg); }
 }
 
-/* BRAKE LIGHTS */
+/* LIGHTS */
 .brake {
-  animation: brakePulse 3s infinite;
+  animation: brakeFlash 3s infinite;
 }
 
-@keyframes brakePulse {
-  0%,70% { opacity:.3; }
+@keyframes brakeFlash {
+  0%,70% { opacity:.25; }
   75%,85% { opacity:1; }
-  100% { opacity:.3; }
+  100% { opacity:.25; }
 }
 
-/* TURN SIGNALS */
-.signal-left {
-  animation: turnLeft 2s infinite;
-}
-.signal-right {
-  animation: turnRight 2s infinite;
+.signal {
+  animation: signalBlink 1s infinite;
 }
 
-@keyframes turnLeft {
-  0%,50%,100% { opacity:.2; }
-  10%,30% { opacity:1; }
-}
-
-@keyframes turnRight {
-  0%,50%,100% { opacity:.2; }
-  60%,80% { opacity:1; }
+@keyframes signalBlink {
+  0%,50% { opacity:0; }
+  60%,100% { opacity:1; }
 }
 
 /* BRAND */
 h1 {
-  margin: 6px 0 0;
-  font-size: 44px;
+  margin: 10px 0 0;
   letter-spacing: 6px;
+  font-size: 42px;
 }
 
 /* BUTTONS */
@@ -193,15 +184,14 @@ footer {
           <path d="M430 150 a45 45 0 0 0 90 0" fill="#020617"/>
 
           <!-- BRAKE LIGHT -->
-          <rect class="brake" x="610" y="110" width="18" height="22" rx="4" fill="#ff0000"/>
+          <rect class="brake" x="630" y="125" width="10" height="20" rx="4" fill="#ff0000"/>
 
-          <!-- TURN SIGNALS -->
-          <rect class="signal-left" x="60" y="118" width="14" height="14" rx="3" fill="#ffb000"/>
-          <rect class="signal-right" x="590" y="118" width="14" height="14" rx="3" fill="#ffb000"/>
+          <!-- TURN SIGNAL -->
+          <rect class="signal" x="50" y="125" width="10" height="20" rx="4" fill="#ffb000"/>
 
           <!-- LEFT WHEEL -->
           <g class="wheel" transform="translate(255 150)">
-            <circle r="40" fill="#000"/>
+            <circle r="38" fill="#000"/>
             <circle r="34" fill="none" stroke="#333" stroke-width="4" stroke-dasharray="6 6"/>
             <circle r="22" fill="#d1d5db"/>
             <circle r="18" fill="none" stroke="#fff" stroke-width="3"/>
@@ -211,7 +201,7 @@ footer {
 
           <!-- RIGHT WHEEL -->
           <g class="wheel" transform="translate(475 150)">
-            <circle r="40" fill="#000"/>
+            <circle r="38" fill="#000"/>
             <circle r="34" fill="none" stroke="#333" stroke-width="4" stroke-dasharray="6 6"/>
             <circle r="22" fill="#d1d5db"/>
             <circle r="18" fill="none" stroke="#fff" stroke-width="3"/>
