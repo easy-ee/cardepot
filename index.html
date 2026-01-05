@@ -76,22 +76,18 @@ body {
   50% { opacity:.8; }
 }
 
-/* VEHICLE — LOWERED */
+/* VEHICLE POSITION */
 .car {
   position: absolute;
   left: 50%;
-  bottom: 48px; /* VERY CLOSE TO TITLE */
+  bottom: 48px;
   transform: translateX(-50%);
 }
 
-/* WHEELS */
+/* WHEELS — FULLY STOPPED */
 .wheel {
   transform-origin: center;
-  animation: spin 2.5s linear infinite; /* slowed */
-}
-
-@keyframes spin {
-  to { transform: rotate(-360deg); }
+  animation: none; /* 🚫 NO ROTATION */
 }
 
 /* LIGHTS */
