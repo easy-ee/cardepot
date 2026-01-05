@@ -117,13 +117,32 @@ body {
 
 @keyframes bounce {
   0%,100% { transform: translateY(0); }
-  50% { transform: translateY(5px); }
+  50% { transform: translateY(6px); }
 }
 
 @keyframes rumble {
   0% { transform: translateX(0); }
   50% { transform: translateX(1px); }
   100% { transform: translateX(0); }
+}
+
+/* GROUND SHADOW */
+.shadow {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  width: 220px;
+  height: 18px;
+  background: rgba(0,0,0,.4);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  filter: blur(8px);
+  animation: shadowBounce 1.8s ease-in-out infinite;
+}
+
+@keyframes shadowBounce {
+  0%,100% { transform: translateX(-50%) scale(1); opacity:.35; }
+  50% { transform: translateX(-50%) scale(.85); opacity:.2; }
 }
 
 /* WHEELS */
@@ -137,17 +156,12 @@ body {
 }
 
 /* LIGHTS */
-.headlight {
-  animation: blink 2.5s ease-in-out infinite;
-}
-
-.taillight {
-  animation: blink 3s ease-in-out infinite;
-}
+.headlight { animation: blink 2.5s ease-in-out infinite; }
+.taillight { animation: blink 3s ease-in-out infinite; }
 
 @keyframes blink {
-  0%,100% { opacity: .4; }
-  50% { opacity: 1; }
+  0%,100% { opacity:.4; }
+  50% { opacity:1; }
 }
 
 /* BUTTONS */
@@ -182,7 +196,6 @@ footer {
 
 <div class="card">
 
-  <!-- MARQUEE -->
   <div class="marquee">
     <span>BUY HERE / PAY HERE – GOOD CREDIT / BAD CREDIT – FINANCING AVAILABLE</span>
   </div>
@@ -192,28 +205,54 @@ footer {
 
       <!-- VEHICLE -->
       <div class="car-wrapper">
+
+        <!-- SHADOW -->
+        <div class="shadow"></div>
+
         <svg class="car" width="360" height="140" viewBox="0 0 600 200">
 
+          <!-- MASK FOR WHEEL WELLS -->
+          <defs>
+            <mask id="wheelCut">
+              <rect width="600" height="200" fill="white"/>
+              <circle cx="190" cy="130" r="22" fill="black"/>
+              <circle cx="410" cy="130" r="22" fill="black"/>
+            </mask>
+          </defs>
+
           <!-- BODY -->
-          <path d="M40 120 Q80 80 140 80 H360 Q430 80 500 100 Q540 110 560 120 V130 H40 Z"
-                fill="#7CFF00"/>
+          <path d="M40 120 Q80 80 140 80 H360
+                   Q430 80 500 100
+                   Q540 110 560 120
+                   V130 H40 Z"
+                fill="#7CFF00"
+                mask="url(#wheelCut)"/>
 
           <path d="M180 80 Q230 45 300 45 Q360 45 400 80"
-                fill="#7CFF00"/>
+                fill="#7CFF00"
+                mask="url(#wheelCut)"/>
 
-          <!-- HEADLIGHT -->
+          <!-- FENDER OUTLINES -->
+          <circle cx="190" cy="130" r="22"
+                  fill="none"
+                  stroke="rgba(0,0,0,.35)"
+                  stroke-width="3"/>
+
+          <circle cx="410" cy="130" r="22"
+                  fill="none"
+                  stroke="rgba(0,0,0,.35)"
+                  stroke-width="3"/>
+
+          <!-- LIGHTS -->
           <circle class="headlight" cx="552" cy="115" r="6" fill="#ffffff"/>
-
-          <!-- TAILLIGHT -->
           <circle class="taillight" cx="48" cy="115" r="6" fill="#ff0000"/>
 
-          <!-- LEFT WHEEL (RAISED INTO BODY) -->
+          <!-- WHEELS -->
           <g class="wheel" transform="translate(190 130)">
             <circle r="18" fill="#000"/>
             <circle r="8" fill="#aaa"/>
           </g>
 
-          <!-- RIGHT WHEEL (RAISED INTO BODY) -->
           <g class="wheel" transform="translate(410 130)">
             <circle r="18" fill="#000"/>
             <circle r="8" fill="#aaa"/>
@@ -222,7 +261,6 @@ footer {
         </svg>
       </div>
 
-      <!-- TITLE -->
       <div class="brand">
         <h1><span>CAR</span><span>DEPOT</span></h1>
       </div>
