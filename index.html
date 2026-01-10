@@ -8,8 +8,6 @@
 <style>
 * { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
-
 body {
   margin: 0;
   padding: 20px;
@@ -28,7 +26,7 @@ body {
   box-shadow: 0 30px 60px rgba(0,0,0,.6);
 }
 
-/* MARQUEE — MATCHES TITLE */
+/* MARQUEE */
 .marquee {
   background: #020617;
   overflow: hidden;
@@ -43,54 +41,21 @@ body {
   font-weight: 900;
   letter-spacing: 6px;
   text-transform: uppercase;
-  animation:
-    scroll 18s linear infinite,
-    glowCycle 9s linear infinite;
+  animation: scroll 18s linear infinite;
+  color: #22ff00;
+  text-shadow: 0 0 10px #22ff00, 0 0 30px #22ff00;
 }
 
 @keyframes scroll {
   from { transform: translateX(0); }
-  to   { transform: translateX(-100%); }
-}
-
-@keyframes glowCycle {
-  0% {
-    color:#22ff00;
-    text-shadow: 0 0 10px #22ff00, 0 0 30px #22ff00;
-  }
-  33% {
-    color:#00ffff;
-    text-shadow: 0 0 10px #00ffff, 0 0 30px #00ffff;
-  }
-  66% {
-    color:#ff00ff;
-    text-shadow: 0 0 10px #ff00ff, 0 0 30px #ff00ff;
-  }
-  100% {
-    color:#22ff00;
-    text-shadow: 0 0 10px #22ff00, 0 0 30px #22ff00;
-  }
+  to { transform: translateX(-100%); }
 }
 
 /* HEADER */
 .header {
   background: linear-gradient(180deg,#020617,#0b1220);
   color: #fff;
-  padding: 22px 16px 30px;
-  position: relative;
-}
-
-/* SCENE */
-.scene {
-  position: relative;
-  height: 260px;
-}
-
-/* BRAND */
-.brand {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+  padding: 22px 16px 26px;
 }
 
 .brand h1 {
@@ -98,55 +63,68 @@ body {
   font-size: 46px;
   font-weight: 900;
   letter-spacing: 8px;
-  color: #eaffff;
   text-shadow:
     0 0 6px #22ff00,
     0 0 18px #22ff00,
     0 0 36px rgba(34,255,0,.9);
 }
 
-.brand span:first-child {
-  margin-right: 18px;
+.brand span:first-child { margin-right: 18px; }
+
+.address {
+  font-size: 15px;
+  margin-top: 8px;
 }
 
-/* CAR */
-.car-wrapper {
-  position: absolute;
-  left: 50%;
-  bottom: 56px;
-  transform: translateX(-50%);
-  animation: bodyBounce 1.8s ease-in-out infinite;
+/* VEHICLE GALLERY */
+.gallery {
+  padding: 20px;
+  display: grid;
+  gap: 14px;
 }
 
-@keyframes bodyBounce {
-  0%,100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(4px); }
+.vehicle-card {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,.2);
+  cursor: pointer;
+  transition: transform .2s ease;
 }
 
-/* SHADOW */
-.shadow {
-  position: absolute;
-  bottom: 48px;
-  left: 50%;
-  width: 260px;
-  height: 18px;
-  background: rgba(0,0,0,.6);
-  filter: blur(18px);
-  transform: translateX(-50%);
-  animation: shadowPulse 1.8s ease-in-out infinite;
+.vehicle-card:hover {
+  transform: scale(1.02);
 }
 
-@keyframes shadowPulse {
-  0%,100% { transform: translateX(-50%) scale(1); opacity:.6; }
-  50% { transform: translateX(-50%) scale(.85); opacity:.4; }
+.vehicle-header {
+  background: #0b1220;
+  color: #fff;
+  padding: 14px;
+  font-weight: bold;
+  font-size: 16px;
 }
 
-/* WHEELS */
-.wheel {
-  animation: spin .6s linear infinite;
+.vehicle-thumb img {
+  width: 100%;
+  display: block;
 }
 
-@keyframes spin { to { transform: rotate(360deg); } }
+.vehicle-details {
+  max-height: 0;
+  overflow: hidden;
+  background: #f4f6f9;
+  transition: max-height .35s ease;
+}
+
+.vehicle-details div {
+  padding: 14px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Expanded */
+.vehicle-card.active .vehicle-details {
+  max-height: 200px;
+}
 
 /* BUTTONS */
 .buttons {
@@ -168,12 +146,6 @@ body {
 .text { background:#3b82f6; }
 .map  { background:#8b5cf6; }
 
-/* ADDRESS */
-.address {
-  font-size: 15px;
-  margin-top: 10px;
-}
-
 /* FOOTER */
 footer {
   background: #f4f6f9;
@@ -181,7 +153,7 @@ footer {
   font-size: 12px;
 }
 
-/* MOBILE ADJUST */
+/* MOBILE */
 @media (max-width: 480px) {
   .marquee span { font-size: 28px; }
   .brand h1 { font-size: 34px; }
@@ -198,35 +170,61 @@ footer {
   </div>
 
   <div class="header">
-    <div class="scene">
-
-      <div class="shadow"></div>
-
-      <div class="car-wrapper">
-        <svg width="360" height="140" viewBox="0 0 600 200">
-          <path d="M40 110 Q70 70 120 70 H360 Q420 70 480 90 Q520 100 560 110 V120 H40 Z" fill="#7CFF00"/>
-          <path d="M160 70 Q200 40 260 40 Q320 40 360 70" fill="#7CFF00"/>
-
-          <g transform="translate(260 135)" class="wheel">
-            <circle r="18" fill="#000"/>
-          </g>
-
-          <g transform="translate(430 135)" class="wheel">
-            <circle r="18" fill="#000"/>
-          </g>
-        </svg>
-      </div>
-
-      <div class="brand">
-        <h1><span>CAR</span><span>DEPOT</span></h1>
-      </div>
-
+    <div class="brand">
+      <h1><span>CAR</span><span>DEPOT</span></h1>
     </div>
-
     <div class="address">
       13725 East Broad St<br>
       Pataskala, OH 43062
     </div>
+  </div>
+
+  <!-- VEHICLE CARDS -->
+  <div class="gallery">
+
+    <div class="vehicle-card">
+      <div class="vehicle-header">2018 Honda Accord</div>
+      <div class="vehicle-thumb">
+        <img src="https://via.placeholder.com/400x220?text=Honda+Accord">
+      </div>
+      <div class="vehicle-details">
+        <div>
+          • Automatic<br>
+          • Low miles<br>
+          • Financing available<br>
+          • Clean title
+        </div>
+      </div>
+    </div>
+
+    <div class="vehicle-card">
+      <div class="vehicle-header">2017 Toyota Camry</div>
+      <div class="vehicle-thumb">
+        <img src="https://via.placeholder.com/400x220?text=Toyota+Camry">
+      </div>
+      <div class="vehicle-details">
+        <div>
+          • Excellent condition<br>
+          • Great gas mileage<br>
+          • Buy Here / Pay Here
+        </div>
+      </div>
+    </div>
+
+    <div class="vehicle-card">
+      <div class="vehicle-header">2019 Ford Fusion</div>
+      <div class="vehicle-thumb">
+        <img src="https://via.placeholder.com/400x220?text=Ford+Fusion">
+      </div>
+      <div class="vehicle-details">
+        <div>
+          • Backup camera<br>
+          • Bluetooth<br>
+          • Warranty options
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <div class="buttons">
@@ -238,6 +236,14 @@ footer {
   <footer>Fast • Reliable • Trusted</footer>
 
 </div>
+
+<script>
+document.querySelectorAll('.vehicle-card').forEach(card => {
+  card.addEventListener('click', () => {
+    card.classList.toggle('active');
+  });
+});
+</script>
 
 </body>
 </html>
