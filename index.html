@@ -26,125 +26,156 @@ body {
   box-shadow: 0 30px 60px rgba(0,0,0,.6);
 }
 
-/* HEADER */
-.header {
-  background: linear-gradient(180deg,#020617,#0b1220);
-  color: #fff;
-  padding: 20px 16px 30px;
-}
-
-/* BIG MARQUEE */
+/* MARQUEE */
 .marquee {
-  width: 100%;
+  background: #0a0a0a;
   overflow: hidden;
-  background: #020617;
-  border-radius: 12px;
-  margin-bottom: 10px;
+  padding: 10px 0;
+  font-size: 17px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 .marquee span {
   display: inline-block;
   white-space: nowrap;
   padding-left: 100%;
-  font-size: 26px;
-  font-weight: 900;
-  letter-spacing: 4px;
-  animation: scroll 14s linear infinite, glow 6s linear infinite;
+  animation: scroll 16s linear infinite, colorCycle 9s linear infinite;
 }
 
 @keyframes scroll {
   from { transform: translateX(0); }
-  to { transform: translateX(-100%); }
+  to   { transform: translateX(-100%); }
 }
 
-@keyframes glow {
-  0% { color:#22ff00; text-shadow:0 0 12px #22ff00; }
-  33% { color:#00ffff; text-shadow:0 0 12px #00ffff; }
-  66% { color:#ff00ff; text-shadow:0 0 12px #ff00ff; }
-  100% { color:#22ff00; text-shadow:0 0 12px #22ff00; }
+@keyframes colorCycle {
+  0%   { color:#22ff00; text-shadow:0 0 8px #22ff00; }
+  33%  { color:#00ffff; text-shadow:0 0 8px #00ffff; }
+  66%  { color:#ff00ff; text-shadow:0 0 8px #ff00ff; }
+  100% { color:#22ff00; text-shadow:0 0 8px #22ff00; }
+}
+
+/* HEADER */
+.header {
+  background: linear-gradient(180deg,#020617,#0b1220);
+  color: #fff;
+  padding: 20px 16px 28px;
+  position: relative;
 }
 
 /* SCENE */
 .scene {
   position: relative;
-  height: 300px;
-}
-
-/* UNDERGLOW */
-.underglow {
-  position: absolute;
-  bottom: 78px;
-  left: 50%;
-  width: 300px;
-  height: 30px;
-  transform: translateX(-50%);
-  filter: blur(20px);
-  animation: rgb 6s linear infinite;
-}
-
-@keyframes rgb {
-  0% { background:#ff0000; }
-  33% { background:#00ffff; }
-  66% { background:#8b5cf6; }
-  100% { background:#ff0000; }
-}
-
-/* HEADLIGHT BEAM */
-.beam {
-  position: absolute;
-  left: 40px;
-  bottom: 140px;
-  width: 160px;
-  height: 60px;
-  background: linear-gradient(90deg, rgba(200,255,255,.6), transparent);
-  clip-path: polygon(0 20%,100% 0,100% 100%,0 80%);
-  filter: blur(8px);
-  animation: pulse 1.4s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%,100% { opacity:.4; }
-  50% { opacity:.8; }
-}
-
-/* VEHICLE POSITION — LOWERED 1 INCH */
-.car {
-  position: absolute;
-  left: 50%;
-  bottom: 24px; /* MOVED DOWN */
-  transform: translateX(-50%);
-}
-
-/* WHEELS STOPPED */
-.wheel {
-  animation: none;
-}
-
-/* LIGHTS */
-.brake {
-  animation: brakeFlash 3s infinite;
-}
-
-@keyframes brakeFlash {
-  0%,70% { opacity:.25; }
-  75%,85% { opacity:1; }
-  100% { opacity:.25; }
-}
-
-.signal {
-  animation: signalBlink 1s infinite;
-}
-
-@keyframes signalBlink {
-  0%,50% { opacity:0; }
-  60%,100% { opacity:1; }
+  height: 260px;
 }
 
 /* BRAND */
-h1 {
-  margin: 10px 0 0;
-  letter-spacing: 6px;
-  font-size: 42px;
+.brand {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 46px;
+  letter-spacing: 8px;
+  font-weight: 900;
+  color: #eaffff;
+  text-shadow:
+    0 0 6px #22ff00,
+    0 0 18px #22ff00,
+    0 0 36px rgba(34,255,0,.9);
+}
+
+.brand span:first-child {
+  margin-right: 18px;
+}
+
+/* CAR WRAPPER */
+.car-wrapper {
+  position: absolute;
+  left: 50%;
+  bottom: calc(58px - 0.1in);
+  transform: translateX(-50%);
+  animation: bodyBounce 1.8s ease-in-out infinite;
+}
+
+@keyframes bodyBounce {
+  0%,100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(4px); }
+}
+
+/* SHADOW */
+.shadow {
+  position: absolute;
+  bottom: 52px;
+  left: 50%;
+  width: 260px;
+  height: 18px;
+  background: rgba(0,0,0,.6);
+  filter: blur(18px);
+  transform: translateX(-50%);
+  animation: shadowPulse 1.8s ease-in-out infinite;
+}
+
+@keyframes shadowPulse {
+  0%,100% { transform: translateX(-50%) scale(1); opacity:.6; }
+  50% { transform: translateX(-50%) scale(.85); opacity:.4; }
+}
+
+/* BODY */
+.car-body {
+  animation: bodyFloat 1.8s ease-in-out infinite;
+}
+
+@keyframes bodyFloat {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(2px); }
+}
+
+/* AXLES */
+.axle.front { animation: frontAxle 1.8s ease-in-out infinite; }
+.axle.rear  { animation: rearAxle 1.8s ease-in-out infinite; }
+
+@keyframes frontAxle {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+@keyframes rearAxle {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
+
+/* WHEELS (LOCKED) */
+.wheel {
+  transform-origin: center;
+}
+
+.axle.front .wheel {
+  animation:
+    spin .6s linear infinite,
+    wheelLockFront 1.8s ease-in-out infinite;
+}
+
+.axle.rear .wheel {
+  animation:
+    spin .6s linear infinite,
+    wheelLockRear 1.8s ease-in-out infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+@keyframes wheelLockFront {
+  0%,100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-6px) rotate(180deg); }
+}
+
+@keyframes wheelLockRear {
+  0%,100% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-3px) rotate(180deg); }
 }
 
 /* BUTTONS */
@@ -166,7 +197,28 @@ h1 {
 .text { background:#3b82f6; }
 .map  { background:#8b5cf6; }
 .save { background:#f59e0b; }
+.schedule { background:#ef4444; }
 
+/* SCHEDULER */
+.scheduler {
+  padding: 20px;
+}
+
+.scheduler h2 {
+  margin-bottom: 12px;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.scheduler iframe {
+  width: 100%;
+  height: 620px;
+  border: none;
+  border-radius: 14px;
+}
+
+/* FOOTER */
 footer {
   background: #f4f6f9;
   padding: 12px;
@@ -179,72 +231,66 @@ footer {
 
 <div class="card">
 
+  <div class="marquee">
+    <span>BUY HERE / PAY HERE – GOOD CREDIT / BAD CREDIT – FINANCING AVAILABLE</span>
+  </div>
+
   <div class="header">
-
-    <div class="marquee">
-      <span>
-        BUY HERE • PAY HERE • NO CREDIT • BAD CREDIT • WE FINANCE ANYONE •
-      </span>
-    </div>
-
     <div class="scene">
 
-      <div class="underglow"></div>
-      <div class="beam"></div>
+      <div class="shadow"></div>
 
-      <div class="car">
-        <svg width="360" height="180" viewBox="0 0 700 260">
-
-          <!-- TRUCK BODY -->
-          <path d="
-            M60 140
-            Q90 90 150 90
-            H430
-            Q520 90 600 120
-            L640 130
-            V150
-            H60 Z"
-            fill="#7CFF00"/>
-
-          <!-- ROOF -->
-          <rect x="200" y="60" width="260" height="40" rx="10" fill="#7CFF00"/>
-
-          <!-- WINDOWS -->
-          <rect x="220" y="70" width="220" height="25" rx="6" fill="#020617"/>
-
-          <!-- WHEEL CUTOUTS -->
-          <path d="M210 150 a45 45 0 0 0 90 0" fill="#020617"/>
-          <path d="M430 150 a45 45 0 0 0 90 0" fill="#020617"/>
-
-          <!-- LIGHTS -->
-          <rect class="brake" x="630" y="125" width="10" height="20" rx="4" fill="#ff0000"/>
-          <rect class="signal" x="50" y="125" width="10" height="20" rx="4" fill="#ffb000"/>
-
-          <!-- WHEELS -->
-          <g class="wheel" transform="translate(255 150)">
-            <circle r="38" fill="#000"/>
-            <circle r="22" fill="#d1d5db"/>
+      <div class="car-wrapper">
+        <svg width="360" height="140" viewBox="0 0 600 200">
+          <g class="car-body">
+            <path d="M40 110 Q70 70 120 70 H360 Q420 70 480 90 Q520 100 560 110 V120 H40 Z" fill="#7CFF00"/>
+            <path d="M160 70 Q200 40 260 40 Q320 40 360 70" fill="#7CFF00"/>
           </g>
 
-          <g class="wheel" transform="translate(475 150)">
-            <circle r="38" fill="#000"/>
-            <circle r="22" fill="#d1d5db"/>
+          <g class="axle front">
+            <g class="wheel" transform="translate(230 135)">
+              <circle r="18" fill="#000"/>
+            </g>
+            <g class="wheel" transform="translate(300 135)">
+              <circle r="18" fill="#000"/>
+            </g>
           </g>
 
+          <g class="axle rear">
+            <g class="wheel" transform="translate(400 135)">
+              <circle r="18" fill="#000"/>
+            </g>
+            <g class="wheel" transform="translate(470 135)">
+              <circle r="18" fill="#000"/>
+            </g>
+          </g>
         </svg>
+      </div>
+
+      <div class="brand">
+        <h1><span>CAR</span><span>DEPOT</span></h1>
       </div>
 
     </div>
 
-    <h1>CAR DEPOT</h1>
-    <div>13725 East Broad St • Pataskala, OH</div>
+    <div class="address">
+      13725 East Broad St<br>
+      Pataskala, OH 43062
+    </div>
   </div>
 
   <div class="buttons">
     <a class="btn call" href="tel:+16142859929">📞 CALL</a>
     <a class="btn text" href="sms:+16142859929">💬 TEXT</a>
-    <a class="btn map" href="https://maps.google.com">📍 MAP</a>
-    <a class="btn save" href="#">💾 SAVE</a>
+    <a class="btn map" href="https://maps.google.com/?q=13725+East+Broad+St+Pataskala+OH+43062">📍 MAP</a>
+    <a class="btn save" href="cardepot.vcf" download>💾 SAVE</a>
+    <a class="btn schedule" href="#schedule">📅 SCHEDULE APPOINTMENT</a>
+  </div>
+
+  <!-- APPOINTMENT SCHEDULER -->
+  <div id="schedule" class="scheduler">
+    <h2>Book a Visit</h2>
+    <iframe src="https://calendly.com/YOUR-USERNAME/YOUR-EVENT"></iframe>
   </div>
 
   <footer>Fast • Reliable • Trusted</footer>
