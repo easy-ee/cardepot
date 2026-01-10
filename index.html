@@ -8,6 +8,8 @@
 <style>
 * { box-sizing: border-box; }
 
+html { scroll-behavior: smooth; }
+
 body {
   margin: 0;
   padding: 20px;
@@ -26,22 +28,24 @@ body {
   box-shadow: 0 30px 60px rgba(0,0,0,.6);
 }
 
-/* MARQUEE */
+/* MARQUEE — MATCHES TITLE */
 .marquee {
-  background: #0a0a0a;
+  background: #020617;
   overflow: hidden;
-  padding: 10px 0;
-  font-size: 17px;
-  font-weight: bold;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  padding: 18px 0;
 }
 
 .marquee span {
   display: inline-block;
   white-space: nowrap;
   padding-left: 100%;
-  animation: scroll 16s linear infinite, colorCycle 9s linear infinite;
+  font-size: 42px;
+  font-weight: 900;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  animation:
+    scroll 18s linear infinite,
+    glowCycle 9s linear infinite;
 }
 
 @keyframes scroll {
@@ -49,18 +53,30 @@ body {
   to   { transform: translateX(-100%); }
 }
 
-@keyframes colorCycle {
-  0%   { color:#22ff00; text-shadow:0 0 8px #22ff00; }
-  33%  { color:#00ffff; text-shadow:0 0 8px #00ffff; }
-  66%  { color:#ff00ff; text-shadow:0 0 8px #ff00ff; }
-  100% { color:#22ff00; text-shadow:0 0 8px #22ff00; }
+@keyframes glowCycle {
+  0% {
+    color:#22ff00;
+    text-shadow: 0 0 10px #22ff00, 0 0 30px #22ff00;
+  }
+  33% {
+    color:#00ffff;
+    text-shadow: 0 0 10px #00ffff, 0 0 30px #00ffff;
+  }
+  66% {
+    color:#ff00ff;
+    text-shadow: 0 0 10px #ff00ff, 0 0 30px #ff00ff;
+  }
+  100% {
+    color:#22ff00;
+    text-shadow: 0 0 10px #22ff00, 0 0 30px #22ff00;
+  }
 }
 
 /* HEADER */
 .header {
   background: linear-gradient(180deg,#020617,#0b1220);
   color: #fff;
-  padding: 20px 16px 28px;
+  padding: 22px 16px 30px;
   position: relative;
 }
 
@@ -80,8 +96,8 @@ body {
 .brand h1 {
   margin: 0;
   font-size: 46px;
-  letter-spacing: 8px;
   font-weight: 900;
+  letter-spacing: 8px;
   color: #eaffff;
   text-shadow:
     0 0 6px #22ff00,
@@ -93,11 +109,11 @@ body {
   margin-right: 18px;
 }
 
-/* CAR WRAPPER */
+/* CAR */
 .car-wrapper {
   position: absolute;
   left: 50%;
-  bottom: calc(58px - 0.1in);
+  bottom: 56px;
   transform: translateX(-50%);
   animation: bodyBounce 1.8s ease-in-out infinite;
 }
@@ -110,7 +126,7 @@ body {
 /* SHADOW */
 .shadow {
   position: absolute;
-  bottom: 52px;
+  bottom: 48px;
   left: 50%;
   width: 260px;
   height: 18px;
@@ -125,58 +141,12 @@ body {
   50% { transform: translateX(-50%) scale(.85); opacity:.4; }
 }
 
-/* BODY */
-.car-body {
-  animation: bodyFloat 1.8s ease-in-out infinite;
-}
-
-@keyframes bodyFloat {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(2px); }
-}
-
-/* AXLES */
-.axle.front { animation: frontAxle 1.8s ease-in-out infinite; }
-.axle.rear  { animation: rearAxle 1.8s ease-in-out infinite; }
-
-@keyframes frontAxle {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(6px); }
-}
-
-@keyframes rearAxle {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(3px); }
-}
-
-/* WHEELS (LOCKED) */
+/* WHEELS */
 .wheel {
-  transform-origin: center;
-}
-
-.axle.front .wheel {
-  animation:
-    spin .6s linear infinite,
-    wheelLockFront 1.8s ease-in-out infinite;
-}
-
-.axle.rear .wheel {
-  animation:
-    spin .6s linear infinite,
-    wheelLockRear 1.8s ease-in-out infinite;
+  animation: spin .6s linear infinite;
 }
 
 @keyframes spin { to { transform: rotate(360deg); } }
-
-@keyframes wheelLockFront {
-  0%,100% { transform: translateY(0) rotate(0); }
-  50% { transform: translateY(-6px) rotate(180deg); }
-}
-
-@keyframes wheelLockRear {
-  0%,100% { transform: translateY(0) rotate(0); }
-  50% { transform: translateY(-3px) rotate(180deg); }
-}
 
 /* BUTTONS */
 .buttons {
@@ -191,31 +161,17 @@ body {
   color: #fff;
   font-weight: bold;
   text-decoration: none;
+  font-size: 16px;
 }
 
 .call { background:#22c55e; }
 .text { background:#3b82f6; }
 .map  { background:#8b5cf6; }
-.save { background:#f59e0b; }
-.schedule { background:#ef4444; }
 
-/* SCHEDULER */
-.scheduler {
-  padding: 20px;
-}
-
-.scheduler h2 {
-  margin-bottom: 12px;
-  font-size: 20px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-.scheduler iframe {
-  width: 100%;
-  height: 620px;
-  border: none;
-  border-radius: 14px;
+/* ADDRESS */
+.address {
+  font-size: 15px;
+  margin-top: 10px;
 }
 
 /* FOOTER */
@@ -223,6 +179,12 @@ footer {
   background: #f4f6f9;
   padding: 12px;
   font-size: 12px;
+}
+
+/* MOBILE ADJUST */
+@media (max-width: 480px) {
+  .marquee span { font-size: 28px; }
+  .brand h1 { font-size: 34px; }
 }
 </style>
 </head>
@@ -242,27 +204,15 @@ footer {
 
       <div class="car-wrapper">
         <svg width="360" height="140" viewBox="0 0 600 200">
-          <g class="car-body">
-            <path d="M40 110 Q70 70 120 70 H360 Q420 70 480 90 Q520 100 560 110 V120 H40 Z" fill="#7CFF00"/>
-            <path d="M160 70 Q200 40 260 40 Q320 40 360 70" fill="#7CFF00"/>
+          <path d="M40 110 Q70 70 120 70 H360 Q420 70 480 90 Q520 100 560 110 V120 H40 Z" fill="#7CFF00"/>
+          <path d="M160 70 Q200 40 260 40 Q320 40 360 70" fill="#7CFF00"/>
+
+          <g transform="translate(260 135)" class="wheel">
+            <circle r="18" fill="#000"/>
           </g>
 
-          <g class="axle front">
-            <g class="wheel" transform="translate(230 135)">
-              <circle r="18" fill="#000"/>
-            </g>
-            <g class="wheel" transform="translate(300 135)">
-              <circle r="18" fill="#000"/>
-            </g>
-          </g>
-
-          <g class="axle rear">
-            <g class="wheel" transform="translate(400 135)">
-              <circle r="18" fill="#000"/>
-            </g>
-            <g class="wheel" transform="translate(470 135)">
-              <circle r="18" fill="#000"/>
-            </g>
+          <g transform="translate(430 135)" class="wheel">
+            <circle r="18" fill="#000"/>
           </g>
         </svg>
       </div>
@@ -283,17 +233,10 @@ footer {
     <a class="btn call" href="tel:+16142859929">📞 CALL</a>
     <a class="btn text" href="sms:+16142859929">💬 TEXT</a>
     <a class="btn map" href="https://maps.google.com/?q=13725+East+Broad+St+Pataskala+OH+43062">📍 MAP</a>
-    <a class="btn save" href="cardepot.vcf" download>💾 SAVE</a>
-    <a class="btn schedule" href="#schedule">📅 SCHEDULE APPOINTMENT</a>
-  </div>
-
-  <!-- APPOINTMENT SCHEDULER -->
-  <div id="schedule" class="scheduler">
-    <h2>Book a Visit</h2>
-    <iframe src="https://calendly.com/YOUR-USERNAME/YOUR-EVENT"></iframe>
   </div>
 
   <footer>Fast • Reliable • Trusted</footer>
+
 </div>
 
 </body>
